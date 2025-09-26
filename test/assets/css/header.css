@@ -1,0 +1,107 @@
+/* Хедер в стиле Tilda */
+header {
+    background: var(--white);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 1rem 0;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.main-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 0.5rem;
+}
+
+.main-title a {
+    color: var(--primary-color);
+    font-size: 2.2rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.stethoscope {
+    font-size: 2rem;
+    opacity: 0.8;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+/* Навигация в стиле Tilda */
+.main-navigation {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.main-navigation a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: var(--transition);
+    font-size: 1rem;
+}
+
+.main-navigation a:hover {
+    background-color: var(--light-gray);
+    color: var(--secondary-color);
+}
+
+/* Кнопка теста в хедере */
+.header-test-btn {
+    background: linear-gradient(135deg, var(--accent-color), #c0392b);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+}
+
+.header-test-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+}
+
+@media (max-width: 768px) {
+    .main-title a {
+        font-size: 1.8rem;
+    }
+    
+    .main-navigation {
+        gap: 1rem;
+    }
+    
+    .main-navigation a {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
+    
+    .header-test-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}

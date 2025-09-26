@@ -1,0 +1,274 @@
+/* Компоненты в стиле Tilda */
+
+/* Disclaimer */
+.disclaimer {
+    background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+    border: 1px solid #ffeaa7;
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 1200px;
+    box-shadow: var(--shadow);
+}
+
+.disclaimer strong {
+    color: #e74c3c;
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+/* Секции */
+.welcome-section,
+.burnout-info,
+.test-section {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 3rem;
+    margin: 2rem auto;
+    box-shadow: var(--shadow);
+    max-width: 1200px;
+}
+
+.welcome-section h2 {
+    color: var(--primary-color);
+    text-align: center;
+    font-weight: 700;
+}
+
+/* Карточки информации */
+.info-card {
+    background: var(--light-gray);
+    border-left: 4px solid var(--secondary-color);
+    padding: 2rem;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+    transition: var(--transition);
+}
+
+.info-card:hover {
+    transform: translateX(5px);
+    box-shadow: var(--shadow);
+}
+
+.info-card.warning {
+    border-left-color: var(--accent-color);
+    background: linear-gradient(135deg, #ffeaa7, #fff3cd);
+}
+
+.info-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+/* Списки */
+.custom-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.custom-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+    padding-left: 2rem;
+}
+
+.custom-list li:last-child {
+    border-bottom: none;
+}
+
+.siren-list li::before {
+    content: "🚨";
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+}
+
+.fire-list li::before {
+    content: "🔥";
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+}
+
+/* Секция теста */
+.test-section {
+    text-align: center;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+}
+
+.test-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+}
+
+.test-description {
+    text-align: left;
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.mbi-link {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--secondary-color), #2980b9);
+    color: white;
+    padding: 15px 35px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+}
+
+.mbi-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+}
+
+/* Футер в стиле Tilda */
+footer {
+    background: var(--primary-color);
+    color: white;
+    padding: 3rem 0 1rem;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.footer-section h3 {
+    color: white;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+}
+
+.footer-links,
+.contact-links,
+.legal-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.footer-links a,
+.contact-links a,
+.legal-links a {
+    color: #ecf0f1;
+    text-decoration: none;
+    transition: var(--transition);
+    padding: 5px 0;
+}
+
+.footer-links a:hover,
+.contact-links a:hover,
+.legal-links a:hover {
+    color: var(--secondary-color);
+    transform: translateX(5px);
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    max-width: 1200px;
+    margin: 3rem auto 0;
+    color: #bdc3c7;
+}
+
+/* Плавающее меню */
+.floating-menu {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
+}
+
+.menu-button {
+    background: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    transition: var(--transition);
+}
+
+.menu-button:hover {
+    background: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    background: var(--white);
+    min-width: 220px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.floating-menu:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 20px;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: var(--transition);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.dropdown-content a:last-child {
+    border-bottom: none;
+}
+
+.dropdown-content a:hover {
+    background: var(--light-gray);
+    color: var(--secondary-color);
+}
+
+@media (max-width: 768px) {
+    .welcome-section,
+    .burnout-info,
+    .test-section {
+        padding: 2rem 1.5rem;
+        margin: 1.5rem auto;
+    }
+    
+    .info-card {
+        padding: 1.5rem;
+    }
+    
+    .floating-menu {
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .menu-button {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+}
