@@ -325,7 +325,7 @@
         .disclaimer-card {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 40px;
+            padding: 0 40px;
             display: flex;
             align-items: center;
             gap: 2rem;
@@ -339,10 +339,9 @@
 
         .disclaimer-content h3 {
             color: #2c3e50;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
             font-family: 'Zag', sans-serif;
-            font-weight: bold;
         }
 
         .disclaimer-content p {
@@ -350,15 +349,12 @@
             max-width: 800px;
             margin: 0 auto;
             font-family: 'Tekst', sans-serif;
-            font-size: 1.2rem;
-            line-height: 1.6;
-            font-weight: 500;
         }
 
         /* Секция с фоном для заголовка выгорания */
         .burnout-header-section {
             background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
-                        url('assets/images/burnout-bg.jpg.png') center/cover no-repeat;
+                        url(assets/images/burnout-bg.jpg.png) center/cover no-repeat;
             min-height: 60vh;
             display: flex;
             align-items: center;
@@ -370,10 +366,6 @@
         .burnout-header-content {
             max-width: 1000px;
             color: white;
-            margin-left: 70%;
-            transform: translateX(-50%);
-            max-width: 800px;
-            text-align: left;
         }
 
         .burnout-header-title {
@@ -382,7 +374,6 @@
             margin-bottom: 2rem;
             font-family: 'Zag', sans-serif;
             line-height: 1.2;
-            text-align: left;
         }
 
         .burnout-header-text {
@@ -390,7 +381,6 @@
             line-height: 1.8;
             opacity: 0.95;
             font-family: 'Tekst', sans-serif;
-            text-align: left;
         }
 
         /* Новая секция про эмоциональное выгорание */
@@ -502,12 +492,12 @@
         }
 
         .component-image {
-            flex: 0 0 300px;
-            height: 400px;
+            flex: 0 0 500px;
+            height: 300px;
             border-radius: 12px;
             overflow: hidden;
             box-shadow: var(--shadow);
-            aspect-ratio: 3/4;
+            aspect-ratio: 16/9;
         }
 
         .component-image img {
@@ -604,8 +594,8 @@
             }
             
             .component-image {
-                flex: 0 0 280px;
-                height: 370px;
+                flex: 0 0 350px;
+                height: 250px;
             }
             
             .component-block {
@@ -614,11 +604,6 @@
             
             .burnout-header-title {
                 font-size: 3rem;
-            }
-            
-            .burnout-header-content {
-                margin-left: 60%;
-                transform: translateX(-50%);
             }
         }
 
@@ -671,8 +656,8 @@
             .component-image {
                 flex: none;
                 width: 100%;
-                max-width: 400px;
-                height: 500px;
+                max-width: 500px;
+                height: 300px;
             }
             
             .component-content {
@@ -691,20 +676,6 @@
             
             .burnout-header-text {
                 font-size: 1.2rem;
-            }
-            
-            .burnout-header-content {
-                margin-left: 50%;
-                transform: translateX(-50%);
-                max-width: 90%;
-            }
-            
-            .disclaimer-content h3 {
-                font-size: 1.6rem;
-            }
-            
-            .disclaimer-content p {
-                font-size: 1.1rem;
             }
         }
 
@@ -733,7 +704,6 @@
                 flex-direction: column;
                 text-align: center;
                 gap: 1rem;
-                padding: 30px 20px;
             }
             
             .burnout-article {
@@ -745,8 +715,7 @@
             }
             
             .component-image {
-                height: 400px;
-                max-width: 300px;
+                height: 250px;
             }
             
             .burnout-header-section {
@@ -760,20 +729,6 @@
             
             .burnout-header-text {
                 font-size: 1.1rem;
-            }
-            
-            .burnout-header-content {
-                margin-left: 50%;
-                transform: translateX(-50%);
-                max-width: 95%;
-            }
-            
-            .disclaimer-content h3 {
-                font-size: 1.4rem;
-            }
-            
-            .disclaimer-content p {
-                font-size: 1rem;
             }
         }
 
@@ -796,7 +751,7 @@
             }
             
             .disclaimer-card {
-                padding: 20px 15px;
+                padding: 0 20px;
             }
             
             .logo-ng {
@@ -812,8 +767,7 @@
             }
             
             .component-image {
-                height: 350px;
-                max-width: 260px;
+                height: 200px;
             }
             
             .burnout-header-section {
@@ -827,14 +781,6 @@
             
             .burnout-header-text {
                 font-size: 1rem;
-            }
-            
-            .disclaimer-content h3 {
-                font-size: 1.3rem;
-            }
-            
-            .disclaimer-content p {
-                font-size: 0.9rem;
             }
         }
 
@@ -915,12 +861,12 @@
         </section>
 
         <!-- Секция с фоном для заголовка выгорания -->
-        <section class="burnout-header-section" id="burnout-info">
-            <div class="burnout-header-content">
-                <h1 class="burnout-header-title">Эмоциональное выгорание: когда ресурсы на исходе</h1>
-                <p class="burnout-header-text">Эмоциональное выгорание — это не просто усталость или плохое настроение. Это серьезный синдром, развивающийся в ответ на хронический стресс, связанный с профессиональной деятельностью. Всемирная организация здравоохранения официально признала выгорание фактором, влияющим на состояние здоровья.</p>
-            </div>
-        </section>
+        <<section class="burnout-header-section" id="burnout-info">
+    <div class="burnout-header-content" style="margin-left: 70%; transform: translateX(-50%); max-width: 800px;">
+        <h1 class="burnout-header-title" style="text-align: left;">Эмоциональное выгорание: когда ресурсы на исходе</h1>
+        <p class="burnout-header-text" style="text-align: left;">Эмоциональное выгорание — это не просто усталость или плохое настроение. Это серьезный синдром, развивающийся в ответ на хронический стресс, связанный с профессиональной деятельностью. Всемирная организация здравоохранения официально признала выгорание фактором, влияющим на состояние здоровья.</p>
+    </div>
+</section>
 
         <!-- Детальная информация про эмоциональное выгорание -->
         <section class="section-wide burnout-detail-section">
@@ -941,7 +887,7 @@
                         <!-- Блок с деперсонализацией -->
                         <div class="component-block reverse">
                             <div class="component-image">
-                                <img src="assets/images/otdal.jpg" alt="Деперсонализация">
+                                <img src="assets/images/otdal.png" alt="Деперсонализация">
                             </div>
                             <div class="component-content">
                                 <h3>Деперсонализация</h3>
