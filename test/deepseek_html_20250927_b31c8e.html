@@ -26,45 +26,8 @@
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Подключение шрифтов */
-        @font-face {
-            font-family: 'NG';
-            src: url('assets/fonts/NG.woff2') format('woff2'),
-                 url('assets/fonts/NG.woff') format('woff'),
-                 url('assets/fonts/NG.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        @font-face {
-            font-family: 'Zag';
-            src: url('assets/fonts/Zag.woff2') format('woff2'),
-                 url('assets/fonts/Zag.woff') format('woff'),
-                 url('assets/fonts/Zag.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        @font-face {
-            font-family: 'Tekst';
-            src: url('assets/fonts/Tekst.woff2') format('woff2'),
-                 url('assets/fonts/Tekst.woff') format('woff'),
-                 url('assets/fonts/Tekst.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        @font-face {
-            font-family: 'Vazh';
-            src: url('assets/fonts/Vazh.woff2') format('woff2'),
-                 url('assets/fonts/Vazh.woff') format('woff'),
-                 url('assets/fonts/Vazh.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
-
         body {
-            font-family: 'Tekst', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--light-bg);
@@ -78,6 +41,16 @@
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 40px;
+        }
+
+        /* Шрифт для логотипа NG */
+        @font-face {
+            font-family: 'NG';
+            src: url('assets/fonts/NG.woff2') format('woff2'),
+                 url('assets/fonts/NG.woff') format('woff'),
+                 url('assets/fonts/NG.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
         }
 
         .logo-ng {
@@ -137,7 +110,6 @@
             position: relative;
             transition: var(--transition);
             white-space: nowrap;
-            font-family: 'Tekst', sans-serif;
         }
 
         .nav-link:hover,
@@ -173,7 +145,6 @@
             transition: var(--transition);
             white-space: nowrap;
             border: 2px solid var(--primary-color);
-            font-family: 'Tekst', sans-serif;
         }
 
         .auth-btn:hover {
@@ -254,7 +225,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-family: 'NG', sans-serif;
         }
 
         .hero-subtitle {
@@ -263,7 +233,6 @@
             margin-bottom: 2.5rem;
             line-height: 1.6;
             color: #bdc3c7;
-            font-family: 'Tekst', sans-serif;
         }
 
         .hero-buttons {
@@ -282,7 +251,6 @@
             transition: var(--transition);
             border: none;
             cursor: pointer;
-            font-family: 'Tekst', sans-serif;
         }
 
         .btn-primary {
@@ -325,7 +293,7 @@
         .disclaimer-card {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 40px;
+            padding: 0 40px;
             display: flex;
             align-items: center;
             gap: 2rem;
@@ -339,58 +307,100 @@
 
         .disclaimer-content h3 {
             color: #2c3e50;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-            font-family: 'Zag', sans-serif;
-            font-weight: bold;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
         }
 
         .disclaimer-content p {
             color: #2c3e50;
             max-width: 800px;
             margin: 0 auto;
-            font-family: 'Tekst', sans-serif;
-            font-size: 1.2rem;
-            line-height: 1.6;
-            font-weight: 500;
         }
 
-        /* Секция с фоном для заголовка выгорания */
-        .burnout-header-section {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
-                        url('assets/images/burnout-bg.jpg.png') center/cover no-repeat;
-            min-height: 60vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Информационная секция */
+        .info-section {
+            background: var(--light-bg);
+        }
+
+        .section-header {
             text-align: center;
-            padding: 100px 40px;
+            margin-bottom: 4rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 40px;
         }
 
-        .burnout-header-content {
-            max-width: 1000px;
-            color: white;
-            margin-left: 70%;
-            transform: translateX(-50%);
-            max-width: 800px;
-            text-align: left;
-        }
-
-        .burnout-header-title {
-            font-size: 3.5rem;
+        .section-header h2 {
+            font-size: 2.8rem;
             font-weight: 700;
-            margin-bottom: 2rem;
-            font-family: 'Zag', sans-serif;
-            line-height: 1.2;
-            text-align: left;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
         }
 
-        .burnout-header-text {
-            font-size: 1.4rem;
-            line-height: 1.8;
-            opacity: 0.95;
-            font-family: 'Tekst', sans-serif;
-            text-align: left;
+        .section-header p {
+            color: #666;
+        }
+
+        .features-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        /* Секция симптомов */
+        .symptoms-section {
+            background: var(--white);
+        }
+
+        .symptoms-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .symptom-card {
+            background: var(--light-bg);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .symptom-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
         }
 
         /* Новая секция про эмоциональное выгорание */
@@ -406,7 +416,7 @@
 
         .burnout-article {
             background: transparent;
-            padding: 4rem 0;
+            padding: 4rem;
             border-radius: 12px;
             line-height: 1.8;
         }
@@ -416,7 +426,6 @@
             color: var(--primary-color);
             margin-bottom: 2rem;
             text-align: center;
-            font-family: 'Zag', sans-serif;
         }
 
         .burnout-article h2 {
@@ -425,20 +434,17 @@
             margin: 3rem 0 1.5rem 0;
             border-left: 4px solid var(--accent-color);
             padding-left: 1rem;
-            font-family: 'Zag', sans-serif;
         }
 
         .burnout-article h3 {
             font-size: 1.4rem;
             color: var(--primary-color);
             margin: 2rem 0 1rem 0;
-            font-family: 'Zag', sans-serif;
         }
 
         .burnout-article p {
             margin-bottom: 1.5rem;
             color: var(--text-color);
-            font-family: 'Tekst', sans-serif;
         }
 
         .burnout-article ul {
@@ -449,7 +455,6 @@
         .burnout-article li {
             margin-bottom: 0.8rem;
             position: relative;
-            font-family: 'Tekst', sans-serif;
         }
 
         .burnout-article li::before {
@@ -473,28 +478,20 @@
             margin-bottom: 0;
             font-style: italic;
             color: var(--primary-color);
-            font-family: 'Vazh', sans-serif;
         }
 
-        /* Новые стили для центрированных блоков с компонентами */
+        /* Новые стили для секции с картинками */
         .burnout-components {
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4rem;
         }
 
         .component-block {
             display: flex;
             align-items: center;
-            justify-content: center;
-            width: 100%;
-            max-width: 1200px;
-            gap: 4rem;
-            margin: 0 auto;
+            margin-bottom: 4rem;
+            gap: 3rem;
         }
 
         .component-block.reverse {
@@ -507,7 +504,6 @@
             border-radius: 12px;
             overflow: hidden;
             box-shadow: var(--shadow);
-            aspect-ratio: 3/4;
         }
 
         .component-image img {
@@ -518,22 +514,18 @@
 
         .component-content {
             flex: 1;
-            max-width: 600px;
-            text-align: left;
         }
 
         .component-content h3 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: var(--primary-color);
             margin-bottom: 1.5rem;
-            font-family: 'Zag', sans-serif;
         }
 
         .component-content p {
             font-size: 1.1rem;
             line-height: 1.7;
             color: var(--text-color);
-            font-family: 'Tekst', sans-serif;
         }
 
         /* Футер */
@@ -558,7 +550,6 @@
             color: white;
             margin-bottom: 1.5rem;
             font-size: 1.3rem;
-            font-family: 'Zag', sans-serif;
         }
 
         .footer-nav {
@@ -571,7 +562,6 @@
             color: #bdc3c7;
             text-decoration: none;
             transition: var(--transition);
-            font-family: 'Tekst', sans-serif;
         }
 
         .footer-nav a:hover {
@@ -586,7 +576,6 @@
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 40px;
-            font-family: 'Tekst', sans-serif;
         }
 
         /* Адаптивность */
@@ -600,25 +589,12 @@
             }
             
             .burnout-article {
-                padding: 3rem 0;
+                padding: 3rem;
             }
             
             .component-image {
-                flex: 0 0 280px;
-                height: 370px;
-            }
-            
-            .component-block {
-                gap: 3rem;
-            }
-            
-            .burnout-header-title {
-                font-size: 3rem;
-            }
-            
-            .burnout-header-content {
-                margin-left: 60%;
-                transform: translateX(-50%);
+                flex: 0 0 250px;
+                height: 350px;
             }
         }
 
@@ -647,7 +623,7 @@
             }
             
             .burnout-article {
-                padding: 2rem 0;
+                padding: 2rem;
             }
             
             .burnout-article h1 {
@@ -661,7 +637,6 @@
             .component-block {
                 flex-direction: column;
                 text-align: center;
-                gap: 2rem;
             }
             
             .component-block.reverse {
@@ -672,39 +647,7 @@
                 flex: none;
                 width: 100%;
                 max-width: 400px;
-                height: 500px;
-            }
-            
-            .component-content {
-                text-align: center;
-                max-width: 100%;
-            }
-            
-            .burnout-header-section {
-                min-height: 50vh;
-                padding: 80px 30px;
-            }
-            
-            .burnout-header-title {
-                font-size: 2.5rem;
-            }
-            
-            .burnout-header-text {
-                font-size: 1.2rem;
-            }
-            
-            .burnout-header-content {
-                margin-left: 50%;
-                transform: translateX(-50%);
-                max-width: 90%;
-            }
-            
-            .disclaimer-content h3 {
-                font-size: 1.6rem;
-            }
-            
-            .disclaimer-content p {
-                font-size: 1.1rem;
+                height: 300px;
             }
         }
 
@@ -729,15 +672,22 @@
                 display: block;
             }
             
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .symptoms-grid {
+                grid-template-columns: 1fr;
+            }
+            
             .disclaimer-card {
                 flex-direction: column;
                 text-align: center;
                 gap: 1rem;
-                padding: 30px 20px;
             }
             
             .burnout-article {
-                padding: 1.5rem 0;
+                padding: 1.5rem;
             }
             
             .burnout-article h1 {
@@ -745,35 +695,7 @@
             }
             
             .component-image {
-                height: 400px;
-                max-width: 300px;
-            }
-            
-            .burnout-header-section {
-                padding: 60px 20px;
-                min-height: 40vh;
-            }
-            
-            .burnout-header-title {
-                font-size: 2rem;
-            }
-            
-            .burnout-header-text {
-                font-size: 1.1rem;
-            }
-            
-            .burnout-header-content {
-                margin-left: 50%;
-                transform: translateX(-50%);
-                max-width: 95%;
-            }
-            
-            .disclaimer-content h3 {
-                font-size: 1.4rem;
-            }
-            
-            .disclaimer-content p {
-                font-size: 1rem;
+                height: 250px;
             }
         }
 
@@ -796,7 +718,7 @@
             }
             
             .disclaimer-card {
-                padding: 20px 15px;
+                padding: 0 20px;
             }
             
             .logo-ng {
@@ -808,49 +730,11 @@
             }
             
             .burnout-article {
-                padding: 1rem 0;
+                padding: 1rem;
             }
             
             .component-image {
-                height: 350px;
-                max-width: 260px;
-            }
-            
-            .burnout-header-section {
-                padding: 40px 15px;
-                min-height: 35vh;
-            }
-            
-            .burnout-header-title {
-                font-size: 1.8rem;
-            }
-            
-            .burnout-header-text {
-                font-size: 1rem;
-            }
-            
-            .disclaimer-content h3 {
-                font-size: 1.3rem;
-            }
-            
-            .disclaimer-content p {
-                font-size: 0.9rem;
-            }
-        }
-
-        /* Ландшафтная ориентация для мобильных */
-        @media (max-width: 968px) and (orientation: landscape) {
-            .burnout-header-section {
-                min-height: 70vh;
-            }
-            
-            .hero {
-                height: 100vh;
-            }
-            
-            .video-container,
-            .content-side {
-                height: 100vh;
+                height: 200px;
             }
         }
     </style>
@@ -914,18 +798,14 @@
             </div>
         </section>
 
-        <!-- Секция с фоном для заголовка выгорания -->
-        <section class="burnout-header-section" id="burnout-info">
-            <div class="burnout-header-content">
-                <h1 class="burnout-header-title">Эмоциональное выгорание: когда ресурсы на исходе</h1>
-                <p class="burnout-header-text">Эмоциональное выгорание — это не просто усталость или плохое настроение. Это серьезный синдром, развивающийся в ответ на хронический стресс, связанный с профессиональной деятельностью. Всемирная организация здравоохранения официально признала выгорание фактором, влияющим на состояние здоровья.</p>
-            </div>
-        </section>
-
         <!-- Детальная информация про эмоциональное выгорание -->
         <section class="section-wide burnout-detail-section">
             <div class="burnout-content">
                 <article class="burnout-article">
+                    <h1>Эмоциональное выгорание: когда ресурсы на исходе</h1>
+                    
+                    <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem;"><strong>Эмоциональное выгорание</strong> — это не просто усталость или плохое настроение. Это серьезный синдром, развивающийся в ответ на хронический стресс, связанный с профессиональной деятельностью. Всемирная организация здравоохранения официально признала выгорание фактором, влияющим на состояние здоровья.</p>
+                    
                     <div class="burnout-components">
                         <!-- Блок с эмоциональным истощением -->
                         <div class="component-block">
@@ -1112,7 +992,7 @@
             });
 
             // Анимация появления элементов
-            const animatedElements = document.querySelectorAll('.component-block');
+            const animatedElements = document.querySelectorAll('.feature-card, .symptom-card, .component-block');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
