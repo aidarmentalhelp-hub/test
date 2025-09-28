@@ -25,7 +25,6 @@
             --shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --gray-bg: #f8f8f8;
-            --light-gray: #f0f0f0;
         }
 
         /* Подключение шрифтов */
@@ -540,69 +539,6 @@
             font-family: 'Tekst', sans-serif;
         }
 
-        /* Стили для нового блока "Факторы, способствующие выгоранию" */
-        .factors-section {
-            margin: 2rem 0;
-            background: var(--disclaimer-bg);
-            padding: 4rem 0;
-            border-radius: 12px;
-        }
-
-        .factors-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-            text-align: center;
-        }
-
-        .factors-container h2 {
-            font-family: 'Zag', sans-serif;
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 3rem;
-        }
-
-        .factors-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin: 2.5rem 0;
-        }
-
-        .factor-card {
-            background: rgba(77, 76, 76, 0.904);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            transition: var(--transition);
-        }
-
-        .factor-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .factor-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-
-        .factor-card h3 {
-            color: #ffffff;
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-            font-family: 'Tekst', sans-serif;
-        }
-
-        .factor-card p {
-            color: #ffffff;
-            font-size: 1rem;
-            line-height: 1.6;
-            font-family: 'Tekst', sans-serif;
-        }
-
         /* Секция "Почему это важно" с изображением как фоном */
         .importance-section {
             background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
@@ -666,6 +602,69 @@
             font-size: 1.5rem;
         }
 
+        /* Стили для нового блока "Факторы, способствующие выгоранию" */
+        .factors-section {
+            margin: 2rem 0;
+            background: var(--disclaimer-bg);
+            padding: 4rem 0;
+            border-radius: 12px;
+        }
+
+        .factors-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            text-align: center;
+        }
+
+        .factors-container h2 {
+            font-family: 'Zag', sans-serif;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+        }
+
+        .factors-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 2.5rem 0;
+        }
+
+        .factor-card {
+            background: rgba(77, 76, 76, 0.904);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .factor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .factor-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .factor-card h3 {
+            color: #ffffff;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            font-family: 'Tekst', sans-serif;
+        }
+
+        .factor-card p {
+            color: #ffffff;
+            font-size: 1rem;
+            line-height: 1.6;
+            font-family: 'Tekst', sans-serif;
+        }
+
         /* Секция "Что мы предлагаем" */
         .services-section {
             margin: 2rem 0;
@@ -707,7 +706,7 @@
         }
 
         .service-card {
-            background: var(--light-gray);
+            background: var(--gray-bg);
             padding: 2.5rem 2rem;
             border-radius: 12px;
             box-shadow: var(--shadow);
@@ -1280,6 +1279,23 @@
             </div>
         </section>
 
+        <!-- Секция "Почему это важно" -->
+        <section class="importance-section">
+            <div class="importance-content">
+                <h1 class="importance-title">Почему это важно</h1>
+                <p class="importance-text">Без внимания выгорание может привести к серьезным последствиям:</p>
+                <ul class="importance-list">
+                    <li>Депрессии и тревожным расстройствам</li>
+                    <li>Серьезным проблемам со здоровьем</li>
+                    <li>Потере работы и профессиональной идентичности</li>
+                    <li>Разрушению личных отношений</li>
+                    <li>Хронической усталости и апатии</li>
+                    <li>Снижению качества жизни</li>
+                </ul>
+                <a href="pages/tests.html" class="btn btn-primary">Пройти диагностику</a>
+            </div>
+        </section>
+
         <!-- Блок "Факторы выгорания" -->
         <section class="section-wide factors-section">
             <div class="factors-container">
@@ -1315,23 +1331,6 @@
                         <p>Расхождение между личными убеждениями и требованиями организации, этические дилеммы</p>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Секция "Почему это важно" -->
-        <section class="importance-section">
-            <div class="importance-content">
-                <h1 class="importance-title">Почему это важно</h1>
-                <p class="importance-text">Без внимания выгорание может привести к серьезным последствиям:</p>
-                <ul class="importance-list">
-                    <li>Депрессии и тревожным расстройствам</li>
-                    <li>Серьезным проблемам со здоровьем</li>
-                    <li>Потере работы и профессиональной идентичности</li>
-                    <li>Разрушению личных отношений</li>
-                    <li>Хронической усталости и апатии</li>
-                    <li>Снижению качества жизни</li>
-                </ul>
-                <a href="pages/tests.html" class="btn btn-primary">Пройти диагностику</a>
             </div>
         </section>
 

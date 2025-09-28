@@ -25,7 +25,6 @@
             --shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --gray-bg: #f8f8f8;
-            --light-gray: #f0f0f0;
         }
 
         /* Подключение шрифтов */
@@ -544,22 +543,19 @@
         .factors-section {
             margin: 2rem 0;
             background: var(--disclaimer-bg);
-            padding: 4rem 0;
+            padding: 2rem 0;
             border-radius: 12px;
+            font-family: 'Zag', sans-serif;
+            font-size: 2.5rem;
+
         }
 
         .factors-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-            text-align: center;
-        }
-
-        .factors-container h2 {
-            font-family: 'Zag', sans-serif;
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 3rem;
+            text-align: center !important;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            width: 100%;
         }
 
         .factors-grid {
@@ -576,6 +572,7 @@
             box-shadow: var(--shadow);
             text-align: center;
             transition: var(--transition);
+            
         }
 
         .factor-card:hover {
@@ -589,103 +586,29 @@
             color: var(--primary-color);
         }
 
+        .factor-card h2 {
+            color:rgba(77, 76, 76, 0.904);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            font-family: 'Zag', sans-serif;
+        }   
         .factor-card h3 {
-            color: #ffffff;
+            color:#ffffff;
             margin-bottom: 1rem;
             font-size: 1.3rem;
             font-family: 'Tekst', sans-serif;
         }
 
         .factor-card p {
-            color: #ffffff;
+            color:#ffffff;
             font-size: 1rem;
             line-height: 1.6;
             font-family: 'Tekst', sans-serif;
         }
 
-        /* Секция "Почему это важно" с изображением как фоном */
-        .importance-section {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
-                        url('assets/images/impor.png') center/cover no-repeat;
-            min-height: 60vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 100px 40px;
-            position: relative;
-        }
-
-        .importance-content {
-            max-width: 800px;
-            color: white;
-            position: relative;
-            z-index: 2;
-        }
-
-        .importance-title {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            font-family: 'Zag', sans-serif;
-            line-height: 1.2;
-            text-align: center;
-        }
-
-        .importance-text {
-            font-size: 1.4rem;
-            line-height: 1.8;
-            opacity: 0.95;
-            font-family: 'Tekst', sans-serif;
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-
-        .importance-list {
-            text-align: left;
-            display: inline-block;
-            color: white;
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 2.5rem;
-            font-family: 'Tekst', sans-serif;
-        }
-
-        .importance-list li {
-            margin-bottom: 1rem;
-            position: relative;
-            padding-left: 1.5rem;
-        }
-
-        .importance-list li::before {
-            content: "•";
-            color: #e74c3c;
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-            font-size: 1.5rem;
-        }
-
         /* Секция "Что мы предлагаем" */
         .services-section {
             margin: 2rem 0;
-            background: var(--disclaimer-bg);
-            padding: 4rem 0;
-            border-radius: 12px;
-        }
-
-        .services-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-            text-align: center;
-        }
-
-        .services-container h2 {
-            font-family: 'Zag', sans-serif;
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
         }
 
         .services-intro {
@@ -696,7 +619,6 @@
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
-            font-family: 'Tekst', sans-serif;
         }
 
         .services-grid {
@@ -707,7 +629,7 @@
         }
 
         .service-card {
-            background: var(--light-gray);
+            background: var(--gray-bg);
             padding: 2.5rem 2rem;
             border-radius: 12px;
             box-shadow: var(--shadow);
@@ -764,6 +686,43 @@
         .service-link:hover {
             color: var(--accent-color);
             transform: translateX(5px);
+        }
+
+        /* Секция "Почему это важно" */
+        .importance-section {
+            background: #626258;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 40px;
+        }
+
+        .importance-content {
+            max-width: 1000px;
+            color: white;
+            margin: 0 auto;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .importance-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            font-family: 'Zag', sans-serif;
+            line-height: 1.2;
+            text-align: center;
+        }
+
+        .importance-text {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            opacity: 0.95;
+            font-family: 'Tekst', sans-serif;
+            text-align: center;
+            margin-bottom: 2.5rem;
         }
 
         /* Футер */
@@ -1318,58 +1277,60 @@
             </div>
         </section>
 
+        <!-- Секция "Что мы предлагаем" -->
+        <section class="section-wide burnout-detail-section">
+            <div class="burnout-content">
+                <article class="burnout-article">
+                    <div class="services-section">
+                        <h2>Что делать?</h2>
+                        <p class="services-intro">Данный ресурс создан, чтобы помочь вам в профилактике эмоционального выгорания. Мы предлагаем практические инструменты и методики для сохранения ментального здоровья.</p>
+                        
+                        <div class="services-grid">
+                            <div class="service-card">
+                                <div class="service-number">1</div>
+                                <h3>Оценка состояния</h3>
+                                <p>Пройдите тесты для самодиагностики уровня стресса и выгорания. Получите информацию о своем состоянии.</p>
+                                <a href="pages/tests.html" class="service-link">Пройти тестирование →</a>
+                            </div>
+                            
+                            <div class="service-card">
+                                <div class="service-number">2</div>
+                                <h3>Экстренная помощь</h3>
+                                <p>Техники для быстрого снятия напряжения в острых ситуациях. Методы самопомощи здесь и сейчас.</p>
+                                <a href="pages/quick-help.html" class="service-link">Получить помощь →</a>
+                            </div>
+                            
+                            <div class="service-card">
+                                <div class="service-number">3</div>
+                                <h3>Ежедневные практики</h3>
+                                <p>Система упражнений и методик для интеграции в повседневную жизнь. Профилактика выгорания.</p>
+                                <a href="pages/daily.html" class="service-link">Смотреть методики →</a>
+                            </div>
+                            
+                            <div class="service-card">
+                                <div class="service-number">4</div>
+                                <h3>Образовательные материалы</h3>
+                                <p>Статьи, видео и книги по психологии стресса и выгорания. Углубленное понимание проблемы.</p>
+                                <a href="pages/materials.html" class="service-link">Изучить материалы →</a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
         <!-- Секция "Почему это важно" -->
         <section class="importance-section">
             <div class="importance-content">
                 <h1 class="importance-title">Почему это важно</h1>
-                <p class="importance-text">Без внимания выгорание может привести к серьезным последствиям:</p>
-                <ul class="importance-list">
+                <p class="importance-text">Без внимания выгорание может привести к:</p>
+                <ul style="text-align: left; display: inline-block; color: white; font-size: 1.2rem; line-height: 1.8; margin-bottom: 2.5rem;">
                     <li>Депрессии и тревожным расстройствам</li>
                     <li>Серьезным проблемам со здоровьем</li>
+                    <li>Конфликтам в профессиональной и личной жизни</li>
                     <li>Потере работы и профессиональной идентичности</li>
-                    <li>Разрушению личных отношений</li>
-                    <li>Хронической усталости и апатии</li>
-                    <li>Снижению качества жизни</li>
                 </ul>
-                <a href="pages/tests.html" class="btn btn-primary">Пройти диагностику</a>
-            </div>
-        </section>
-
-        <!-- Секция "Что мы предлагаем" -->
-        <section class="section-wide services-section">
-            <div class="services-container">
-                <h2>Что делать?</h2>
-                <p class="services-intro">Данный ресурс создан, чтобы помочь вам в профилактике эмоционального выгорания. Мы предлагаем практические инструменты и методики для сохранения ментального здоровья.</p>
-                
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-number">1</div>
-                        <h3>Оценка состояния</h3>
-                        <p>Пройдите тесты для самодиагностики уровня стресса и выгорания. Получите информацию о своем состоянии.</p>
-                        <a href="pages/tests.html" class="service-link">Пройти тестирование →</a>
-                    </div>
-                    
-                    <div class="service-card">
-                        <div class="service-number">2</div>
-                        <h3>Экстренная помощь</h3>
-                        <p>Техники для быстрого снятия напряжения в острых ситуациях. Методы самопомощи здесь и сейчас.</p>
-                        <a href="pages/quick-help.html" class="service-link">Получить помощь →</a>
-                    </div>
-                    
-                    <div class="service-card">
-                        <div class="service-number">3</div>
-                        <h3>Ежедневные практики</h3>
-                        <p>Система упражнений и методик для интеграции в повседневную жизнь. Профилактика выгорания.</p>
-                        <a href="pages/daily.html" class="service-link">Смотреть методики →</a>
-                    </div>
-                    
-                    <div class="service-card">
-                        <div class="service-number">4</div>
-                        <h3>Образовательные материалы</h3>
-                        <p>Статьи, видео и книги по психологии стресса и выгорания. Углубленное понимание проблемы.</p>
-                        <a href="pages/materials.html" class="service-link">Изучить материалы →</a>
-                    </div>
-                </div>
+                <a href="pages/tests.html" class="btn btn-primary">Пройти тест</a>
             </div>
         </section>
     </main>

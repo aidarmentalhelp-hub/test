@@ -25,7 +25,6 @@
             --shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --gray-bg: #f8f8f8;
-            --light-gray: #f0f0f0;
         }
 
         /* Подключение шрифтов */
@@ -540,6 +539,69 @@
             font-family: 'Tekst', sans-serif;
         }
 
+        /* Секция "Почему это важно" с изображением как фоном */
+        .importance-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('assets/images/importance-bg.jpg') center/cover no-repeat;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 40px;
+            position: relative;
+        }
+
+        .importance-content {
+            max-width: 800px;
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .importance-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            font-family: 'Zag', sans-serif;
+            line-height: 1.2;
+            text-align: center;
+        }
+
+        .importance-text {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            opacity: 0.95;
+            font-family: 'Tekst', sans-serif;
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .importance-list {
+            text-align: left;
+            display: inline-block;
+            color: white;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            font-family: 'Tekst', sans-serif;
+        }
+
+        .importance-list li {
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .importance-list li::before {
+            content: "•";
+            color: #e74c3c;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+        }
+
         /* Стили для нового блока "Факторы, способствующие выгоранию" */
         .factors-section {
             margin: 2rem 0;
@@ -603,69 +665,6 @@
             font-family: 'Tekst', sans-serif;
         }
 
-        /* Секция "Почему это важно" с изображением как фоном */
-        .importance-section {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
-                        url('assets/images/impor.png') center/cover no-repeat;
-            min-height: 60vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 100px 40px;
-            position: relative;
-        }
-
-        .importance-content {
-            max-width: 800px;
-            color: white;
-            position: relative;
-            z-index: 2;
-        }
-
-        .importance-title {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            font-family: 'Zag', sans-serif;
-            line-height: 1.2;
-            text-align: center;
-        }
-
-        .importance-text {
-            font-size: 1.4rem;
-            line-height: 1.8;
-            opacity: 0.95;
-            font-family: 'Tekst', sans-serif;
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-
-        .importance-list {
-            text-align: left;
-            display: inline-block;
-            color: white;
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 2.5rem;
-            font-family: 'Tekst', sans-serif;
-        }
-
-        .importance-list li {
-            margin-bottom: 1rem;
-            position: relative;
-            padding-left: 1.5rem;
-        }
-
-        .importance-list li::before {
-            content: "•";
-            color: #e74c3c;
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-            font-size: 1.5rem;
-        }
-
         /* Секция "Что мы предлагаем" */
         .services-section {
             margin: 2rem 0;
@@ -707,7 +706,7 @@
         }
 
         .service-card {
-            background: var(--light-gray);
+            background: var(--gray-bg);
             padding: 2.5rem 2rem;
             border-radius: 12px;
             box-shadow: var(--shadow);
@@ -1280,6 +1279,23 @@
             </div>
         </section>
 
+        <!-- Секция "Почему это важно" -->
+        <section class="importance-section">
+            <div class="importance-content">
+                <h1 class="importance-title">Почему это важно</h1>
+                <p class="importance-text">Без внимания выгорание может привести к серьезным последствиям:</p>
+                <ul class="importance-list">
+                    <li>Депрессии и тревожным расстройствам</li>
+                    <li>Серьезным проблемам со здоровьем</li>
+                    <li>Потере работы и профессиональной идентичности</li>
+                    <li>Разрушению личных отношений</li>
+                    <li>Хронической усталости и апатии</li>
+                    <li>Снижению качества жизни</li>
+                </ul>
+                <a href="pages/tests.html" class="btn btn-primary">Пройти диагностику</a>
+            </div>
+        </section>
+
         <!-- Блок "Факторы выгорания" -->
         <section class="section-wide factors-section">
             <div class="factors-container">
@@ -1315,23 +1331,6 @@
                         <p>Расхождение между личными убеждениями и требованиями организации, этические дилеммы</p>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Секция "Почему это важно" -->
-        <section class="importance-section">
-            <div class="importance-content">
-                <h1 class="importance-title">Почему это важно</h1>
-                <p class="importance-text">Без внимания выгорание может привести к серьезным последствиям:</p>
-                <ul class="importance-list">
-                    <li>Депрессии и тревожным расстройствам</li>
-                    <li>Серьезным проблемам со здоровьем</li>
-                    <li>Потере работы и профессиональной идентичности</li>
-                    <li>Разрушению личных отношений</li>
-                    <li>Хронической усталости и апатии</li>
-                    <li>Снижению качества жизни</li>
-                </ul>
-                <a href="pages/tests.html" class="btn btn-primary">Пройти диагностику</a>
             </div>
         </section>
 
