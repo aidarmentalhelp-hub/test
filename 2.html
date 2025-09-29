@@ -22,10 +22,10 @@
             --disclaimer-bg: #C7AD7F;
             --border-color: #e0e0e0;
             --white: #ffffff;
-            --black: #000000;
             --shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
-            --transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --gray-bg: #f8f8f8;
+            --light-gray: #f0f0f0;
         }
 
         /* Подключение шрифтов */
@@ -76,99 +76,16 @@
             overflow-x: hidden;
         }
 
-        /* Стили для плавного появления */
-        .hero-element {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .hero-element.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .stagger-element {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .stagger-element.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .fade-in-element {
-            opacity: 0;
-            transition: opacity 0.8s ease-in-out;
-        }
-
-        .fade-in-element.visible {
-            opacity: 1;
-        }
-
-        .slide-in-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .slide-in-left.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .slide-in-right {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .slide-in-right.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .scale-in {
-            opacity: 0;
-            transform: scale(0.9);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .scale-in.visible {
-            opacity: 1;
-            transform: scale(1);
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
         }
 
         .logo-ng {
             font-family: 'NG', sans-serif;
             font-size: 2.2rem;
             font-weight: normal;
-        }
-
-        /* УЛУЧШЕННАЯ АНИМАЦИЯ ОГНЯ */
-        @keyframes fireGradient {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        .hero-title.fire-animation {
-            background: radial-gradient(45deg, 
-                #ff4500, #ff6347, #ff8c00, #ffa500,
-                #ff8c00, #ff6347,#ffa500,  #ff0000);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            background-size: 300% 300%;
-            animation: fireGradient 4s ease infinite;
         }
 
         /* Тонкий фиксированный хедер */
@@ -185,14 +102,6 @@
             display: flex;
             align-items: center;
             transition: var(--transition);
-            opacity: 0;
-            transform: translateY(-100%);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .tilda-header.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         .header-container {
@@ -225,7 +134,7 @@
             color: var(--text-color);
             text-decoration: none;
             font-weight: 500;
-            font-size: 1.3rem;
+            font-size: 0.9rem;
             padding: 8px 0;
             position: relative;
             transition: var(--transition);
@@ -235,7 +144,7 @@
 
         .nav-link:hover,
         .nav-link.active {
-            color: #1d7ba0;
+            color: var(--secondary-color);
         }
 
         .nav-link.active::after {
@@ -259,7 +168,7 @@
             background: transparent;
             color: var(--primary-color);
             padding: 8px 20px;
-            border-radius: 0;
+            border-radius: 6px;
             text-decoration: none;
             font-weight: 500;
             font-size: 0.9rem;
@@ -289,14 +198,13 @@
             height: 100vh;
             display: flex;
             position: relative;
+            margin-top: 60px;
         }
 
         .video-container {
             flex: 1;
             position: relative;
             overflow: hidden;
-            opacity: 1;
-            transition: opacity 0.5s ease;
         }
 
         .hero-video {
@@ -322,13 +230,21 @@
             justify-content: center;
             padding: 0 60px;
             position: relative;
-            opacity: 1;
-            transition: opacity 0.5s ease;
         }
 
         .hero-content {
             color: white;
             max-width: 500px;
+            opacity: 0;
+            transform: translateX(50px);
+            animation: slideIn 1.5s ease-out 0.5s forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .hero-title {
@@ -336,7 +252,7 @@
             font-weight: 700;
             line-height: 1.1;
             margin-bottom: 1.5rem;
-            background: linear-gradient(45deg, #ff6b35, #ff8e35, #ffa235);
+            background: linear-gradient(45deg, #fff, #e74c3c);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -345,6 +261,7 @@
 
         .hero-subtitle {
             font-size: 1.4rem;
+            opacity: 0.9;
             margin-bottom: 2.5rem;
             line-height: 1.6;
             color: #bdc3c7;
@@ -360,7 +277,7 @@
         .btn {
             display: inline-block;
             padding: 14px 32px;
-            border-radius: 0;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
             font-size: 1rem;
@@ -394,12 +311,6 @@
         /* Основной контент */
         .main-content {
             width: 100%;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-        }
-
-        .main-content.visible {
-            opacity: 1;
         }
 
         /* Секции на всю ширину */
@@ -429,7 +340,7 @@
         }
 
         .disclaimer-content h3 {
-            color: var(--black);
+            color: #2c3e50;
             margin-bottom: 1.5rem;
             font-size: 1.8rem;
             font-family: 'Zag', sans-serif;
@@ -437,11 +348,11 @@
         }
 
         .disclaimer-content p {
-            color: var(--black);
+            color: #2c3e50;
             max-width: 800px;
             margin: 0 auto;
             font-family: 'Tekst', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             line-height: 1.6;
             font-weight: 500;
         }
@@ -474,7 +385,6 @@
             font-family: 'Zag', sans-serif;
             line-height: 1.2;
             text-align: left;
-            color: white;
         }
 
         .burnout-header-text {
@@ -483,7 +393,6 @@
             opacity: 0.95;
             font-family: 'Tekst', sans-serif;
             text-align: left;
-            color: white;
         }
 
         /* Новая секция про эмоциональное выгорание */
@@ -500,12 +409,13 @@
         .burnout-article {
             background: transparent;
             padding: 4rem 0;
+            border-radius: 12px;
             line-height: 1.8;
         }
 
         .burnout-article h1 {
             font-size: 2.5rem;
-            color: var(--black);
+            color: var(--primary-color);
             margin-bottom: 2rem;
             text-align: center;
             font-family: 'Zag', sans-serif;
@@ -513,7 +423,7 @@
 
         .burnout-article h2 {
             font-size: 1.8rem;
-            color: var(--black);
+            color: var(--primary-color);
             margin: 3rem 0 1.5rem 0;
             padding-left: 0;
             font-family: 'Zag', sans-serif;
@@ -523,7 +433,7 @@
 
         .burnout-article h3 {
             font-size: 1.4rem;
-            color: var(--black);
+            color: var(--primary-color);
             margin: 2rem 0 1rem 0;
             font-family: 'Zag', sans-serif;
             text-align: center;
@@ -531,7 +441,7 @@
 
         .burnout-article p {
             margin-bottom: 1.5rem;
-            color: var(--black);
+            color: var(--text-color);
             font-family: 'Tekst', sans-serif;
         }
 
@@ -544,7 +454,6 @@
             margin-bottom: 0.8rem;
             position: relative;
             font-family: 'Tekst', sans-serif;
-            color: var(--black);
         }
 
         .burnout-article li::before {
@@ -557,35 +466,19 @@
         }
 
         .important-note {
-            background: transparent !important;
-            border: 4px dashed #000000 !important; /* Черная прерывистая линия */
-            padding: 2rem !important;
-            margin-top: 5rem !important;
-            margin-bottom:0rem !important;
-}
-     
-
+            background: var(--disclaimer-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            border-left: none;
+        }
 
         .important-note p {
-            color: #000000 !important; /* Черный текст */
-            font-style: italic;
             margin-bottom: 0;
+            font-style: italic;
+            color: var(--primary-color);
             font-family: 'Vazh', sans-serif;
-            text-align: center;
-            font-weight: 500;
-            font-size: 1.4rem;
-}
-.importance-title {
-    font-size: 4rem !important; /* Было 3.5rem */
-}
-
-.importance-text {
-    font-size: 1.6rem !important; /* Было 1.4rem */
-}
-
-.importance-list {
-    font-size: 1.4rem !important; /* Было 1.2rem */
-}
+        }
 
         /* Новые стили для центрированных блоков с компонентами */
         .burnout-components {
@@ -615,6 +508,7 @@
         .component-image {
             flex: 0 0 300px;
             height: 400px;
+            border-radius: 12px;
             overflow: hidden;
             box-shadow: var(--shadow);
             aspect-ratio: 3/4;
@@ -624,7 +518,6 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
         }
 
         .component-content {
@@ -635,21 +528,84 @@
 
         .component-content h3 {
             font-size: 2rem;
-            color: var(--black);
+            color: var(--primary-color);
             margin-bottom: 1.5rem;
             font-family: 'Zag', sans-serif;
         }
 
         .component-content p {
-            font-size: 1.4rem;
+            font-size: 1.1rem;
             line-height: 1.7;
-            color: var(--black);
+            color: var(--text-color);
+            font-family: 'Tekst', sans-serif;
+        }
+
+        /* Стили для нового блока "Факторы, способствующие выгоранию" */
+        .factors-section {
+            margin: 2rem 0;
+            background: var(--disclaimer-bg);
+            padding: 4rem 0;
+            border-radius: 12px;
+        }
+
+        .factors-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            text-align: center;
+        }
+
+        .factors-container h2 {
+            font-family: 'Zag', sans-serif;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+        }
+
+        .factors-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 2.5rem 0;
+        }
+
+        .factor-card {
+            background: rgba(77, 76, 76, 0.904);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .factor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .factor-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .factor-card h3 {
+            color: #ffffff;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            font-family: 'Tekst', sans-serif;
+        }
+
+        .factor-card p {
+            color: #ffffff;
+            font-size: 1rem;
+            line-height: 1.6;
             font-family: 'Tekst', sans-serif;
         }
 
         /* Секция "Почему это важно" с изображением как фоном */
         .importance-section {
-            background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), 
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
                         url('assets/images/impor.png') center/cover no-repeat;
             min-height: 60vh;
             display: flex;
@@ -674,7 +630,6 @@
             font-family: 'Zag', sans-serif;
             line-height: 1.2;
             text-align: center;
-            color: white;
         }
 
         .importance-text {
@@ -684,7 +639,6 @@
             font-family: 'Tekst', sans-serif;
             text-align: center;
             margin-bottom: 2.5rem;
-            color: white;
         }
 
         .importance-list {
@@ -701,7 +655,6 @@
             margin-bottom: 1rem;
             position: relative;
             padding-left: 1.5rem;
-            color: white;
         }
 
         .importance-list li::before {
@@ -713,94 +666,13 @@
             font-size: 1.5rem;
         }
 
-        /* Стили для нового блока "Факторы, способствующие выгоранию" */
-        .factors-section {
-            margin: 0rem 0;
-            margin: 0;
-            background: 
-            radial-gradient(ellipse at 60% 120%, 
-            #F3D8AB 20%,
-            #EACE9C 40%,
-            #E2C28F 55%,
-            #D4AF7B 70%,
-            #9D7B54 110%),
-            url('assets/images/services-bg.jpg') center/cover no-repeat;
-            padding: 4rem 0;
-        }
-            
-
-        .factors-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-            text-align: center;
-        }
-
-        .factors-container h2 {
-            font-family: 'Zag', sans-serif;
-            font-size: 2.5rem;
-            color: var(--black);
-            margin-bottom: 3rem;
-        }
-
-        .factors-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin: 2.5rem 0;
-        }
-
-        .factor-card {
-            background: rgba(245, 245, 221, 0.8);
-            padding: 2rem;
-            box-shadow: var(--shadow);
-            text-align: center;
-            transition: var(--transition);
-        }
-
-        .factor-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .factor-icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .factor-icon img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-        .factor-card h3 {
-            color: #000000;
-            margin-bottom: 2rem;
-            font-size: 1.3rem;
-            font-family: 'Tekst', sans-serif;
-            font-weight: bold
-        }
-
-        .factor-card p {
-            color: #000000;
-            font-size: 1.4rem;
-            line-height: 1.6;
-            font-family: 'Tekst', sans-serif;
-        }
-
         /* Секция "Что мы предлагаем" */
         .services-section {
-    margin: 0;
-    background: linear-gradient(rgba(245, 245, 221, 0), rgba(245, 245, 221, 0)), 
-                url('assets/images/serv.png') center/cover no-repeat;
-    padding: 4rem 0;
-    position: relative;
-}
+            margin: 2rem 0;
+            background: var(--disclaimer-bg);
+            padding: 4rem 0;
+            border-radius: 12px;
+        }
 
         .services-container {
             max-width: 1400px;
@@ -812,24 +684,19 @@
         .services-container h2 {
             font-family: 'Zag', sans-serif;
             font-size: 2.5rem;
-            color: var(--black);
+            color: var(--primary-color);
             margin-bottom: 1rem;
         }
 
         .services-intro {
-            font-size: 1.7rem;
-            font-weight: bold;
+            font-size: 1.2rem;
             text-align: center;
             margin-bottom: 3rem;
-            color: #000000 ;
+            color: var(--text-color);
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
-            font-family: 'vazh', sans-serif;
-            background: linear-gradient(0deg, #000000, #4b4b4b);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+            font-family: 'Tekst', sans-serif;
         }
 
         .services-grid {
@@ -839,24 +706,14 @@
             margin: 2.5rem 0;
         }
 
-        @media (max-width: 1400px) {
-            .services-grid {
-            grid-template-columns: repeat(2, 1fr); /* 2 в ряд на средних экранах */
-            }
-        }
-
-        @media (max-width: 968px) {
-        .services-grid {
-        grid-template-columns: 1fr; /* 1 в ряд на мобильных */
-        }
-        }       
-
         .service-card {
-            background: rgba(245, 245, 221, 0.8);
+            background: var(--light-gray);
             padding: 2.5rem 2rem;
+            border-radius: 12px;
             box-shadow: var(--shadow);
             transition: var(--transition);
             position: relative;
+            border: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
         }
@@ -867,51 +724,45 @@
         }
 
         .service-number {
-    font-size: 15rem !important;
-    font-weight: 900;
-    position: absolute;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    color: rgba(44, 62, 80, 0.08) !important;
-    z-index: 0;
-    line-height: 1;
-    margin: 0;
-    right: auto !important;
-}
+            font-size: 3rem;
+            font-weight: 800;
+            color: rgba(44, 62, 80, 0.1);
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-family: 'Zag', sans-serif;
+        }
 
         .service-card h3 {
-            color: var(--black);
+            color: var(--primary-color);
             margin: 1rem 0;
-            font-size: 1.7rem;
+            font-size: 1.4rem;
             font-family: 'Zag', sans-serif;
             text-align: center;
         }
 
         .service-card p {
-            color: var(--black);
+            color: var(--text-color);
             margin-bottom: 2rem;
             flex-grow: 1;
             font-family: 'Tekst', sans-serif;
             line-height: 1.6;
             text-align: center;
-            font-size: 1.6rem;
         }
 
         .service-link {
-            color: #000000;
+            color: var(--secondary-color);
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
             font-family: 'Tekst', sans-serif;
             transition: var(--transition);
             margin-top: auto;
             text-align: center;
             display: block;
-
         }
 
         .service-link:hover {
-            color: #1d7ba0;
+            color: var(--accent-color);
             transform: translateX(5px);
         }
 
@@ -1001,17 +852,11 @@
             }
             
             .importance-title {
-                text-align: left;
                 font-size: 3rem;
             }
             
             .factors-grid {
                 grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .factor-icon {
-                width: 50px;
-                height: 50px;
             }
         }
 
@@ -1115,11 +960,6 @@
             
             .factors-grid {
                 grid-template-columns: 1fr;
-            }
-            
-            .factor-icon {
-                width: 45px;
-                height: 45px;
             }
         }
 
@@ -1226,11 +1066,6 @@
             .service-number {
                 font-size: 2.5rem;
             }
-            
-            .factor-icon {
-                width: 40px;
-                height: 40px;
-            }
         }
 
         @media (max-width: 480px) {
@@ -1313,12 +1148,6 @@
             .service-card {
                 padding: 1.5rem 1.2rem;
             }
-            
-            .factor-icon {
-                width: 35px;
-                height: 35px;
-            }
-            
         }
 
         /* Ландшафтная ориентация для мобильных */
@@ -1340,11 +1169,6 @@
                 min-height: 70vh;
             }
         }
-        .grayscale-image {
-    filter: grayscale(0%) !important; /* Начальное состояние - цветное */
-    transition: filter 1.5s ease;
-        }
-
     </style>
 </head>
 <body>
@@ -1373,7 +1197,7 @@
     <!-- Герой секция с видео -->
     <section class="hero">
         <div class="video-container">
-            <video class="hero-video" muted playsinline autoplay>
+            <video class="hero-video" muted playsinline>
                 <source src="assets/video/vi.mp4" type="video/mp4">
                 <source src="assets/video/vi.webm" type="video/webm">
                 Ваш браузер не поддерживает видео
@@ -1383,9 +1207,9 @@
         
         <div class="content-side">
             <div class="hero-content">
-                <h1 class="hero-title hero-element">Не гори!</h1>
-                <p class="hero-subtitle hero-element">Практические методики и инструменты для сохранения ментального здоровья</p>
-                <div class="hero-buttons hero-element">
+                <h1 class="hero-title">Не гори!</h1>
+                <p class="hero-subtitle">Практические методики и инструменты для сохранения ментального здоровья</p>
+                <div class="hero-buttons">
                     <a href="#burnout-info" class="btn btn-primary">Узнать о выгорании</a>
                     <a href="#methods" class="btn btn-secondary">Смотреть методики</a>
                 </div>
@@ -1398,7 +1222,7 @@
         <!-- Disclaimer -->
         <section class="section-wide disclaimer-section">
             <div class="disclaimer-card">
-                <div class="disclaimer-content fade-in-element">
+                <div class="disclaimer-content">
                     <h3>Важная информация</h3>
                     <p>Данный ресурс не является медицинской помощью и не предоставляет медицинские услуги. 
                     Представленные материалы носят исключительно информационно-образовательный характер.</p>
@@ -1409,8 +1233,8 @@
         <!-- Секция с фоном для заголовка выгорания -->
         <section class="burnout-header-section" id="burnout-info">
             <div class="burnout-header-content">
-                <h1 class="burnout-header-title slide-in-left">Эмоциональное выгорание: когда ресурсы на исходе</h1>
-                <p class="burnout-header-text slide-in-right">Эмоциональное выгорание — это не просто усталость или плохое настроение. Это серьезный синдром, развивающийся в ответ на хронический стресс, связанный с профессиональной деятельностью. Всемирная организация здравоохранения официально признала выгорание фактором, влияющим на состояние здоровья.</p>
+                <h1 class="burnout-header-title">Эмоциональное выгорание: когда ресурсы на исходе</h1>
+                <p class="burnout-header-text">Эмоциональное выгорание — это не просто усталость или плохое настроение. Это серьезный синдром, развивающийся в ответ на хронический стресс, связанный с профессиональной деятельностью. Всемирная организация здравоохранения официально признала выгорание фактором, влияющим на состояние здоровья.</p>
             </div>
         </section>
 
@@ -1421,10 +1245,10 @@
                     <div class="burnout-components">
                         <!-- Блок с эмоциональным истощением -->
                         <div class="component-block">
-                            <div class="component-image slide-in-left">
-                                <img src="assets/images/istosh.png" alt="Эмоциональное истощение">
+                            <div class="component-image">
+                                <img src="assets/images/istosh.jpg" alt="Эмоциональное истощение">
                             </div>
-                            <div class="component-content slide-in-right">
+                            <div class="component-content">
                                 <h3>Эмоциональное истощение</h3>
                                 <p>Человек чувствует себя "выжатым как лимон". Постоянная усталость не проходит даже после отдыха. Пропадает энергия для работы и личной жизни, появляется ощущение, что "батарейка села".</p>
                             </div>
@@ -1432,138 +1256,117 @@
                         
                         <!-- Блок с деперсонализацией -->
                         <div class="component-block reverse">
-                            <div class="component-image slide-in-right">
-                                <img src="assets/images/otdal.png" alt="Деперсонализация">
+                            <div class="component-image">
+                                <img src="assets/images/otdal.jpg" alt="Деперсонализация">
                             </div>
-                            <div class="component-content slide-in-left">
-                                <h3>Деперсонализация (отдаление)</h3>
-                                <p>Появляется циничное отношение к работе, коллегам, клиентам. Человек начинает воспринимать других как объекты, теряет эмпатию и способность к сопереживанию.</p>
+                            <div class="component-content">
+                                <h3>Деперсонализация</h3>
+                                <p>Возникает циничное, отстраненное отношение к коллегам, клиентам и самой работе. Человек начинает воспринимать других как объекты, теряет эмпатию и способность к сопереживанию.</p>
                             </div>
                         </div>
                         
-                        <!-- Блок с редукцией профессиональных достижений -->
+                        <!-- Блок со снижением эффективности -->
                         <div class="component-block">
-                            <div class="component-image slide-in-left">
-                                <img src="assets/images/redak.png" alt="Редукция профессиональных достижений">
+                            <div class="component-image">
+                                <img src="assets/images/istosh.jpg" alt="Снижение эффективности">
                             </div>
-                            <div class="component-content slide-in-right">
-                                <h3>Редукция профессиональных достижений</h3>
-                                <p>Снижается продуктивность, появляется чувство некомпетентности. Человек перестает видеть смысл в своей работе, обесценивает собственные достижения.</p>
+                            <div class="component-content">
+                                <h3>Снижение эффективности</h3>
+                                <p>Ухудшаются рабочие результаты, появляется чувство некомпетентности. Пропадает удовлетворение от работы, достижения перестают радовать.</p>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="important-note scale-in">
-                        <p>Важно: выгорание — это не личная слабость, а результат длительного воздействия профессионального стресса. Раннее распознавание симптомов позволяет предотвратить серьезные последствия для здоровья.</p>
-                    </div>
                 </article>
+            </div>
+        </section>
+
+        <!-- Блок "Факторы выгорания" -->
+        <section class="section-wide factors-section">
+            <div class="factors-container">
+                <h2>Факторы, способствующие выгоранию</h2>
+                <div class="factors-grid">
+                    <div class="factor-card">
+                        <h3>Высокая рабочая нагрузка и переработки</h3>
+                        <p>Постоянное превышение норм рабочего времени, большой объем задач и дедлайны без адекватного отдыха</p>
+                    </div>
+                    
+                    <div class="factor-card">
+                        <h3>Недостаточный контроль над рабочим процессом</h3>
+                        <p>Отсутствие возможности влиять на принятие решений, распределение задач и организацию работы</p>
+                    </div>
+                    
+                    <div class="factor-card">
+                        <h3>Неадекватное вознаграждение</h3>
+                        <p>Несправедливая оплата труда, отсутствие признания заслуг и морального поощрения</p>
+                    </div>
+                    
+                    <div class="factor-card">
+                        <h3>Нарушенные рабочие отношения и конфликты</h3>
+                        <p>Токсичная атмосфера в коллективе, отсутствие поддержки коллег и руководства</p>
+                    </div>
+                    
+                    <div class="factor-card">
+                        <h3>Отсутствие справедливости и прозрачности</h3>
+                        <p>Непрозрачные критерии оценки работы, фаворитизм и несправедливое распределение ресурсов</p>
+                    </div>
+                    
+                    <div class="factor-card">
+                        <h3>Конфликт ценностей</h3>
+                        <p>Расхождение между личными убеждениями и требованиями организации, этические дилеммы</p>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- Секция "Почему это важно" -->
         <section class="importance-section">
             <div class="importance-content">
-                <h2 class="importance-title fade-in-element">Почему важно вовремя распознать выгорание</h2>
-                <p class="importance-text fade-in-element">Невыявленное и нелеченное выгорание может привести к серьезным последствиям:</p>
-                <ul class="importance-list stagger-element">
-                    <li>Развитие клинической депрессии и тревожных расстройств</li>
-                    <li>Серьезные проблемы со сном и аппетитом</li>
-                    <li>Снижение иммунитета и частые заболевания</li>
-                    <li>Проблемы в личных отношениях и социальной изоляции</li>
-                    <li>Снижение профессиональной эффективности и карьерного роста</li>
-                    <li>Злоупотребление алкоголем или другими веществами</li>
+                <h1 class="importance-title">Почему это важно</h1>
+                <p class="importance-text">Без внимания выгорание может привести к серьезным последствиям:</p>
+                <ul class="importance-list">
+                    <li>Депрессии и тревожным расстройствам</li>
+                    <li>Серьезным проблемам со здоровьем</li>
+                    <li>Потере работы и профессиональной идентичности</li>
+                    <li>Разрушению личных отношений</li>
+                    <li>Хронической усталости и апатии</li>
+                    <li>Снижению качества жизни</li>
                 </ul>
-            </div>
-        </section>
-
-        <!-- Секция "Факторы, способствующие выгоранию" -->
-        <section class="factors-section">
-            <div class="factors-container">
-                <h2 class="fade-in-element">Факторы, способствующие выгоранию</h2>
-                <div class="factors-grid">
-                    <div class="factor-card stagger-element">
-                        <div class="factor-icon">
-                            <img src="assets/icons/workload.svg" alt="Высокая нагрузка">
-                        </div>
-                        <h3>Высокая рабочая нагрузка</h3>
-                        <p>Постоянные переработки, нереальные сроки и большой объем задач без достаточных ресурсов для их выполнения</p>
-                    </div>
-                    
-                    <div class="factor-card stagger-element">
-                        <div class="factor-icon">
-                            <img src="assets/icons/rest.svg" alt="Отсутствие отдыха">
-                        </div>
-                        <h3>Отсутствие отдыха</h3>
-                        <p>Недостаток перерывов, работа без выходных, невозможность полноценно восстановить силы после рабочего дня</p>
-                    </div>
-                    
-                    <div class="factor-card stagger-element">
-                        <div class="factor-icon">
-                            <img src="assets/icons/reward.svg" alt="Недостаток вознаграждения">
-                        </div>
-                        <h3>Недостаток вознаграждения</h3>
-                        <p>Неадекватная оплата труда, отсутствие признания достижений и карьерного роста</p>
-                    </div>
-                    
-                    <div class="factor-card stagger-element">
-                        <div class="factor-icon">
-                            <img src="assets/icons/community.svg" alt="Нарушения в коллективе">
-                        </div>
-                        <h3>Нарушения в коллективе</h3>
-                        <p>Токсичная атмосфера, конфликты, отсутствие поддержки от коллег и руководства</p>
-                    </div>
-                    
-                    <div class="factor-card stagger-element">
-                        <div class="factor-icon">
-                            <img src="assets/icons/fairness.svg" alt="Несправедливость и отсутствие контроля">
-                        </div>
-                        <h3>Несправедливость и отсутствие контроля</h3>
-                        <p>Неравное распределение нагрузки, фаворитизм, минимальное влияние на принятие решений и невозможность влиять на свою работу</p>
-                    </div>
-                    
-                    <div class="factor-card stagger-element">
-                        <div class="factor-icon">
-                            <img src="assets/icons/values.svg" alt="Конфликт ценностей">
-                        </div>
-                        <h3>Конфликт ценностей</h3>
-                        <p>Расхождение между личными ценностями сотрудника и требованиями организации</p>
-                    </div>
-                </div>
+                <a href="pages/tests.html" class="btn btn-primary">Пройти диагностику</a>
             </div>
         </section>
 
         <!-- Секция "Что мы предлагаем" -->
-        <section class="services-section" id="methods">
+        <section class="section-wide services-section">
             <div class="services-container">
-                <h2 class="fade-in-element">Что делать?</h2>
-                <p class="services-intro fade-in-element"> Методики и инструменты помогут вам распознать признаки выгорания на ранней стадии и научиться эффективно управлять своим состоянием</p>
+                <h2>Что делать?</h2>
+                <p class="services-intro">Данный ресурс создан, чтобы помочь вам в профилактике эмоционального выгорания. Мы предлагаем практические инструменты и методики для сохранения ментального здоровья.</p>
                 
                 <div class="services-grid">
-                    <div class="service-card stagger-element">
+                    <div class="service-card">
                         <div class="service-number">1</div>
-                        <h3>Проверяй</h3>
-                        <p>Профессиональные тесты и опросники для оценки уровня стресса и риска выгорания</p>
+                        <h3>Оценка состояния</h3>
+                        <p>Пройдите тесты для самодиагностики уровня стресса и выгорания. Получите информацию о своем состоянии.</p>
                         <a href="pages/tests.html" class="service-link">Пройти тестирование →</a>
                     </div>
                     
-                    <div class="service-card stagger-element">
+                    <div class="service-card">
                         <div class="service-number">2</div>
-                        <h3>Используй</h3>
-                        <p>Быстрые техники самопомощи для снятия напряжения и восстановления энергии</p>
-                        <a href="pages/quick-help.html" class="service-link">Смотреть методики →</a>
+                        <h3>Экстренная помощь</h3>
+                        <p>Техники для быстрого снятия напряжения в острых ситуациях. Методы самопомощи здесь и сейчас.</p>
+                        <a href="pages/quick-help.html" class="service-link">Получить помощь →</a>
                     </div>
                     
-                    <div class="service-card stagger-element">
+                    <div class="service-card">
                         <div class="service-number">3</div>
-                        <h3>Тренируй</h3>
-                        <p> Упражнения и навыки для поддержания ментального здоровья в повседневной жизни</p>
-                        <a href="pages/daily.html" class="service-link">Узнать больше →</a>
+                        <h3>Ежедневные практики</h3>
+                        <p>Система упражнений и методик для интеграции в повседневную жизнь. Профилактика выгорания.</p>
+                        <a href="pages/daily.html" class="service-link">Смотреть методики →</a>
                     </div>
                     
-                    <div class="service-card stagger-element">
+                    <div class="service-card">
                         <div class="service-number">4</div>
-                        <h3>Изучай</h3>
-                        <p>Статьи, и рекомендации по профилактике профессионального выгорания</p>
+                        <h3>Образовательные материалы</h3>
+                        <p>Статьи, видео и книги по психологии стресса и выгорания. Углубленное понимание проблемы.</p>
                         <a href="pages/materials.html" class="service-link">Изучить материалы →</a>
                     </div>
                 </div>
@@ -1574,14 +1377,15 @@
     <!-- Футер -->
     <footer class="tilda-footer">
         <div class="footer-content">
-            <div class="footer-section fade-in-element">
+            <div class="footer-section">
                 <h3>НЕ ГОРИ</h3>
-                <p>Платформа для профилактики профессионального выгорания и поддержания ментального здоровья</p>
+                <p>Практические методики для сохранения ментального здоровья и профилактики профессионального выгорания.</p>
             </div>
             
-            <div class="footer-section fade-in-element">
-                <h3>Разделы</h3>
+            <div class="footer-section">
+                <h3>Навигация</h3>
                 <nav class="footer-nav">
+                    <a href="index.html">Главная</a>
                     <a href="pages/quick-help.html">Быстрая помощь</a>
                     <a href="pages/daily.html">Методики</a>
                     <a href="pages/materials.html">Материалы</a>
@@ -1589,283 +1393,46 @@
                 </nav>
             </div>
             
-            <div class="footer-section fade-in-element">
+            <div class="footer-section">
                 <h3>Контакты</h3>
                 <nav class="footer-nav">
                     <a href="mailto:info@negoti.ru">info@negoti.ru</a>
-                    <a href="#privacy">Политика конфиденциальности</a>
-                    <a href="#terms">Условия использования</a>
+                    <a href="#">Политика конфиденциальности</a>
+                    <a href="#">Условия использования</a>
                 </nav>
             </div>
         </div>
         
-        <div class="footer-bottom fade-in-element">
-            <p>&copy; 2025 НЕ ГОРИ. Все права защищены.</p>
+        <div class="footer-bottom">
+            <p>&copy; 2024 НЕ ГОРИ. Все права защищены.</p>
         </div>
     </footer>
 
     <script>
+        // Автовоспроизведение видео
         document.addEventListener('DOMContentLoaded', function() {
-            // Сразу показываем блок с видео
-            const videoBlock = document.querySelector('.video-container');
-            const contentSide = document.querySelector('.content-side');
-            videoBlock.style.opacity = '1';
-            contentSide.style.opacity = '1';
-
-            // Через 0.8 секунды показываем "не гори!" с улучшенной анимацией
-            setTimeout(() => {
-                const heroTitle = document.querySelector('.hero-title');
-                heroTitle.classList.add('fire-animation');
-                heroTitle.classList.add('visible');
-            }, 600);
-
-            // Через 1.2 секунды показываем подзаголовок
-            setTimeout(() => {
-                const heroSubtitle = document.querySelector('.hero-subtitle');
-                heroSubtitle.classList.add('visible');
-            }, 2000);
-
-            // Через 1.6 секунды показываем кнопки
-            setTimeout(() => {
-                const mainContent = document.querySelector('.main-content');
-                mainContent.classList.add('visible');
-            }, 0);
-
-             // Через 1.6 секунды показываем кнопки
-            setTimeout(() => {
-                const heroButtons = document.querySelector('.hero-buttons');
-                heroButtons.classList.add('visible');
-            }, 2200);
-
-            // Через 2 секунды показываем хедер и основной контент
-            setTimeout(() => {
-                const header = document.querySelector('.tilda-header');
-                const mainContent = document.querySelector('.main-content');
-                
-                header.classList.add('visible');
-                mainContent.classList.add('visible');
-
-                // Запускаем анимации для остальных элементов с задержками
-                setTimeout(() => {
-                    // Disclaimer
-                    const disclaimer = document.querySelector('.disclaimer-content');
-                    if (disclaimer) disclaimer.classList.add('visible');
-
-                    // Burnout header
-                    const burnoutTitle = document.querySelector('.burnout-header-title');
-                    const burnoutText = document.querySelector('.burnout-header-text');
-                    if (burnoutTitle) burnoutTitle.classList.add('visible');
-                    setTimeout(() => {
-                        if (burnoutText) burnoutText.classList.add('visible');
-                    }, 0);
-
-                    // Components
-                    const components = document.querySelectorAll('.component-image, .component-content');
-                    components.forEach((component, index) => {
-                        setTimeout(() => {
-                            component.classList.add('visible');
-                        }, index * 0);
-                    });
-
-                    // Important note
-                    setTimeout(() => {
-                        const importantNote = document.querySelector('.important-note');
-                        if (importantNote) importantNote.classList.add('visible');
-                    }, 1000);
-
-                    // Importance section
-                    const importanceElements = document.querySelectorAll('.importance-section .fade-in-element, .importance-section .stagger-element');
-                    importanceElements.forEach((element, index) => {
-                        setTimeout(() => {
-                            element.classList.add('visible');
-                        }, index * 150);
-                    });
-
-                    
-
-                    // Factors section
-                    const factorsTitle = document.querySelector('.factors-container h2');
-                    if (factorsTitle) factorsTitle.classList.add('visible');
-                    
-                    const factorCards = document.querySelectorAll('.factor-card');
-                    factorCards.forEach((card, index) => {
-                        setTimeout(() => {
-                            card.classList.add('visible');
-                        }, 500 + (index * 100));
-                    });
-
-                    // Services section
-                    const servicesTitle = document.querySelector('.services-container h2');
-                    const servicesIntro = document.querySelector('.services-intro');
-                    if (servicesTitle) servicesTitle.classList.add('visible');
-                    setTimeout(() => {
-                        if (servicesIntro) servicesIntro.classList.add('visible');
-                    }, 300);
-                    
-                    const serviceCards = document.querySelectorAll('.service-card');
-                    serviceCards.forEach((card, index) => {
-                        setTimeout(() => {
-                            card.classList.add('visible');
-                        }, 600 + (index * 100));
-                    });
-
-                    // Footer
-                    const footerElements = document.querySelectorAll('.footer-section, .footer-bottom');
-                    footerElements.forEach((element, index) => {
-                        setTimeout(() => {
-                            element.classList.add('visible');
-                        }, index * 200);
-                    });
-
-                }, 500);
-            }, 2200);
-
-            // Intersection Observer для анимации при скролле
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
+            const video = document.querySelector('.hero-video');
+            if (video) {
+                video.play().catch(e => {
+                    console.log('Автовоспроизведение видео заблокировано браузером');
                 });
-            }, observerOptions);
-
-            // Наблюдаем за всеми элементами с анимациями
-            const animatedElements = document.querySelectorAll('.stagger-element, .fade-in-element, .slide-in-left, .slide-in-right, .scale-in');
-            animatedElements.forEach(element => {
-                observer.observe(element);
-            });
-
+            }
+            
             // Плавная прокрутка для якорных ссылок
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
                     const target = document.querySelector(this.getAttribute('href'));
                     if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
+                        const headerHeight = document.querySelector('.tilda-header').offsetHeight;
+                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
                         });
                     }
                 });
-            });
-
-            // Обработчик для мобильного меню
-            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-            const headerNav = document.querySelector('.header-nav');
-            const headerActions = document.querySelector('.header-actions');
-
-            if (mobileMenuBtn) {
-                mobileMenuBtn.addEventListener('click', function() {
-                    const isVisible = headerNav.style.display === 'flex';
-                    
-                    if (isVisible) {
-                        headerNav.style.display = 'none';
-                        headerActions.style.display = 'none';
-                    } else {
-                        headerNav.style.display = 'flex';
-                        headerActions.style.display = 'flex';
-                        headerNav.style.flexDirection = 'column';
-                        headerNav.style.position = 'absolute';
-                        headerNav.style.top = '100%';
-                        headerNav.style.left = '0';
-                        headerNav.style.right = '0';
-                        headerNav.style.background = 'rgba(245, 245, 221, 0.98)';
-                        headerNav.style.backdropFilter = 'blur(10px)';
-                        headerNav.style.padding = '2rem';
-                        headerNav.style.gap = '1.5rem';
-                    }
-                });
-            }
-          // Обесцвечивание картинки istosh - цвет не возвращается пока картинка видна
-const istoshObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        // Обесцвечиваем когда 50% картинки видно
-        if (entry.intersectionRatio > 0.5) {
-            entry.target.style.filter = 'grayscale(100%)';
-        }
-        // Возвращаем цвет только когда картинка полностью скрыта (меньше 10% видно)
-        else if (entry.intersectionRatio < 0.1) {
-            entry.target.style.filter = 'grayscale(0%)';
-        }
-    });
-}, { 
-    threshold: [0, 0.9, 0.5, 1]
-});
-
-const istoshImage = document.querySelector('img[src*="istosh"]');
-if (istoshImage) {
-    istoshImage.style.transition = 'filter 1.5s ease';
-    istoshImage.style.filter = 'grayscale(0%)';
-    istoshObserver.observe(istoshImage);
-}
-
-// Обесцвечивание картинки otdal - цвет не возвращается пока картинка видна
-const otdalObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        // Обесцвечиваем когда 50% картинки видно
-        if (entry.intersectionRatio > 0.5) {
-            entry.target.style.filter = 'grayscale(100%)';
-        }
-        // Возвращаем цвет только когда картинка полностью скрыта (меньше 10% видно)
-        else if (entry.intersectionRatio < 0.1) {
-            entry.target.style.filter = 'grayscale(0%)';
-        }
-    });
-}, { 
-    threshold: [0, 0.9, 0.5, 1]
-});
-
-const otdalImage = document.querySelector('img[src*="otdal"]');
-if (otdalImage) {
-    otdalImage.style.transition = 'filter 1.5s ease';
-    otdalImage.style.filter = 'grayscale(0%)';
-    otdalObserver.observe(otdalImage);
-}
-
-// Обесцвечивание картинки redak - цвет не возвращается пока картинка видна
-const redakObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        // Обесцвечиваем когда 50% картинки видно
-        if (entry.intersectionRatio > 0.5) {
-            entry.target.style.filter = 'grayscale(100%)';
-        }
-        // Возвращаем цвет только когда картинка полностью скрыта (меньше 10% видно)
-        else if (entry.intersectionRatio < 0.1) {
-            entry.target.style.filter = 'grayscale(0%)';
-        }
-    });
-}, { 
-    threshold: [0, 0.9, 0.5, 1] // Несколько порогов для точного контроля
-});
-
-const redakImage = document.querySelector('img[src*="redak"]');
-if (redakImage) {
-    redakImage.style.transition = 'filter 1.5s ease';
-    redakImage.style.filter = 'grayscale(0%)';
-    redakObserver.observe(redakImage);
-}
-
-            // Закрытие мобильного меню при ресайзе
-            window.addEventListener('resize', function() {
-                if (window.innerWidth > 768) {
-                    if (headerNav) {
-                        headerNav.style.display = '';
-                        headerNav.style.position = '';
-                        headerNav.style.background = '';
-                        headerNav.style.padding = '';
-                    }
-                    if (headerActions) {
-                        headerActions.style.display = '';
-                    }
-                } else {
-                    if (headerNav) headerNav.style.display = 'none';
-                    if (headerActions) headerActions.style.display = 'none';
-                }
             });
         });
     </script>
