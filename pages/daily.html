@@ -3,14 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ежедневные практики | Анти-выгорание для врачей</title>
+    <title>Ежедневные практики | Не гори: профилактика профессионального выгорания</title>
     
-    <!-- Подключаем общие CSS -->
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/header.css">
-    <link rel="stylesheet" href="../assets/css/components.css">
+    <!-- Фавиконки -->
+    <link rel="icon" type="image/png" href="../assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="../assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="НЕГОРИ" />
+    <link rel="manifest" href="../assets/favicon/site.webmanifest" />
     
     <style>
+        /* Все исходные стили остаются без изменений */
         /* Reset и базовые стили */
         * {
             margin: 0;
@@ -22,6 +26,7 @@
             --primary-color: #2c3e50;
             --secondary-color: #3498db;
             --accent-color: #e74c3c;
+            --success-color: #2ecc71;
             --text-color: #333333;
             --dark-bg: #1a1a1a;
             --light-bg: #F5F5DD;
@@ -80,6 +85,8 @@
             font-weight: 400;
             max-width: 100vw;
             overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
         }
 
         /* Стили для плавного появления */
@@ -342,6 +349,7 @@
             max-width: 800px;
             color: white;
             text-align: center;
+            width: 100%;
         }
 
         .daily-title {
@@ -350,6 +358,8 @@
             margin-bottom: 1.5rem;
             font-family: 'Zag', sans-serif;
             line-height: 1.2;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .daily-subtitle {
@@ -357,6 +367,8 @@
             line-height: 1.8;
             opacity: 0.95;
             font-family: 'Tekst', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .main-content {
@@ -377,14 +389,14 @@
         }
 
         /* ВОЛНОВЫЕ СПОЙЛЕРЫ - ИСПРАВЛЕННЫЕ */
-        .technique {
+        .practice-card {
             margin: 2rem 0;
             background: transparent;
             box-shadow: var(--shadow);
             overflow: hidden;
         }
 
-        .technique-header {
+        .practice-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -395,11 +407,11 @@
             transition: all 0.3s;
         }
 
-        .technique-header:hover {
+        .practice-header:hover {
             background: #34495e;
         }
 
-        .technique-title {
+        .practice-title {
             display: flex;
             align-items: center;
             gap: 1rem;
@@ -407,91 +419,81 @@
             color: var(--white);
             font-size: 1.5rem;
             font-family: 'Zag', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
-        .technique-icon {
+        .practice-icon {
             width: 24px;
             height: 24px;
             transition: transform 0.3s;
             filter: brightness(0) invert(1);
         }
 
-        .technique.active .technique-icon {
+        .practice-card.active .practice-icon {
             transform: rotate(180deg);
         }
 
         /* Волновая анимация - ИСПРАВЛЕНО */
-        .technique-content {
+        .practice-content {
             max-height: 0;
             overflow: hidden;
             transition: all 0.6s ease;
-            background: rgba(255, 255, 255, 0.747);
+            background:  rgba(255, 255, 255, 0.747);
             clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
         }
 
-        .technique.active .technique-content {
+        .practice-card.active .practice-content {
             max-height: 2000px;
             clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
         }
 
-        .technique-content-inner {
+        .practice-content-inner {
             padding: 0 2rem;
             opacity: 0;
             transition: opacity 0.3s ease 0.2s;
         }
 
-        .technique.active .technique-content-inner {
+        .practice-card.active .practice-content-inner {
             padding: 2rem;
             opacity: 1;
         }
 
-        /* Стили для контента методик */
-        .technique-content-inner p {
+        /* Стили для контента практик */
+        .practice-content-inner p {
             font-size: 1.5rem;
             font-weight: 700;
             line-height: 1.6;
             color: var(--black);
             margin-bottom: 1.5rem;
             font-family: 'Tekst', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
-        .technique-content-inner ol, .technique-content-inner ul {
+        .practice-content-inner ol, .practice-content-inner ul {
             margin: 1rem 0;
             padding-left: 1.5rem;
         }
 
-        .technique-content-inner li {
+        .practice-content-inner li {
             margin-bottom: 0.8rem;
             line-height: 1.5;
             font-size: 1.34rem;
             font-weight: 600;
             color: var(--text-color);
             font-family: 'Tekst', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
-        .technique-content-inner strong {
+        .practice-content-inner strong {
             color: var(--primary-color);
             font-weight: 600;
         }
 
-        .technique-tip {
-            text-align: center;
-            background: rgba(31, 123, 184, 0);
-            border: 2px dashed black;
-            padding: 1rem;
-            margin: 1.5rem 0;
-        }
-
-        .technique-tip p {
-            margin: 0;
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            font-weight: 600;
-            font-family: 'Tekst', sans-serif;
-        }
-
-        /* Стили для карточек */
-        .card {
+        /* Информационные блоки */
+        .info-card {
             background: white;
             border-radius: 10px;
             padding: 1.5rem;
@@ -500,23 +502,44 @@
             border-left: 4px solid #3498db;
         }
 
-        .card.success {
-            border-left-color: #2ecc71;
+        .info-card.success {
+            border-left-color: var(--success-color);
             background: rgba(46, 204, 113, 0.05);
         }
 
-        .card.warning {
-            border-left-color: #e74c3c;
+        .info-card.warning {
+            border-left-color: var(--accent-color);
             background: rgba(231, 76, 60, 0.05);
         }
 
-        .card h4 {
+        .info-card h4 {
             margin-top: 0;
             color: #2c3e50;
             font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        /* Стили для таймеров */
+        .practice-tip {
+            text-align: center;
+            background: rgba(31, 123, 184, 0);
+            border: 2px dashed black;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .practice-tip p {
+            margin: 0;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: 600;
+            font-family: 'Tekst', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* Стили для таймеров и кнопок */
         .timer-display {
             font-size: 4rem;
             font-weight: bold;
@@ -525,6 +548,8 @@
             color: var(--primary-color);
             font-family: 'zach', monospace;
             padding: 1rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .timer-controls {
@@ -561,43 +586,70 @@
             background: #c0392b;
         }
 
-        /* Стили для чеклистов */
-        .b-checklist {
-            list-style: none;
-            padding-left: 0;
+        .help-btn {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            font-family: 'Tekst', sans-serif;
         }
 
-        .b-checklist li {
-            position: relative;
-            padding-left: 2rem;
-            margin-bottom: 0.5rem;
+        .help-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
 
-        .b-checklist li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #2ecc71;
+        .help-btn.more {
+            background: var(--secondary-color);
+        }
+
+        .help-btn.more:hover {
+            background: #2980b9;
+        }
+
+        .help-btn.stop {
+            background: var(--accent-color);
+        }
+
+        .help-btn.stop:hover {
+            background: #c0392b;
+        }
+
+        .task-display {
+            background: var(--primary-color);
+            color: white;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
             font-weight: bold;
             font-size: 1.2rem;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-family: 'Tekst', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
-        /* Дополнительные стили */
-        .disclaimer {
-            background: rgba(231, 76, 60, 0.1);
-            border: 1px solid #e74c3c;
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 1rem 0;
+        .help-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .help-container {
             text-align: center;
+            margin: 2rem 0;
         }
 
-        .text-center {
-            text-align: center;
-        }
-
-        /* Контейнер для техник */
-        .techniques-container {
+        /* Контейнер для практик */
+        .practices-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 40px;
@@ -659,6 +711,8 @@
             margin-bottom: 1rem;
             font-size: 1.5rem;
             font-family: 'Zag', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .modal-message {
@@ -666,6 +720,8 @@
             line-height: 1.5;
             margin-bottom: 1.5rem;
             font-family: 'Tekst', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .modal-btn {
@@ -706,6 +762,8 @@
             margin-bottom: 1.5rem;
             font-size: 1.3rem;
             font-family: 'Zag', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .footer-nav {
@@ -719,6 +777,8 @@
             text-decoration: none;
             transition: var(--transition);
             font-family: 'Tekst', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .footer-nav a:hover {
@@ -734,6 +794,8 @@
             margin: 0 auto;
             padding: 0 40px;
             font-family: 'Tekst', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         /* Мобильное меню - ИСПРАВЛЕННОЕ */
@@ -766,6 +828,8 @@
             border-bottom: 1px solid var(--border-color);
             transition: var(--transition);
             font-family: 'Tekst', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .mobile-nav-link:hover,
@@ -785,6 +849,64 @@
             margin-top: 1rem;
         }
 
+        /* Стили для чеклистов */
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .checklist li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .checklist li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Счетчик помидоров */
+        .pomodoro-counter {
+            text-align: center;
+            margin: 1rem 0;
+            font-weight: bold;
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+        }
+
+        /* Предупреждения */
+        .disclaimer {
+            background: rgba(231, 76, 60, 0.1);
+            border: 1px solid var(--accent-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        /* Улучшения для мобильной адаптации */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .text-container {
+            max-width: 100%;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        }
+
+        /* Предотвращение горизонтального скролла */
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
         /* Адаптивность */
         @media (max-width: 1200px) {
             .header-container {
@@ -795,8 +917,12 @@
                 font-size: 3rem;
             }
             
-            .techniques-container {
+            .practices-container {
                 padding: 0 30px;
+            }
+            
+            .timer-display {
+                font-size: 3rem;
             }
         }
 
@@ -818,16 +944,16 @@
                 font-size: 1.2rem;
             }
             
-            .technique-header {
+            .practice-header {
                 padding: 1rem 1.5rem;
             }
             
-            .technique-title {
+            .practice-title {
                 font-size: 1.3rem;
             }
             
             .timer-display {
-                font-size: 2rem;
+                font-size: 2.5rem;
                 padding: 0.8rem;
             }
             
@@ -838,6 +964,10 @@
             
             .timer-btn {
                 width: 200px;
+            }
+            
+            .practices-container {
+                padding: 0 20px;
             }
         }
 
@@ -861,30 +991,44 @@
             
             .daily-title {
                 font-size: 2rem;
+                text-align: center;
             }
             
             .daily-subtitle {
                 font-size: 1.1rem;
+                text-align: center;
             }
             
-            .techniques-container {
+            .practices-container {
                 padding: 0 20px;
             }
             
-            .technique-header {
+            .practice-header {
                 padding: 0.8rem 1rem;
             }
             
-            .technique-title {
+            .practice-title {
                 font-size: 1.2rem;
             }
             
-            .technique-content-inner {
+            .practice-content-inner {
                 padding: 0 1rem;
             }
             
-            .technique.active .technique-content-inner {
+            .practice-card.active .practice-content-inner {
                 padding: 1.5rem 1rem;
+            }
+            
+            .practice-content-inner p {
+                font-size: 1.3rem;
+            }
+            
+            .practice-content-inner li {
+                font-size: 1.2rem;
+            }
+            
+            .timer-display {
+                font-size: 2rem;
             }
         }
 
@@ -906,7 +1050,7 @@
                 font-size: 1rem;
             }
             
-            .techniques-container {
+            .practices-container {
                 padding: 0 15px;
             }
             
@@ -916,6 +1060,24 @@
             
             .mobile-nav-link {
                 font-size: 1.3rem;
+            }
+            
+            .practice-content-inner p {
+                font-size: 1.2rem;
+            }
+            
+            .practice-content-inner li {
+                font-size: 1.1rem;
+            }
+            
+            .timer-display {
+                font-size: 1.8rem;
+            }
+            
+            .timer-btn,
+            .help-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
             }
         }
 
@@ -932,6 +1094,182 @@
             
             .mobile-nav-link {
                 padding: 0.5rem 0;
+                font-size: 1.2rem;
+            }
+        }
+
+        /* НОВЫЕ СТИЛИ ДЛЯ ВРЕМЕННЫХ БЛОКОВ */
+        .time-section-card {
+            margin: 3rem 0;
+            background: transparent;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .time-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding:  2.5rem 2rem;
+            background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), 
+                        var(--section-bg) center 20%/cover no-repeat;
+            color: var(--white);
+            transition: all 0.3s;
+            min-height: 200px;
+        }
+
+        .time-section-header:hover {
+            background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8)), 
+                        var(--section-bg) center/cover no-repeat;
+        }
+
+        .time-section-title {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin: 0;
+            color: var(--white);
+            font-size: 2rem;
+            font-family: 'Zag', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .time-section-icon {
+            width: 32px;
+            height: 32px;
+            transition: transform 0.3s;
+            filter: brightness(0) invert(1);
+        }
+
+        .time-section-card.active .time-section-icon {
+            transform: rotate(180deg);
+        }
+
+        .time-section-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.6s ease;
+            background: rgba(255, 255, 255, 0.9);
+            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        }
+
+        .time-section-card.active .time-section-content {
+            max-height: 5000px;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .time-section-content-inner {
+            padding: 0 2rem;
+            opacity: 0;
+            transition: opacity 0.3s ease 0.2s;
+        }
+
+        .time-section-card.active .time-section-content-inner {
+            padding: 3rem 2rem;
+            opacity: 1;
+        }
+
+        /* Фоны для разных временных блоков */
+        .morning-section {
+            --section-bg: url('../assets/images/morning-bg.png');
+        }
+
+        .day-section {
+            --section-bg: url('../assets/images/day-bg.png');
+        }
+
+        .evening-section {
+            --section-bg: url('../assets/images/evening-bg.png');
+        }
+
+        /* Стили для подсекций внутри временных блоков */
+        .subsection {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        .subsection-title {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Zag', sans-serif;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .subsection-content {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .mindfulness-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px solid transparent;
+            transition: var(--transition);
+        }
+
+        .mindfulness-link:hover {
+            border-bottom-color: var(--secondary-color);
+        }
+
+        /* Адаптивность для новых элементов */
+        @media (max-width: 768px) {
+            .time-section-header {
+                padding: 1.5rem;
+                min-height: 100px;
+            }
+            
+            .time-section-title {
+                font-size: 1.5rem;
+            }
+            
+            .time-section-icon {
+                width: 24px;
+                height: 24px;
+            }
+            
+            .time-section-content-inner {
+                padding: 0 1rem;
+            }
+            
+            .time-section-card.active .time-section-content-inner {
+                padding: 2rem 1rem;
+            }
+            
+            .subsection {
+                padding: 1.5rem;
+            }
+            
+            .subsection-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .time-section-header {
+                padding: 1rem;
+                min-height: 80px;
+            }
+            
+            .time-section-title {
+                font-size: 1.3rem;
+                gap: 1rem;
+            }
+            
+            .subsection {
+                padding: 1rem;
+            }
+            
+            .subsection-title {
                 font-size: 1.2rem;
             }
         }
@@ -990,360 +1328,277 @@
     <section class="daily-hero">
         <div class="daily-hero-content">
             <h1 class="daily-title slide-in-left">Ежедневные практики</h1>
-            <p class="daily-subtitle slide-in-right">Регулярные привычки для профилактики выгорания (10-15 минут в день)</p>
+            <p class="daily-subtitle slide-in-right">Небольшие ритуалы, встроенные в ваш день, для профилактики выгорания</p>
         </div>
     </section>
 
     <!-- Основной контент -->
     <main class="main-content">
         <section class="section-wide">
-            <div class="techniques-container">
-                <!-- Правило "Трех Б" -->
-                <div class="technique stagger-element">
-                    <div class="technique-header" onclick="toggleTechnique(this)">
-                        <div class="technique-title">
-                            <img src="../assets/icons/balance.svg" alt="Баланс" class="technique-icon">
-                            Правило "Трех Б"
+            <div class="practices-container">
+                <!-- УТРО -->
+                <div class="time-section-card morning-section stagger-element">
+                    <div class="time-section-header" onclick="toggleTimeSection(this)">
+                        <div class="time-section-title">
+                            УТРО 
                         </div>
-                        <span class="technique-icon">▼</span>
+                        <span class="time-section-icon">▼</span>
                     </div>
-                    <div class="technique-content">
-                        <div class="technique-content-inner">
-                            <p><strong>Ежедневно уделяйте внимание трем сферам для поддержания баланса.</strong> Этот простой метод помогает равномерно распределять энергию между ключевыми аспектами жизни.</p>
-                            
-                            <div class="card success">
-                                <h4>💪 Бодрость</h4>
-                                <p><strong>20-30 минут физической активности ежедневно:</strong></p>
-                                <ul class="b-checklist">
-                                    <li>Прогулка на свежем воздухе</li>
-                                    <li>Утренняя зарядка или йога</li>
-                                    <li>Велосипед или плавание</li>
-                                    <li>Танцы под любимую музыку</li>
-                                </ul>
+                    <div class="time-section-content">
+                        <div class="time-section-content-inner">
+                            <div class="subsection">
+                                <h3 class="subsection-title">Правило "Трех Б" (Адаптированная утренняя версия)</h3>
+                                <div class="subsection-content">
+                                    <p><strong>Ежедневно уделяйте внимание трем сферам для поддержания баланса.</strong></p>
+                                    
+                                    <div class="info-card success">
+                                        <h4>Бодрость</h4>
+                                        <p><strong>2-5 минут физической активности:</strong></p>
+                                        <ul class="checklist">
+                                            <li>Короткая зарядка или растяжка</li>
+                                            <li>Несколько минут у окна с глубоким дыханием</li>
+                                            <li>Легкие упражнения для пробуждения тела</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="info-card success">
+                                        <h4>Благодарность</h4>
+                                        <p><strong>1-2 минуты утренней благодарности:</strong></p>
+                                        <ul class="checklist">
+                                            <li>Мысленно поблагодарите за новый день</li>
+                                            <li>Отметьте 1-2 простые вещи (тепло, крыша над головой, близких)</li>
+                                            <li>Настройтесь на позитивный лад</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="info-card success">
+                                        <h4>Намерение</h4>
+                                        <p><strong>2 минуты на формирование намерения:</strong></p>
+                                        <ul class="checklist">
+                                            <li>Сформулируйте одно главное намерение на день</li>
+                                            <li>Пример: "Сегодня я буду спокоен и сфокусирован"</li>
+                                            <li>Определите главный приоритет дня</li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                            
-                            <div class="card success">
-                                <h4>🙏 Благодарность</h4>
-                                <p><strong>3 хорошие вещи, которые случились сегодня:</strong></p>
-                                <ul class="b-checklist">
-                                    <li>Запишите в дневник благодарности</li>
-                                    <li>Поделитесь с близким человеком</li>
-                                    <li>Просто осознайте и поблагодарите мысленно</li>
-                                    <li>Отмечайте даже маленькие радости</li>
-                                </ul>
-                            </div>
-                            
-                            <div class="card success">
-                                <h4>🤝 Близость</h4>
-                                <p><strong>Осмысленное общение не о работе:</strong></p>
-                                <ul class="b-checklist">
-                                    <li>Разговор с семьей без упоминания работы</li>
-                                    <li>Встреча с друзьями</li>
-                                    <li>Хобби или совместное занятие</li>
-                                    <li>Качественное время без гаджетов</li>
-                                </ul>
-                            </div>
-                            
-                            <div class="technique-tip">
-                                <p>💡 <strong>Совет:</strong> Начинайте с одной сферы и постепенно добавляйте остальные. Главное - регулярность!</p>
+
+                            <div class="subsection">
+                                <h3 class="subsection-title">Осознанный завтрак (Техника "Вкусовой якорь")</h3>
+                                <div class="subsection-content">
+                                    <p><strong>Создайте осознанный момент в начале дня с помощью вкуса.</strong></p>
+                                    
+                                    <div class="info-card">
+                                        <h4>Как выполнять</h4>
+                                        <ul>
+                                            <li>Первый глоток кофе или чая, завтрак - делайте осознанно</li>
+                                            <li>Сосредоточьтесь только на вкусе на 1-2 минуты</li>
+                                            <li>Отложите телефон и другие отвлекающие факторы</li>
+                                            <li>Прочувствуйте аромат, температуру, текстуру</li>
+                                            <li>Это "якорь" спокойствия и присутствия "здесь и сейчас"</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <a href="../pages/mindfulness" class="mindfulness-link">
+                                        Узнать больше о практиках осознанности →
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Микро-перерывы по таймеру -->
-                <div class="technique stagger-element">
-                    <div class="technique-header" onclick="toggleTechnique(this)">
-                        <div class="technique-title">
-                            <img src="../assets/icons/timer.svg" alt="Таймер" class="technique-icon">
-                            Микро-перерывы по таймеру
+                <!-- ДЕНЬ -->
+                <div class="time-section-card day-section stagger-element">
+                    <div class="time-section-header" onclick="toggleTimeSection(this)">
+                        <div class="time-section-title">
+                            ДЕНЬ 
                         </div>
-                        <span class="technique-icon">▼</span>
+                        <span class="time-section-icon">▼</span>
                     </div>
-                    <div class="technique-content">
-                        <div class="technique-content-inner">
-                            <p><strong>Ставим таймер на 45-60 минут. Как только он срабатывает — обязательные 2-3 минуты перерыва.</strong> Этот метод предотвращает накопление усталости в течение дня.</p>
-                            
-                            <ul>
-                                <li><strong>Встать, подойти к окну, посмотреть вдаль</strong> - снимает напряжение с глаз</li>
-                                <li><strong>Сделать 5-10 глотков воды</strong> - поддерживает гидратацию</li>
-                                <li><strong>Потянуться, размять спину и шею</strong> - снимает мышечное напряжение</li>
-                                <li><strong>Сделать несколько глубоких вдохов</strong> - насыщает кислородом</li>
-                                <li><strong>Закрыть глаза на 30 секунд</strong> - дает отдых зрению и психике</li>
-                            </ul>
-                            
-                            <div class="timer-display" id="micro-timer">60:00</div>
-                            <div class="timer-controls">
-                                <button class="timer-btn" onclick="startTimer('micro', 60)">▶️ Запустить (60 мин)</button>
-                                <button class="timer-btn" onclick="startTimer('micro', 45)">▶️ Запустить (45 мин)</button>
-                                <button class="timer-btn stop" onclick="stopTimer('micro')">⏹️ Остановить</button>
+                    <div class="time-section-content">
+                        <div class="time-section-content-inner">
+                            <!-- Отдых: Методики перерывов -->
+                            <div class="subsection">
+                                <h3 class="subsection-title">Отдых: Методики перерывов</h3>
+                                <div class="subsection-content">
+                                    <div class="info-card">
+                                        <h4>Метод "Помидорки"</h4>
+                                        <p><strong>Работа интервалами для поддержания концентрации:</strong></p>
+                                        <ul>
+                                            <li><strong>25 минут</strong> — фокусированной работы</li>
+                                            <li><strong>5 минут</strong> — короткий перерыв</li>
+                                            <li>После 4 циклов — <strong>15-30 минут</strong> длинного перерыва</li>
+                                        </ul>
+                                        
+                                        <div class="timer-display" id="pomodoro-timer">25:00</div>
+                                        <div class="pomodoro-counter">Сегодня завершено: <span id="pomodoro-count">0</span> помидорок</div>
+                                        <div class="timer-controls">
+                                            <button class="timer-btn" onclick="startPomodoro()">Старт</button>
+                                            <button class="timer-btn stop" onclick="stopPomodoro()">Стоп</button>
+                                            <button class="timer-btn" onclick="resetPomodoro()">Сброс</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="info-card success">
+                                        <h4>Практика "Микро-отдых"</h4>
+                                        <p><strong>Короткие перерывы по таймеру каждые 1-2 часа:</strong></p>
+                                        <ul>
+                                            <li><strong>Дыхание (1-2 мин):</strong> 3-5 глубоких медленных вдоха и выдоха</li>
+                                            <li><strong>Телесное (2-3 мин):</strong> Встать, потянуться, вращения плечами</li>
+                                            <li><strong>Осознанность (2-5 мин):</strong> Отвести взгляд от экрана, посмотреть в окно</li>
+                                        </ul>
+                                        <a href="../pages/mindfulness" class="mindfulness-link">
+                                            Узнать больше о практиках осознанности →
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                            
-                            <div class="technique-tip">
-                                <p>💡 <strong>Важно:</strong> Даже короткие перерывы значительно повышают продуктивность и снижают стресс.</p>
+
+                            <!-- Перезагрузка: Быстрая работа с мыслями -->
+                            <div class="subsection">
+                                <h3 class="subsection-title">Перезагрузка: Быстрая работа с мыслями</h3>
+                                <div class="subsection-content">
+                                    <div class="info-card warning">
+                                        <h4>Важное правило</h4>
+                                        <p><strong>Сначала успокойте эмоции через тело (дыхание, заземление), и только потом работайте с мыслями.</strong></p>
+                                        <a href="./quick-help" class="mindfulness-link">
+                                            Сначала успокоиться: быстрые методики →
+                                        </a>
+                                    </div>
+
+                                    <div class="info-card">
+                                        <h4>Метод 1: "Я замечаю у себя мысль..."</h4>
+                                        <ul>
+                                            <li>Когда ловите себя на негативной мысли, мысленно произнесите</li>
+                                            <li><strong>"Я замечаю у себя мысль, что..."</strong> и назовите мысль</li>
+                                            <li>Это создает дистанцию между вами и мыслью</li>
+                                            <li>Вы — не ваша мысль, вы — тот, кто ее наблюдает</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="info-card">
+                                        <h4>Метод 2: Контейнирование переживаний</h4>
+                                        <ul>
+                                            <li>Представьте, что ваша тревожащая эмоция или мысль — это нечто, что можно упаковать</li>
+                                            <li>Мысленно "положите" это беспокойство в воображаемую коробку, сундук или сейф</li>
+                                            <li>Фраза-ключ: "Я замечаю эту тревогу. Я решу ее позже, а сейчас я кладу ее в сейф до [конкретного времени]"</li>
+                                            <li>Позволяет временно отложить переживание</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="info-card">
+                                        <h4>Метод 3: Наблюдение за мыслью</h4>
+                                        <ul>
+                                            <li>Представьте, что ваши мысли — это облака на небе или листья, плывущие по реке</li>
+                                            <li>Вы просто сидите на берегу и наблюдаете, как мысль появляется и уплывает</li>
+                                            <li>Не цепляйтесь за мысли, позвольте им приходить и уходить</li>
+                                            <li>Развивает навык непривязанного наблюдения</li>
+                                        </ul>
+                                        <a href="../pages/mindfulness" class="mindfulness-link">
+                                            Узнать больше о работе с мыслями →
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Техника "Вкусовой якорь" -->
-                <div class="technique stagger-element">
-                    <div class="technique-header" onclick="toggleTechnique(this)">
-                        <div class="technique-title">
-                            <img src="../assets/icons/taste.svg" alt="Вкус" class="technique-icon">
-                            Техника "Вкусовой якорь"
+                <!-- ВЕЧЕР -->
+                <div class="time-section-card evening-section stagger-element">
+                    <div class="time-section-header" onclick="toggleTimeSection(this)">
+                        <div class="time-section-title">
+                            ВЕЧЕР
                         </div>
-                        <span class="technique-icon">▼</span>
+                        <span class="time-section-icon">▼</span>
                     </div>
-                    <div class="technique-content">
-                        <div class="technique-content-inner">
-                            <p><strong>Создание якоря на положительное состояние через вкус.</strong> Метод основан на формировании устойчивых ассоциаций между вкусовыми ощущениями и состоянием расслабления.</p>
-                            
-                            <ol>
-                                <li><strong>Выберите вкус:</strong> который ассоциируется с отдыхом (шоколад, чай, мятная конфета)</li>
-                                <li><strong>Используйте осознанно:</strong> в середине или конце рабочего дня</li>
-                                <li><strong>Сосредоточьтесь:</strong> на вкусовых ощущениях на 1-2 минуты</li>
-                                <li><strong>Дышите глубоко:</strong> и представляйте приятные моменты</li>
-                                <li><strong>Повторяйте регулярно:</strong> для создания устойчивой ассоциации</li>
-                            </ol>
-                            
-                            <div class="card success">
-                                <h4>🎯 Идеи для вкусовых якорей:</h4>
-                                <ul class="b-checklist">
-                                    <li>Кусочек горького шоколада</li>
-                                    <li>Мятная жвачка или конфета</li>
-                                    <li>Особенный сорт чая или кофе</li>
-                                    <li>Свежий фрукт или ягоды</li>
-                                </ul>
+                    <div class="time-section-content">
+                        <div class="time-section-content-inner">
+                            <!-- Создание границы -->
+                            <div class="subsection">
+                                <h3 class="subsection-title">Создание границы между работой и домом</h3>
+                                <div class="subsection-content">
+                                    <p><strong>Символический и физический акт завершения рабочего дня.</strong></p>
+                                    
+                                    <div class="info-card">
+                                        <h4>Выберите один вариант:</h4>
+                                        <ul>
+                                            <li><strong>Смена "костюма":</strong> Переоденьтесь в домашнюю одежду</li>
+                                            <li><strong>"Буферная зона":</strong> Совершите небольшую прогулку перед тем, как зайти домой</li>
+                                            <li><strong>Тишина в машине/комнате:</strong> 10-15 минут в тишине без телефона и разговоров</li>
+                                            <li><strong>Ритуал закрытия:</strong> Закройте все рабочие вкладки, сложите документы</li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- "Журнал разбора" -->
-                <div class="technique stagger-element">
-                    <div class="technique-header" onclick="toggleTechnique(this)">
-                        <div class="technique-title">
-                            <img src="../assets/icons/journal.svg" alt="Журнал" class="technique-icon">
-                            "Журнал разбора"
-                        </div>
-                        <span class="technique-icon">▼</span>
-                    </div>
-                    <div class="technique-content">
-                        <div class="technique-content-inner">
-                            <p><strong>Структурированный вывод мыслей из головы на бумагу после сложного дня.</strong> Помогает обработать эмоции и оставить рабочие переживания на работе.</p>
-                            
-                            <div class="card warning">
-                                <h4>1. Что сегодня было самым сложным?</h4>
-                                <p><strong>Выплесните эмоции, опишите без самоцензуры.</strong> Позвольте себе выразить все, что накопилось.</p>
-                            </div>
-                            
-                            <div class="card success">
-                                <h4>2. Что я сделал хорошо, несмотря на сложности?</h4>
-                                <p><strong>Найдите опору в своих действиях и решениях.</strong> Отметьте даже небольшие успехи.</p>
-                            </div>
-                            
-                            <div class="card">
-                                <h4>3. Что я могу отпустить и оставить сегодня на работе?</h4>
-                                <p><strong>Определите границу между работой и личной жизнью.</strong> Сознательно "оставьте" рабочие проблемы.</p>
-                            </div>
-                            
-                            <div class="technique-tip">
-                                <p>⏰ <strong>Время:</strong> 10-15 минут вечером<br>
-                                📝 <strong>Формат:</strong> Бумажный дневник или цифровые заметки</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            <!-- Разбор и перезагрузка -->
+                            <div class="subsection">
+                                <h3 class="subsection-title">Разбор и перезагрузка</h3>
+                                <div class="subsection-content">
+                                    <div class="info-card">
+                                        <h4>Дневник мыслей ("Журнал разбора")</h4>
+                                        <p><strong>Ответьте на 3 вопроса письменно (5-7 минут):</strong></p>
+                                        <ol>
+                                            <li><strong>Что сегодня вызвало стресс, раздражение или тревогу?</strong> (Просто опишите ситуацию объективно)</li>
+                                            <li><strong>Какие мысли и эмоции у меня были?</strong> (Назовите их: "я разозлился", "почувствовал себя неудачником")</li>
+                                            <li><strong>Как я могу на это посмотреть иначе? Что я могу сделать завтра?</strong> (Переформулируйте мысль или найдите альтернативный взгляд)</li>
+                                        </ol>
+                                    </div>
 
-                <!-- "Техника помидора для документации" -->
-                <div class="technique stagger-element">
-                    <div class="technique-header" onclick="toggleTechnique(this)">
-                        <div class="technique-title">
-                            <img src="../assets/icons/pomodoro.svg" alt="Помидор" class="technique-icon">
-                            Техника помидора для документации
-                        </div>
-                        <span class="technique-icon">▼</span>
-                    </div>
-                    <div class="technique-content">
-                        <div class="technique-content-inner">
-                            <p><strong>Применение известного метода к самой рутинной части работы.</strong> Особенно эффективно для работы с медицинской документацией.</p>
-                            
-                            <ul>
-                                <li><strong>25 минут</strong> интенсивной работы с документами</li>
-                                <li><strong>5 минут</strong> перерыва (встать, пройтись, размяться)</li>
-                                <li>После <strong>4 "помидоров"</strong> — перерыв 15-20 минут</li>
-                            </ul>
-                            
-                            <div class="timer-display" id="pomodoro-timer">25:00</div>
-                            <div class="timer-controls">
-                                <button class="timer-btn" onclick="startTimer('pomodoro', 25)">▶️ Работа (25 мин)</button>
-                                <button class="timer-btn" onclick="startTimer('pomodoro', 5)">⏸️ Перерыв (5 мин)</button>
-                                <button class="timer-btn stop" onclick="stopTimer('pomodoro')">⏹️ Остановить</button>
-                            </div>
-                            
-                            <div id="pomodoro-counter" style="text-align: center; margin: 1rem 0; font-weight: bold; color: #3498db;">
-                                Завершено помидоров: <span id="pomodoro-count">0</span>
-                            </div>
-                            
-                            <div class="card success">
-                                <h4>🎯 Советы по эффективному использованию:</h4>
-                                <ul class="b-checklist">
-                                    <li>Используйте физический таймер для большей эффективности</li>
-                                    <li>Начинайте с самых сложных документов</li>
-                                    <li>В перерыве полностью отвлекайтесь от работы</li>
-                                    <li>Отмечайте завершенные "помидоры" для мотивации</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                    <div class="info-card success">
+                                        <h4>5 удовольствий дня</h4>
+                                        <ul>
+                                            <li>Выпишите 5 маленьких радостей, которые заметили сегодня</li>
+                                            <li>Примеры: вкусный кофе, солнечный луч, улыбка ребенка, приятный разговор</li>
+                                            <li>Фокусировка на позитивных моментах перезагружает восприятие дня</li>
+                                        </ul>
+                                    </div>
 
-                <!-- Практики осознанности -->
-                <div class="technique stagger-element">
-                    <div class="technique-header" onclick="toggleTechnique(this)">
-                        <div class="technique-title">
-                            <img src="../assets/icons/mindfulness.svg" alt="Осознанность" class="technique-icon">
-                            Практики осознанности
-                        </div>
-                        <span class="technique-icon">▼</span>
-                    </div>
-                    <div class="technique-content">
-                        <div class="technique-content-inner">
-                            <p><strong>Несколько простых практик для включения в повседневность.</strong> Помогают оставаться в настоящем моменте и снижать стресс.</p>
-                            
-                            <div class="card">
-                                <h4>☕ Осознанное питье</h4>
-                                <p>Пить чай/кофе без параллельных занятий, полностью сосредоточившись на процессе: температуре, аромате, вкусе.</p>
+                                    <div class="info-card success">
+                                        <h4>3 самопохвалы</h4>
+                                        <ul>
+                                            <li>За что вы можете себя похвалить сегодня?</li>
+                                            <li>Примеры: "Проявил терпение", "Закончил сложную задачу", "Отдохнул, когда устал"</li>
+                                            <li>Важно признавать свои усилия и достижения</li>
+                                        </ul>
+                                        <a href="../pages/mindfulness" class="mindfulness-link">
+                                            Узнать больше о практиках осознанности →
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                            
-                            <div class="card">
-                                <h4>👐 Осознанное мытье рук</h4>
-                                <p>Концентрироваться на ощущениях: температуре воды, запахе мыла, текстуре кожи. Особенно актуально для медиков!</p>
-                            </div>
-                            
-                            <div class="card">
-                                <h4>🚶‍♀️ Осознанная ходьба</h4>
-                                <p>Во время ходьбы по коридору ощущать контакт стоп с полом, движение мышц, ритм дыхания.</p>
-                            </div>
-                            
-                            <div class="card">
-                                <h4>🍎 Осознанный прием пищи</h4>
-                                <p>Медленно есть небольшой кусочек еды, концентрируясь на вкусе, текстуре и аромате.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Ритуал завершения рабочего дня -->
-                <div class="technique stagger-element">
-                    <div class="technique-header" onclick="toggleTechnique(this)">
-                        <div class="technique-title">
-                            <img src="../assets/icons/ritual.svg" alt="Ритуал" class="technique-icon">
-                            Ритуал завершения рабочего дня
-                        </div>
-                        <span class="technique-icon">▼</span>
-                    </div>
-                    <div class="technique-content">
-                        <div class="technique-content-inner">
-                            <p><strong>Создайте буфер между работой и домом для плавного перехода.</strong> Помогает психологически "переключиться" с рабочего режима на домашний.</p>
-                            
-                            <ol>
-                                <li><strong>Переоденьтесь</strong> из рабочей одежды в домашнюю</li>
-                                <li><strong>Прослушайте любимую музыку</strong> по дороге домой</li>
-                                <li><strong>Сделайте 10-минутную прогулку</strong> перед входом домой</li>
-                                <li><strong>Мысленно "оставьте" рабочие проблемы</strong> за дверью</li>
-                                <li><strong>Смените деятельность</strong> - примите душ, займитесь хобби</li>
-                                <li><strong>Создайте переходный ритуал</strong> - чай, медитация, чтение</li>
-                            </ol>
-                            
-                            <div class="technique-tip">
-                                <p>💡 <strong>Эффект:</strong> Ритуал помогает мозгу понять, что рабочий день завершен, и пора переключаться на личную жизнь.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            <!-- Расслабление -->
+                            <div class="subsection">
+                                <h3 class="subsection-title">Расслабление</h3>
+                                <div class="subsection-content">
+                                    <p><strong>Выберите одну технику для глубокого расслабления перед сном:</strong></p>
+                                    
+                                    <div class="info-card">
+                                        <h4>Сканирование тела</h4>
+                                        <ul>
+                                            <li>Мысленное путешествие вниманием по телу от кончиков пальцев ног до макушки</li>
+                                            <li>Обнаружение и снятие мышечных зажимов</li>
+                                            <li>Время: 5-10 минут</li>
+                                        </ul>
+                                    </div>
 
-                <!-- Работа с негативными мыслями -->
-                <div class="technique stagger-element">
-                    <div class="technique-header" onclick="toggleTechnique(this)">
-                        <div class="technique-title">
-                            <img src="../assets/icons/thoughts.svg" alt="Мысли" class="technique-icon">
-                            Работа с негативными мыслями
-                        </div>
-                        <span class="technique-icon">▼</span>
-                    </div>
-                    <div class="technique-content">
-                        <div class="technique-content-inner">
-                            <p><strong>Техника когнитивного переформулирования.</strong> Помогает трансформировать деструктивные мысли в более реалистичные и поддерживающие.</p>
-                            
-                            <div class="card warning">
-                                <h4>1. Поймайте мысль</h4>
-                                <p><strong>"Я ничем не могу помочь этому пациенту → значит, я плохой врач"</strong></p>
-                                <p>Осознайте автоматическую негативную мысль.</p>
-                            </div>
-                            
-                            <div class="card">
-                                <h4>2. Оспорьте её</h4>
-                                <p><strong>"Что я уже сделал? Что реалистично в этих условиях?"</strong></p>
-                                <p>Задайте себе вопросы, проверяющие реальность мысли.</p>
-                            </div>
-                            
-                            <div class="card success">
-                                <h4>3. Переформулируйте</h4>
-                                <p><strong>"Я оказываю квалифицированную помощь в рамках возможного"</strong></p>
-                                <p>Создайте более сбалансированную и реалистичную формулировку.</p>
-                            </div>
-                            
-                            <div class="card">
-                                <h4>📋 Альтернативные поддерживающие формулировки:</h4>
-                                <ul class="b-checklist">
-                                    <li>"Я делаю всё возможное в данных обстоятельствах"</li>
-                                    <li>"Моя ценность не определяется одним случаем"</li>
-                                    <li>"Я учусь и расту с каждым пациентом"</li>
-                                    <li>"Я признаю свои ограничения и это нормально"</li>
-                                </ul>
-                            </div>
-                            
-                            <!-- Когнитивное разделение -->
-                            <div class="technique-tip" style="margin-top: 2rem;">
-                                <h4>🧠 Дополнительная техника: "Когнитивное разделение"</h4>
-                            </div>
-                            
-                            <div class="card warning">
-                                <h4>Шаг 1. Поймайте мысль с дистанцией</h4>
-                                <p><strong>"Я замечаю, что у меня появилась мысль, что я плохой врач"</strong></p>
-                                <p>Добавление фразы "я замечаю мысль" создает психологическую дистанцию.</p>
-                            </div>
-                            
-                            <div class="disclaimer">
-                                <strong>⚠️ Важно помнить: мысль не равно реальность! ⚠️</strong>
-                            </div>
-                            
-                            <div class="card">
-                                <h4>Шаг 2: Разделение фактов и интерпретаций</h4>
-                                <p>✅ <strong>Факт:</strong> "В данной ситуации я не могу помочь пациту так, как хотелось бы"</p>
-                                <p>❌ <strong>Интерпретация:</strong> "Я плохой врач"</p>
-                            </div>
-                            
-                            <div class="card success">
-                                <h4>Шаг 3: Проверка на реалистичность</h4>
-                                <ul class="b-checklist">
-                                    <li>Бывают ли ситуации, когда даже лучшие врачи не могут помочь? → Да✅</li>
-                                    <li>Означает ли одна сложная ситуация полную профессиональную некомпетентность? → Нет❌</li>
-                                    <li>Что говорит мой опыт? Сколько пациентов я уже помог? → Напомни себе о успехах</li>
-                                </ul>
-                            </div>
-                            
-                            <div class="card">
-                                <h4>Шаг 4: Переформулирование</h4>
-                                <p><strong>Вместо:</strong> "Я плохой врач"</p>
-                                <p><strong>Попробуй:</strong></p>
-                                <ul class="b-checklist">
-                                    <li>"Эта ситуация сложная, но она не определяет всю мою компетентность"</li>
-                                    <li>"Я делаю всё возможное в данных условиях"</li>
-                                    <li>"Я могу обратиться к коллегам или супервизору за поддержкой"</li>
-                                </ul>
+                                    <div class="info-card">
+                                        <h4>Прогрессивная мышечная релаксация по Джекобсону</h4>
+                                        <ul>
+                                            <li>Поочередное напряжение и расслабление групп мышц</li>
+                                            <li>Начинайте со стоп, постепенно поднимайтесь к лицу</li>
+                                            <li>Глубокое физическое расслабление помогает успокоить ум</li>
+                                            <li>Время: 10-15 минут</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <a href="../pages/mindfulness" class="mindfulness-link">
+                                        Узнать больше о техниках релаксации →
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1352,25 +1607,15 @@
         </section>
     </main>
 
-    <!-- Всплывающее окно -->
-    <div class="modal-overlay" id="modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">×</button>
-            <h2 class="modal-title">Отлично!</h2>
-            <p class="modal-message">Вы успешно завершили упражнение. Почувствуйте, как напряжение уходит, а на его место приходит спокойствие и ясность.</p>
-            <button class="modal-btn" onclick="closeModal()">Продолжить</button>
-        </div>
-    </div>
-
-    <!-- Футер с главной страницы -->
+    <!-- Футер -->
     <footer class="tilda-footer">
         <div class="footer-content">
-            <div class="footer-section fade-in-element">
+            <div class="footer-section">
                 <h3>НЕ ГОРИ</h3>
-                <p>Платформа для профилактики профессионального выгорания и поддержания ментального здоровья</p>
+                <p>Платформа для профилактики профессионального выгорания. Практики, тесты и материалы для сохранения ментального здоровья.</p>
             </div>
             
-            <div class="footer-section fade-in-element">
+            <div class="footer-section">
                 <h3>Разделы</h3>
                 <nav class="footer-nav">
                     <a href="quick-help.html">Быстрая помощь</a>
@@ -1380,102 +1625,95 @@
                 </nav>
             </div>
             
-            <div class="footer-section fade-in-element">
-                <h3>Контакты</h3>
+            <div class="footer-section">
+                <h3>Поддержка</h3>
                 <nav class="footer-nav">
-                    <a href="mailto:info@negoti.ru">info@negoti.ru</a>
-                    <a href="#privacy">Правовая информация</a>
-                    <a href="#terms">Условия использования</a>
+                    <a href="#faq">Частые вопросы</a>
+                    <a href="#contacts">Контакты</a>
+                    <a href="#feedback">Обратная связь</a>
                 </nav>
             </div>
         </div>
         
-        <div class="footer-bottom fade-in-element">
+        <div class="footer-bottom">
             <p>&copy; 2025 НЕ ГОРИ. Все права защищены.</p>
         </div>
     </footer>
 
-    <script>
-        // Глобальные переменные
-        let timers = {};
-        let pomodoroCount = 0;
+    <!-- Всплывающее окно -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Уведомление</h3>
+            <p class="modal-message" id="modal-message">Сообщение</p>
+            <button class="modal-btn" onclick="closeModal()">Понятно</button>
+        </div>
+    </div>
 
-        // Функция для переключения спойлеров
-        function toggleTechnique(element) {
-            const technique = element.parentElement;
-            technique.classList.toggle('active');
+    <script>
+        // Функция для переключения временных секций
+        function toggleTimeSection(element) {
+            const card = element.closest('.time-section-card');
+            card.classList.toggle('active');
         }
 
-        // Таймеры для упражнений
-        function startTimer(type, minutes) {
-            if (timers[type]) return; // Таймер уже запущен
+        // Функция для переключения обычных практик (оставлена для совместимости)
+        function togglePractice(element) {
+            const card = element.closest('.practice-card');
+            card.classList.toggle('active');
+        }
+
+        // Таймер для метода помидорки
+        let pomodoroInterval;
+        let pomodoroTime = 25 * 60;
+        let pomodoroCount = 0;
+        let isPomodoroRunning = false;
+
+        function startPomodoro() {
+            if (isPomodoroRunning) return;
             
-            const display = document.getElementById(`${type}-timer`);
-            timers[type] = { time: minutes * 60, interval: null };
-            
-            timers[type].interval = setInterval(() => {
-                timers[type].time--;
+            isPomodoroRunning = true;
+            pomodoroInterval = setInterval(() => {
+                pomodoroTime--;
+                updatePomodoroDisplay();
                 
-                if (timers[type].time <= 0) {
-                    clearInterval(timers[type].interval);
-                    timers[type].interval = null;
-                    display.textContent = "00:00";
-                    playCompletionSound();
-                    showModal();
-                    
-                    // Для помидора увеличиваем счетчик
-                    if (type === 'pomodoro' && minutes === 25) {
-                        pomodoroCount++;
-                        document.getElementById('pomodoro-count').textContent = pomodoroCount;
-                        
-                        // После 4 помидоров - сброс
-                        if (pomodoroCount >= 4) {
-                            alert('🎉 Отличная работа! Вы завершили 4 помидора. Пора сделать длинный перерыв 15-20 минут!');
-                            pomodoroCount = 0;
-                            document.getElementById('pomodoro-count').textContent = pomodoroCount;
-                        } else {
-                            alert('🍅 Помидор завершен! Сделайте 5-минутный перерыв.');
-                        }
-                    }
-                    
-                    // Для микро-перерывов
-                    if (type === 'micro') {
-                        alert('⏰ Время для микро-перерыва! Сделайте 2-3 минуты отдыха.');
-                    }
-                    return;
+                if (pomodoroTime <= 0) {
+                    completePomodoro();
                 }
-                
-                const mins = Math.floor(timers[type].time / 60);
-                const secs = timers[type].time % 60;
-                display.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
             }, 1000);
         }
 
-        function stopTimer(type) {
-            if (timers[type] && timers[type].interval) {
-                clearInterval(timers[type].interval);
-                timers[type].interval = null;
-            }
-            
-            // Восстанавливаем начальное время в зависимости от типа
-            const display = document.getElementById(`${type}-timer`);
-            if (type === 'micro') {
-                display.textContent = "60:00";
-            } else if (type === 'pomodoro') {
-                display.textContent = "25:00";
-            }
+        function stopPomodoro() {
+            clearInterval(pomodoroInterval);
+            isPomodoroRunning = false;
         }
 
-        // Функция воспроизведения звука
-        function playCompletionSound() {
-            const audio = new Audio('../assets/sound/st.mp3');
-            audio.play().catch(e => {
-                console.log("Автовоспроизведение звука заблокировано браузером");
-            });
+        function resetPomodoro() {
+            stopPomodoro();
+            pomodoroTime = 25 * 60;
+            updatePomodoroDisplay();
         }
 
-        // Функции для модального окна
-        function showModal() {
+        function updatePomodoroDisplay() {
+            const minutes = Math.floor(pomodoroTime / 60);
+            const seconds = pomodoroTime % 60;
+            document.getElementById('pomodoro-timer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function completePomodoro() {
+            stopPomodoro();
+            pomodoroCount++;
+            document.getElementById('pomodoro-count').textContent = pomodoroCount;
+            showModal('Поздравляем!', 'Один помидорный интервал завершен. Сделайте перерыв 5 минут.');
+            pomodoroTime = 25 * 60;
+            updatePomodoroDisplay();
+        }
+
+        // Модальное окно
+        function showModal(title, message) {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-message').textContent = message;
             document.getElementById('modal').style.display = 'flex';
         }
 
@@ -1483,68 +1721,47 @@
             document.getElementById('modal').style.display = 'none';
         }
 
-        // Мобильное меню
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const body = document.body;
-
-        if (mobileMenuBtn) {
-            mobileMenuBtn.addEventListener('click', function() {
-                mobileMenu.classList.toggle('active');
-                // Меняем иконку меню
-                if (mobileMenu.classList.contains('active')) {
-                    mobileMenuBtn.textContent = '✕';
-                } else {
-                    mobileMenuBtn.textContent = '☰';
+        // Анимации при прокрутке
+        function checkVisibility() {
+            const elements = document.querySelectorAll('.hero-element, .stagger-element, .fade-in-element, .slide-in-left, .slide-in-right, .scale-in, .tilda-header, .main-content');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
                 }
             });
         }
 
-        // Закрытие мобильного меню при клике на ссылку
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('mobile-nav-link')) {
-                mobileMenu.classList.remove('active');
-                mobileMenuBtn.textContent = '☰';
-            }
-        });
+        // Мобильное меню
+        function toggleMobileMenu() {
+            document.querySelector('.mobile-menu').classList.toggle('active');
+        }
 
-        // Закрытие мобильного меню при ресайзе
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 768) {
-                mobileMenu.classList.remove('active');
-                mobileMenuBtn.textContent = '☰';
-            }
-        });
-
-        // Анимации при прокрутке
+        // Инициализация
         document.addEventListener('DOMContentLoaded', function() {
-            // Показываем хедер
-            setTimeout(() => {
-                document.querySelector('.tilda-header').classList.add('visible');
-            }, 300);
+            // Инициализация таймера помидорки
+            updatePomodoroDisplay();
             
-            // Показываем основной контент
-            setTimeout(() => {
-                document.querySelector('.main-content').classList.add('visible');
-            }, 800);
+            // Наблюдатель за видимостью элементов
+            window.addEventListener('scroll', checkVisibility);
+            checkVisibility();
             
-            // Наблюдатель для анимации элементов при прокрутке
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
+            // Мобильное меню
+            document.querySelector('.mobile-menu-btn').addEventListener('click', toggleMobileMenu);
             
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, observerOptions);
+            // Закрытие мобильного меню при клике на ссылку
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', toggleMobileMenu);
+            });
             
-            // Наблюдаем за всеми элементами с классами анимации
-            document.querySelectorAll('.hero-element, .stagger-element, .fade-in-element, .slide-in-left, .slide-in-right, .scale-in').forEach(el => {
-                observer.observe(el);
+            // Закрытие модального окна при клике вне его
+            document.getElementById('modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal();
+                }
             });
         });
     </script>
