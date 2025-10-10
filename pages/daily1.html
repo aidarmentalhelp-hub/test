@@ -153,85 +153,6 @@
             font-weight: normal;
         }
 
-        /* Стили для кнопки "В разработке" */
-        .striped-btn {
-            position: relative;
-            background: transparent;
-            color: var(--primary-color);
-            padding: 8px 20px;
-            border: 2px solid var(--primary-color);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: var(--transition);
-            cursor: pointer;
-            min-width: 120px;
-            font-family: 'Tekst', sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            white-space: nowrap;
-        }
-
-        /* Полосатая граница через псевдоэлементы */
-        .striped-btn::before {
-            content: '';
-            position: absolute;
-            top: -3px;
-            left: -3px;
-            right: -3px;
-            bottom: -3px;
-            border: 3px solid transparent;
-            border-image: repeating-linear-gradient(
-                45deg,
-                #000000,
-                #000000 10px,
-                #FFD700 10px,
-                #FFD700 20px
-            ) 3;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            z-index: -1;
-        }
-
-        .striped-btn:hover::before {
-            opacity: 1;
-        }
-
-        .striped-btn:hover {
-            background: var(--primary-color);
-            color: white;
-            transform: translateY(-1px);
-            border-color: transparent;
-        }
-
-        .btn-text {
-            transition: all 0.4s ease;
-        }
-
-        .btn-hidden {
-            position: absolute;
-            opacity: 0;
-            transition: all 0.4s ease 0.1s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .striped-btn:hover .btn-text {
-            opacity: 0;
-            transform: translateY(-5px);
-        }
-
-        .striped-btn:hover .btn-hidden {
-            opacity: 1;
-        }
-
-        .emoji {
-            font-size: 1rem;
-        }
-
         /* Тонкий фиксированный хедер */
         .tilda-header {
             position: fixed;
@@ -316,6 +237,26 @@
             margin-left: auto;
         }
 
+        .auth-btn {
+            background: transparent;
+            color: var(--primary-color);
+            padding: 8px 20px;
+            border-radius: 0;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            white-space: nowrap;
+            border: 2px solid var(--primary-color);
+            font-family: 'Tekst', sans-serif;
+        }
+
+        .auth-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-1px);
+        }
+
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -323,7 +264,6 @@
             font-size: 1.3rem;
             cursor: pointer;
             padding: 5px;
-            z-index: 1002;
         }
 
         /* Герой секция для страницы ежедневных практик */
@@ -736,55 +676,6 @@
             font-family: 'Tekst', sans-serif;
         }
 
-        /* Мобильное меню - ИСПРАВЛЕННОЕ */
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 60px;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(245, 245, 221, 0.98);
-            backdrop-filter: blur(10px);
-            z-index: 1001;
-            padding: 2rem;
-            overflow-y: auto;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .mobile-menu.active {
-            display: flex;
-        }
-
-        .mobile-nav-link {
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1.5rem;
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--border-color);
-            transition: var(--transition);
-            font-family: 'Tekst', sans-serif;
-        }
-
-        .mobile-nav-link:hover,
-        .mobile-nav-link.active {
-            color: #1d7ba0;
-        }
-
-        .mobile-actions {
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 2px solid var(--border-color);
-        }
-
-        .mobile-login-btn {
-            width: 100%;
-            justify-content: center;
-            margin-top: 1rem;
-        }
-
         /* Адаптивность */
         @media (max-width: 1200px) {
             .header-container {
@@ -909,30 +800,12 @@
             .techniques-container {
                 padding: 0 15px;
             }
-            
-            .mobile-menu {
-                padding: 1.5rem;
-            }
-            
-            .mobile-nav-link {
-                font-size: 1.3rem;
-            }
         }
 
         /* Ландшафтная ориентация для мобильных */
         @media (max-width: 968px) and (orientation: landscape) {
             .daily-hero {
                 height: 70vh;
-            }
-            
-            .mobile-menu {
-                gap: 1rem;
-                padding: 1rem;
-            }
-            
-            .mobile-nav-link {
-                padding: 0.5rem 0;
-                font-size: 1.2rem;
             }
         }
     </style>
@@ -953,38 +826,12 @@
             </nav>
             
             <div class="header-actions">
-                <a href="#login" class="striped-btn">
-                    <span class="btn-text">Вход</span>
-                    <span class="btn-hidden">
-                        <span class="emoji">🚧</span>
-                        В разработке
-                        <span class="emoji">🔨</span>
-                    </span>
-                </a>
+                <a href="#login" class="auth-btn">Вход</a>
             </div>
             
             <button class="mobile-menu-btn">☰</button>
         </div>
     </header>
-
-    <!-- Мобильное меню -->
-    <div class="mobile-menu">
-        <a href="quick-help.html" class="mobile-nav-link">Быстрая помощь</a>
-        <a href="daily.html" class="mobile-nav-link active">Ежедневные практики</a>
-        <a href="materials.html" class="mobile-nav-link">Материалы</a>
-        <a href="tests.html" class="mobile-nav-link">Тесты</a>
-        
-        <div class="mobile-actions">
-            <a href="#login" class="striped-btn mobile-login-btn">
-                <span class="btn-text">Вход</span>
-                <span class="btn-hidden">
-                    <span class="emoji">🚧</span>
-                    В разработке
-                    <span class="emoji">🔨</span>
-                </span>
-            </a>
-        </div>
-    </div>
 
     <!-- Герой секция для страницы ежедневных практик -->
     <section class="daily-hero">
@@ -1482,39 +1329,6 @@
         function closeModal() {
             document.getElementById('modal').style.display = 'none';
         }
-
-        // Мобильное меню
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const body = document.body;
-
-        if (mobileMenuBtn) {
-            mobileMenuBtn.addEventListener('click', function() {
-                mobileMenu.classList.toggle('active');
-                // Меняем иконку меню
-                if (mobileMenu.classList.contains('active')) {
-                    mobileMenuBtn.textContent = '✕';
-                } else {
-                    mobileMenuBtn.textContent = '☰';
-                }
-            });
-        }
-
-        // Закрытие мобильного меню при клике на ссылку
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('mobile-nav-link')) {
-                mobileMenu.classList.remove('active');
-                mobileMenuBtn.textContent = '☰';
-            }
-        });
-
-        // Закрытие мобильного меню при ресайзе
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 768) {
-                mobileMenu.classList.remove('active');
-                mobileMenuBtn.textContent = '☰';
-            }
-        });
 
         // Анимации при прокрутке
         document.addEventListener('DOMContentLoaded', function() {

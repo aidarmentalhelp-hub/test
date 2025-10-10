@@ -317,7 +317,6 @@
             font-size: 1.3rem;
             cursor: pointer;
             padding: 5px;
-            z-index: 1002;
         }
 
         /* Герой секция для страницы быстрой помощи */
@@ -354,11 +353,15 @@
         }
 
         .main-content {
-            width: 100%;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-            background: url('../assets/images/downloadedImage.png') center/cover no-repeat fixed;
-        }
+    width: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    background: url('../assets/images/downloadedImage.png') center/cover no-repeat fixed;
+}
+
+.main-content.visible {
+    opacity: 1;
+}
 
         .main-content.visible {
             opacity: 1;
@@ -387,6 +390,7 @@
             background: var(--primary-color);
             color: var(--white);
             transition: all 0.3s;
+           
         }
 
         .technique-header:hover {
@@ -452,6 +456,7 @@
         .technique-content-inner ol, .technique-content-inner ul {
             margin: 1rem 0;
             padding-left: 1.5rem;
+            
         }
 
         .technique-content-inner li {
@@ -493,6 +498,7 @@
             color: var(--primary-color);
             font-family: 'zach', monospace;
             padding: 1rem;
+            
         }
 
         .timer-controls {
@@ -619,6 +625,7 @@
             text-align: center;
             position: relative;
             animation: slideIn 0.3s ease-out;
+            
         }
 
         @keyframes slideIn {
@@ -727,55 +734,6 @@
             margin: 0 auto;
             padding: 0 40px;
             font-family: 'Tekst', sans-serif;
-        }
-
-        /* Мобильное меню - ИСПРАВЛЕННОЕ */
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 60px;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(245, 245, 221, 0.98);
-            backdrop-filter: blur(10px);
-            z-index: 1001;
-            padding: 2rem;
-            overflow-y: auto;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .mobile-menu.active {
-            display: flex;
-        }
-
-        .mobile-nav-link {
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1.5rem;
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--border-color);
-            transition: var(--transition);
-            font-family: 'Tekst', sans-serif;
-        }
-
-        .mobile-nav-link:hover,
-        .mobile-nav-link.active {
-            color: #1d7ba0;
-        }
-
-        .mobile-actions {
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 2px solid var(--border-color);
-        }
-
-        .mobile-login-btn {
-            width: 100%;
-            justify-content: center;
-            margin-top: 1rem;
         }
 
         /* Адаптивность */
@@ -902,30 +860,12 @@
             .techniques-container {
                 padding: 0 15px;
             }
-            
-            .mobile-menu {
-                padding: 1.5rem;
-            }
-            
-            .mobile-nav-link {
-                font-size: 1.3rem;
-            }
         }
 
         /* Ландшафтная ориентация для мобильных */
         @media (max-width: 968px) and (orientation: landscape) {
             .quick-help-hero {
                 height: 70vh;
-            }
-            
-            .mobile-menu {
-                gap: 1rem;
-                padding: 1rem;
-            }
-            
-            .mobile-nav-link {
-                padding: 0.5rem 0;
-                font-size: 1.2rem;
             }
         }
     </style>
@@ -959,25 +899,6 @@
             <button class="mobile-menu-btn">☰</button>
         </div>
     </header>
-
-    <!-- Мобильное меню -->
-    <div class="mobile-menu">
-        <a href="quick-help.html" class="mobile-nav-link active">Быстрая помощь</a>
-        <a href="daily.html" class="mobile-nav-link">Методики</a>
-        <a href="materials.html" class="mobile-nav-link">Материалы</a>
-        <a href="tests.html" class="mobile-nav-link">Тесты</a>
-        
-        <div class="mobile-actions">
-            <a href="#login" class="striped-btn mobile-login-btn">
-                <span class="btn-text">Вход</span>
-                <span class="btn-hidden">
-                    <span class="emoji">🚧</span>
-                    В разработке
-                    <span class="emoji">🔨</span>
-                </span>
-            </a>
-        </div>
-    </div>
 
     <!-- Герой секция для страницы быстрой помощи -->
     <section class="quick-help-hero">
@@ -1157,39 +1078,36 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Наблюдение за мыслями -->
                 <div class="technique stagger-element">
-                    <div class="technique-header" onclick="toggleTechnique(this)">
-                        <div class="technique-title">
-                            <img src="../assets/icons/observe.svg" alt="Наблюдение" class="technique-icon">
-                            Наблюдение за мыслями
-                        </div>
-                        <span class="technique-icon">▼</span>
-                    </div>
-                    <div class="technique-content">
-                        <div class="technique-content-inner">
-                            <p><strong>Техника для дистанцирования от навязчивых мыслей и снижения эмоциональной вовлеченности.</strong> Этот метод помогает развить позицию наблюдателя и уменьшить влияние тревожных мыслей.</p>
-                            
-                            <ol>
-                                <li><strong>Поза:</strong> Сядьте удобно, закройте глаза, сделайте несколько спокойных вдохов и выдохов</li>
-                                <li><strong>Наблюдение:</strong> Представьте, что ваши мысли — это облака, плывущие по небу, или листья, плывущие по реке</li>
-                                <li><strong>Дистанцирование:</strong> Не пытайтесь остановить мысли, просто наблюдайте за ними со стороны без оценки</li>
-                                <li><strong>Отпускание:</strong> Позвольте мыслям приходить и уходить, не цепляясь за них</li>
-                                <li><strong>Повторение:</strong> Практикуйте 3-5 минут ежедневно для развития навыка</li>
-                            </ol>
-                            
-                            <div class="technique-tip">
-                                <p>Совет: Не оценивайте мысли как "хорошие" или "плохие". Ваша задача — просто замечать их появление и исчезновение.</p>
-                            </div>
-                            
-                            <div class="technique-tip">
-                                <p><strong>Эффект:</strong> Сложно одновременно наблюдать за мыслями и полностью в них погружаться. Позиция наблюдателя создает психологическую дистанцию, снижая эмоциональный накал.</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="technique-header" onclick="toggleTechnique(this)">
+                 <div class="technique-title">
+                  <img src="../assets/icons/observe.svg" alt="Наблюдение" class="technique-icon">
+                    Наблюдение за мыслями
                 </div>
-
+                 <span class="technique-icon">▼</span>
+                 </div>
+                 <div class="technique-content">
+        <div class="technique-content-inner">
+            <p><strong>Техника для дистанцирования от навязчивых мыслей и снижения эмоциональной вовлеченности.</strong> Этот метод помогает развить позицию наблюдателя и уменьшить влияние тревожных мыслей.</p>
+            
+            <ol>
+                <li><strong>Поза:</strong> Сядьте удобно, закройте глаза, сделайте несколько спокойных вдохов и выдохов</li>
+                <li><strong>Наблюдение:</strong> Представьте, что ваши мысли — это облака, плывущие по небу, или листья, плывущие по реке</li>
+                <li><strong>Дистанцирование:</strong> Не пытайтесь остановить мысли, просто наблюдайте за ними со стороны без оценки</li>
+                <li><strong>Отпускание:</strong> Позвольте мыслям приходить и уходить, не цепляясь за них</li>
+                <li><strong>Повторение:</strong> Практикуйте 3-5 минут ежедневно для развития навыка</li>
+            </ol>
+            
+            <div class="technique-tip">
+                <p>Совет: Не оценивайте мысли как "хорошие" или "плохие". Ваша задача — просто замечать их появление и исчезновение.</p>
+            </div>
+            
+            <div class="technique-tip">
+                <p><strong>Эффект:</strong> Сложно одновременно наблюдать за мыслями и полностью в них погружаться. Позиция наблюдателя создает психологическую дистанцию, снижая эмоциональный накал.</p>
+            </div>
+        </div>
+    </div>
+</div>
                 <!-- "Сброс" через холод -->
                 <div class="technique stagger-element">
                     <div class="technique-header" onclick="toggleTechnique(this)">
@@ -1207,12 +1125,12 @@
                                 <li><strong>Подготовка:</strong> Выйдите в процедурный кабинет или ванную комнату</li>
                                 <li><strong>Воздействие:</strong> Намочите запястья и шею холодной водой или приложите холодный компресс</li>
                                 <li><strong>Альтернатива:</strong> Если возможно, умойтесь холодной водой или подержите в ней руки</li>
-                                <li><strong>Дыхание:</strong> Сделайте несколько глубоких вдохов-выдохов во время процедура</li>
+                                <li><strong>Дыхание:</strong> Сделайте несколько глубоких вдохов-выдохов во время процедуры</li>
                                 <li><strong>Осознание:</strong> Сосредоточьтесь на ощущении прохлады и свежести</li>
                             </ol>
                             
                             <div class="technique-tip">
-                                <p>Эффект: Холод — быстрый переключатель нервной системы</p>
+                                <p>Эффект:  Холод — быстрый переключатель нервной системы</p>
                             </div>
                         </div>
                     </div>
@@ -1353,36 +1271,70 @@
             helpControls.style.display = 'none';
         }
 
-        // Мобильное меню
+        // Обработчик для мобильного меню
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const body = document.body;
+        const headerNav = document.querySelector('.header-nav');
+        const headerActions = document.querySelector('.header-actions');
 
         if (mobileMenuBtn) {
             mobileMenuBtn.addEventListener('click', function() {
-                mobileMenu.classList.toggle('active');
-                // Меняем иконку меню
-                if (mobileMenu.classList.contains('active')) {
-                    mobileMenuBtn.textContent = '✕';
+                const isVisible = headerNav.style.display === 'flex';
+                
+                if (isVisible) {
+                    headerNav.style.display = 'none';
+                    if (headerActions) headerActions.style.display = 'none';
                 } else {
-                    mobileMenuBtn.textContent = '☰';
+                    headerNav.style.display = 'flex';
+                    if (headerActions) headerActions.style.display = 'flex';
+                    headerNav.style.flexDirection = 'column';
+                    headerNav.style.position = 'absolute';
+                    headerNav.style.top = '100%';
+                    headerNav.style.left = '0';
+                    headerNav.style.right = '0';
+                    headerNav.style.background = 'rgba(245, 245, 221, 0.98)';
+                    headerNav.style.backdropFilter = 'blur(10px)';
+                    headerNav.style.padding = '2rem';
+                    headerNav.style.gap = '1.5rem';
+                    headerNav.style.borderBottom = '1px solid var(--border-color)';
+                    
+                    if (headerActions) {
+                        headerActions.style.flexDirection = 'column';
+                        headerActions.style.position = 'absolute';
+                        headerActions.style.top = 'calc(100% + 200px)';
+                        headerActions.style.left = '0';
+                        headerActions.style.right = '0';
+                        headerActions.style.background = 'rgba(245, 245, 221, 0.98)';
+                        headerActions.style.backdropFilter = 'blur(10px)';
+                        headerActions.style.padding = '1rem 2rem';
+                        headerActions.style.gap = '1rem';
+                    }
                 }
             });
         }
 
-        // Закрытие мобильного меню при клике на ссылку
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('mobile-nav-link')) {
-                mobileMenu.classList.remove('active');
-                mobileMenuBtn.textContent = '☰';
-            }
-        });
-
         // Закрытие мобильного меню при ресайзе
         window.addEventListener('resize', function() {
             if (window.innerWidth > 768) {
-                mobileMenu.classList.remove('active');
-                mobileMenuBtn.textContent = '☰';
+                if (headerNav) {
+                    headerNav.style.display = '';
+                    headerNav.style.position = '';
+                    headerNav.style.background = '';
+                    headerNav.style.padding = '';
+                    headerNav.style.flexDirection = '';
+                    headerNav.style.gap = '';
+                    headerNav.style.borderBottom = '';
+                }
+                if (headerActions) {
+                    headerActions.style.display = '';
+                    headerActions.style.position = '';
+                    headerActions.style.background = '';
+                    headerNav.style.padding = '';
+                    headerActions.style.flexDirection = '';
+                    headerActions.style.gap = '';
+                }
+            } else {
+                if (headerNav) headerNav.style.display = 'none';
+                if (headerActions) headerActions.style.display = 'none';
             }
         });
 

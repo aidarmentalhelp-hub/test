@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Не гори: профилактика профессионального выгорания</title>
+    
+    <!-- Фавиконки -->
+    <link rel="icon" type="image/png" href="assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="НЕГОРИ" />
+    <link rel="manifest" href="assets/favicon/site.webmanifest" />
+    
     <style>
         /* Reset и базовые стили */
         * {
@@ -74,6 +83,8 @@
             font-weight: 400;
             max-width: 100vw;
             overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
         }
 
         /* Стили для плавного появления */
@@ -329,6 +340,7 @@
         .hero-content {
             color: white;
             max-width: 500px;
+            width: 100%;
         }
 
         .hero-title {
@@ -341,6 +353,8 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             font-family: 'NG', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .hero-subtitle {
@@ -349,6 +363,8 @@
             line-height: 1.6;
             color: #bdc3c7;
             font-family: 'Tekst', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .hero-buttons {
@@ -368,6 +384,8 @@
             border: none;
             cursor: pointer;
             font-family: 'Tekst', sans-serif;
+            text-align: center;
+            white-space: nowrap;
         }
 
         .btn-primary {
@@ -444,6 +462,8 @@
             font-size: 1.5rem;
             line-height: 1.6;
             font-weight: 500;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         /* Секция с фоном для заголовка выгорания */
@@ -465,6 +485,7 @@
             transform: translateX(-50%);
             max-width: 800px;
             text-align: left;
+            width: 100%;
         }
 
         .burnout-header-title {
@@ -475,6 +496,8 @@
             line-height: 1.2;
             text-align: left;
             color: white;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .burnout-header-text {
@@ -484,6 +507,8 @@
             font-family: 'Tekst', sans-serif;
             text-align: left;
             color: white;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         /* Новая секция про эмоциональное выгорание */
@@ -509,6 +534,8 @@
             margin-bottom: 2rem;
             text-align: center;
             font-family: 'Zag', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .burnout-article h2 {
@@ -519,6 +546,8 @@
             font-family: 'Zag', sans-serif;
             text-align: center;
             border-left: none;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .burnout-article h3 {
@@ -527,12 +556,16 @@
             margin: 2rem 0 1rem 0;
             font-family: 'Zag', sans-serif;
             text-align: center;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .burnout-article p {
             margin-bottom: 1.5rem;
             color: var(--black);
             font-family: 'Tekst', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .burnout-article ul {
@@ -545,6 +578,8 @@
             position: relative;
             font-family: 'Tekst', sans-serif;
             color: var(--black);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .burnout-article li::before {
@@ -574,6 +609,8 @@
             text-align: center;
             font-weight: 500;
             font-size: 1.4rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
 }
 .importance-title {
     font-size: 4rem !important; /* Было 3.5rem */
@@ -638,6 +675,8 @@
             color: var(--black);
             margin-bottom: 1.5rem;
             font-family: 'Zag', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .component-content p {
@@ -645,6 +684,8 @@
             line-height: 1.7;
             color: var(--black);
             font-family: 'Tekst', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         /* Секция "Почему это важно" с изображением как фоном */
@@ -665,6 +706,7 @@
             color: white;
             position: relative;
             z-index: 2;
+            width: 100%;
         }
 
         .importance-title {
@@ -675,6 +717,8 @@
             line-height: 1.2;
             text-align: center;
             color: white;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .importance-text {
@@ -685,6 +729,8 @@
             text-align: center;
             margin-bottom: 2.5rem;
             color: white;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .importance-list {
@@ -695,6 +741,7 @@
             line-height: 1.8;
             margin-bottom: 2.5rem;
             font-family: 'Tekst', sans-serif;
+            max-width: 100%;
         }
 
         .importance-list li {
@@ -702,6 +749,8 @@
             position: relative;
             padding-left: 1.5rem;
             color: white;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .importance-list li::before {
@@ -741,6 +790,8 @@
             font-size: 2.5rem;
             color: var(--black);
             margin-bottom: 3rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .factors-grid {
@@ -783,7 +834,9 @@
             margin-bottom: 2rem;
             font-size: 1.3rem;
             font-family: 'Tekst', sans-serif;
-            font-weight: bold
+            font-weight: bold;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .factor-card p {
@@ -791,6 +844,8 @@
             font-size: 1.4rem;
             line-height: 1.6;
             font-family: 'Tekst', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         /* Секция "Что мы предлагаем" */
@@ -814,6 +869,8 @@
             font-size: 2.5rem;
             color: var(--black);
             margin-bottom: 1rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .services-intro {
@@ -830,6 +887,8 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
         }
 
         .services-grid {
@@ -886,6 +945,8 @@
             font-size: 1.7rem;
             font-family: 'Zag', sans-serif;
             text-align: center;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .service-card p {
@@ -896,6 +957,8 @@
             line-height: 1.6;
             text-align: center;
             font-size: 1.6rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .service-link {
@@ -907,7 +970,8 @@
             margin-top: auto;
             text-align: center;
             display: block;
-
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .service-link:hover {
@@ -938,6 +1002,8 @@
             margin-bottom: 1.5rem;
             font-size: 1.3rem;
             font-family: 'Zag', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .footer-nav {
@@ -951,6 +1017,8 @@
             text-decoration: none;
             transition: var(--transition);
             font-family: 'Tekst', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .footer-nav a:hover {
@@ -966,11 +1034,13 @@
             margin: 0 auto;
             padding: 0 40px;
             font-family: 'Tekst', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         /* Адаптивность */
         @media (max-width: 1200px) {
-            .container {
+            .header-container {
                 padding: 0 30px;
             }
             
@@ -1012,6 +1082,12 @@
             .factor-icon {
                 width: 50px;
                 height: 50px;
+            }
+            
+            .services-container,
+            .factors-container,
+            .burnout-content {
+                padding: 0 30px;
             }
         }
 
@@ -1121,10 +1197,18 @@
                 width: 45px;
                 height: 45px;
             }
+            
+            .services-container,
+            .factors-container,
+            .burnout-content,
+            .header-container,
+            .footer-content {
+                padding: 0 20px;
+            }
         }
 
         @media (max-width: 768px) {
-            .container {
+            .header-container {
                 padding: 0 20px;
             }
             
@@ -1181,6 +1265,7 @@
                 margin-left: 50%;
                 transform: translateX(-50%);
                 max-width: 95%;
+                text-align: center;
             }
             
             .disclaimer-content h3 {
@@ -1198,6 +1283,7 @@
             
             .importance-title {
                 font-size: 2rem;
+                text-align: center;
             }
             
             .importance-text {
@@ -1231,6 +1317,16 @@
                 width: 40px;
                 height: 40px;
             }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 280px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1240,6 +1336,12 @@
             
             .hero-title {
                 font-size: 2rem;
+                text-align: center;
+            }
+            
+            .hero-subtitle {
+                text-align: center;
+                font-size: 1.2rem;
             }
             
             .btn {
@@ -1279,10 +1381,12 @@
             
             .burnout-header-title {
                 font-size: 1.8rem;
+                text-align: center;
             }
             
             .burnout-header-text {
                 font-size: 1rem;
+                text-align: center;
             }
             
             .disclaimer-content h3 {
@@ -1319,6 +1423,21 @@
                 height: 35px;
             }
             
+            .services-intro {
+                font-size: 1.4rem;
+            }
+            
+            .service-card p {
+                font-size: 1.4rem;
+            }
+            
+            .component-content p {
+                font-size: 1.2rem;
+            }
+            
+            .factor-card p {
+                font-size: 1.2rem;
+            }
         }
 
         /* Ландшафтная ориентация для мобильных */
@@ -1344,6 +1463,120 @@
     filter: grayscale(0%) !important; /* Начальное состояние - цветное */
     transition: filter 1.5s ease;
         }
+        .striped-btn {
+    position: relative;
+    background: transparent;
+    color: var(--primary-color);
+    padding: 8px 20px;
+    border: 2px solid var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    cursor: pointer;
+    min-width: 120px;
+    font-family: 'Tekst', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+/* Полосатая граница через псевдоэлементы */
+.striped-btn::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border: 3px solid transparent;
+    border-image: repeating-linear-gradient(
+        45deg,
+        #000000,
+        #000000 10px,
+        #FFD700 10px,
+        #FFD700 20px
+    ) 3;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: -1;
+}
+
+.striped-btn:hover::before {
+    opacity: 1;
+}
+
+.striped-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-1px);
+    border-color: transparent;
+}
+
+.btn-text {
+    transition: all 0.4s ease;
+}
+
+.btn-hidden {
+    position: absolute;
+    opacity: 0;
+    transition: all 0.4s ease 0.1s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.striped-btn:hover .btn-text {
+    opacity: 0;
+    transform: translateY(-5px);
+}
+
+.striped-btn:hover .btn-hidden {
+    opacity: 1;
+}
+
+.emoji {
+    font-size: 1rem;
+}
+
+/* Улучшения для мобильной адаптации */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.text-container {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+/* Предотвращение горизонтального скролла */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* Улучшение читаемости на маленьких экранах */
+@media (max-width: 768px) {
+    .burnout-header-content,
+    .importance-content {
+        text-align: center !important;
+        margin-left: 0 !important;
+        transform: none !important;
+    }
+    
+    .burnout-header-title,
+    .burnout-header-text {
+        text-align: center !important;
+    }
+    
+    .component-content {
+        text-align: center;
+    }
+}
 
     </style>
 </head>
@@ -1363,8 +1596,15 @@
             </nav>
             
             <div class="header-actions">
-                <a href="#login" class="auth-btn">Вход</a>
-            </div>
+                <a href="#login" class="striped-btn">
+                     <span class="btn-text">Вход</span>
+                    <span class="btn-hidden">
+                     <span class="emoji"></span>
+            В разработке
+            <span class="emoji"></span>
+        </span>
+    </a>
+</div>
             
             <button class="mobile-menu-btn">☰</button>
         </div>
