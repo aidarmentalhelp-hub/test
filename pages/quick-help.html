@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Быстрая помощь | Не гори: профилактика профессионального выгорания</title>
+    
+    <!-- Фавиконки -->
+    <link rel="icon" type="image/png" href="../assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="../assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="НЕГОРИ" />
+    <link rel="manifest" href="../assets/favicon/site.webmanifest" />
+    
+    <style>
+        /* Reset и базовые стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #c4511c;
+            --success-color: #1c6b3d;
+            --text-color: #333333;
+            --dark-bg: #1a1a1a;
+            --light-bg: #F5F5DD;
+            --disclaimer-bg: #C7AD7F;
+            --border-color: #e0e0e0;
+            --white: #ffffff;
+            --black: #000000;
+            --shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --gray-bg: #f8f8f8;
+            --neo-bg: #f0f3f5;
+            --neo-shadow-light: #ffffff;
+            --neo-shadow-dark: #d1d9e6;
+        }
+
+        /* Подключение шрифтов */
+        @font-face {
+            font-family: 'NG';
+            src: url('../assets/fonts/NG.woff2') format('woff2'),
+                 url('../assets/fonts/NG.woff') format('woff'),
+                 url('../assets/fonts/NG.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Zag';
+            src: url('../assets/fonts/Zag.woff2') format('woff2'),
+                 url('../assets/fonts/Zag.woff') format('woff'),
+                 url('../assets/fonts/Zag.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Tekst';
+            src: url('../assets/fonts/Tekst.woff2') format('woff2'),
+                 url('../assets/fonts/Tekst.woff') format('woff'),
+                 url('../assets/fonts/Tekst.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'Tekst', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            font-size: 16px;
+            font-weight: 400;
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+
+        .logo-ng {
+            font-family: 'NG', sans-serif;
+            font-size: 2.2rem;
+            font-weight: normal;
+        }
+
+        /* Хедер */
+        .tilda-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--light-bg);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            box-shadow: var(--shadow);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--primary-color);
+            margin-right: auto;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+            margin-right: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.3rem;
+            padding: 8px 0;
+            position: relative;
+            transition: var(--transition);
+            white-space: nowrap;
+            font-family: 'Tekst', sans-serif;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #1d7ba0;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1002;
+        }
+
+        /* Герой секция */
+        .quick-help-hero {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('../assets/images/quick-help-bg.jpg') center/cover no-repeat;
+            padding: 100px 40px;
+            margin-top: 60px;
+        }
+
+        .quick-help-hero-content {
+            max-width: 800px;
+            color: white;
+            text-align: center;
+            width: 100%;
+        }
+
+        .quick-help-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-family: 'Zag', sans-serif;
+            line-height: 1.2;
+        }
+
+        .quick-help-subtitle {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            opacity: 0.95;
+            font-family: 'Tekst', sans-serif;
+        }
+
+        /* Основной контент */
+        .main-content {
+            width: 100%;
+            background: var(--light-bg);
+            padding: 0;
+        }
+
+        /* СОСТОЯНИЕ 1: Все методики закрыты - мозаика */
+        .techniques-mosaic {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            height: 100vh;
+            gap: 0;
+        }
+
+        .technique-tile {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .technique-tile::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.1)), 
+                        var(--section-bg) center/cover no-repeat;
+        }
+
+        .technique-tile::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--section-overlay);
+            transition: all 0.3s ease;
+        }
+
+        .technique-tile:hover::after {
+            background: rgba(0,0,0,0.1);
+        }
+
+        .tile-title {
+            position: relative;
+            z-index: 2;
+            color: var(--white);
+            font-size: 2rem;
+            font-family: 'Zag', sans-serif;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .technique-tile:hover .tile-title {
+            transform: scale(1.05);
+        }
+
+        /* Позиционирование плиток в мозаике */
+        .technique-tile:nth-child(1) { grid-area: 1 / 1 / 2 / 3; }
+        .technique-tile:nth-child(2) { grid-area: 1 / 3 / 2 / 4; }
+        .technique-tile:nth-child(3) { grid-area: 1 / 4 / 2 / 5; }
+        .technique-tile:nth-child(4) { grid-area: 2 / 1 / 3 / 2; }
+        .technique-tile:nth-child(5) { grid-area: 2 / 2 / 3 / 3; }
+        .technique-tile:nth-child(6) { grid-area: 2 / 3 / 3 / 5; }
+
+        /* СОСТОЯНИЕ 2: Открыта методика */
+        .techniques-container {
+            display: none;
+            min-height: calc(100vh - 60px);
+            position: relative;
+        }
+
+        .techniques-container.active {
+            display: block;
+        }
+
+        .techniques-mosaic.hidden {
+            display: none;
+        }
+
+        /* Основная область для контента методик */
+        .technique-main-area {
+            width: 100%;
+            background: var(--light-bg);
+            position: relative;
+        }
+
+        /* Контейнер для контента методик - будет позиционироваться после hero */
+        .technique-content {
+            display: none;
+            background: rgba(255, 255, 255, 0.98);
+            padding: 60px 40px;
+            min-height: 80vh;
+        }
+
+        .technique-content.active {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ПЛАВАЮЩИЙ КРЕСТИК */
+        .close-technique {
+            position: fixed;
+            top: 80px;
+            right: 40px;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .close-technique:hover {
+            transform: scale(1.1);
+            background: var(--primary-color);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+        }
+
+        .close-technique.active {
+            display: flex;
+        }
+
+        .technique-content-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Вкладки внизу */
+        .technique-tabs {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 10vh;
+            min-height: 80px;
+            display: none;
+            background: var(--light-bg);
+            border-top: 2px solid var(--border-color);
+            z-index: 999;
+        }
+
+        .technique-tabs.active {
+            display: flex;
+        }
+
+        .technique-tab {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            padding: 0 10px;
+        }
+
+        .technique-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.1)), 
+                        var(--section-bg) center/cover no-repeat;
+        }
+
+        .technique-tab::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--section-overlay);
+            transition: all 0.3s ease;
+        }
+
+        .technique-tab:hover::after {
+            background: rgba(0,0,0,0.1);
+        }
+
+        .technique-tab.active::after {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .tab-title {
+            position: relative;
+            z-index: 2;
+            color: var(--white);
+            font-size: 1.1rem;
+            font-family: 'Zag', sans-serif;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .technique-tab:hover .tab-title {
+            transform: scale(1.05);
+        }
+
+        .technique-tab.active .tab-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        /* Цветовые схемы */
+        .breath-style {
+            --section-bg: url('../assets/images/12.png');
+            
+        }
+
+        .grounding-style {
+            --section-bg: url('../assets/images/13.png');
+            
+        }
+
+        .body-style {
+            --section-bg: url('../assets/images/14.png');
+           
+        }
+
+        .cold-style {
+            --section-bg: url('../assets/images/15.png');
+            
+        }
+
+        .stop-style {
+            --section-bg: url('../assets/images/16.png');
+            
+        }
+
+        .worry-style {
+            --section-bg: url('../assets/images/17.png');
+           
+        }
+
+        /* Стили контента */
+        .subsection {
+            margin: 2rem 0;
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 
+                8px 8px 16px var(--neo-shadow-dark),
+                -8px -8px 16px var(--neo-shadow-light);
+            border-radius: 10px;
+        }
+
+        .subsection-title {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            font-family: 'Zag', sans-serif;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .subsection-content {
+            font-size: 1.3rem;
+            line-height: 1.7;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            margin: 1.5rem 0;
+            box-shadow: 
+                6px 6px 12px var(--neo-shadow-dark),
+                -6px -6px 12px var(--neo-shadow-light);
+            border-radius: 8px;
+        }
+
+        .info-card.success {
+            border-left: 4px solid var(--success-color);
+        }
+
+        .info-card.warning {
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .checklist li {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            line-height: 1.6;
+        }
+
+        .checklist li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success-color);
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .timer-display {
+            font-size: 4rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 2rem 0;
+            color: var(--primary-color);
+            font-family: 'Zag', monospace;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 
+                inset 4px 4px 8px var(--neo-shadow-dark),
+                inset -4px -4px 8px var(--neo-shadow-light);
+            border-radius: 10px;
+        }
+
+        .timer-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .timer-btn {
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--primary-color);
+            border: none;
+            padding: 15px 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 
+                6px 6px 12px var(--neo-shadow-dark),
+                -6px -6px 12px var(--neo-shadow-light);
+            font-family: 'Tekst', sans-serif;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .timer-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                8px 8px 16px var(--neo-shadow-dark),
+                -8px -8px 16px var(--neo-shadow-light);
+        }
+
+        .timer-btn.stop {
+            color: var(--accent-color);
+        }
+
+        /* Мобильное меню */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--light-bg);
+            z-index: 1001;
+            padding: 2rem;
+            overflow-y: auto;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .mobile-nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.5rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            font-family: 'Tekst', sans-serif;
+        }
+
+        /* Футер */
+        .tilda-footer {
+            background: var(--dark-bg);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-family: 'Zag', sans-serif;
+        }
+
+        .footer-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .footer-nav a {
+            color: #bdc3c7;
+            text-decoration: none;
+            font-family: 'Tekst', sans-serif;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bdc3c7;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 968px) {
+            .techniques-mosaic {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+            }
+
+            .technique-tile:nth-child(1) { grid-area: 1 / 1 / 2 / 2; }
+            .technique-tile:nth-child(2) { grid-area: 1 / 2 / 2 / 3; }
+            .technique-tile:nth-child(3) { grid-area: 2 / 1 / 3 / 2; }
+            .technique-tile:nth-child(4) { grid-area: 2 / 2 / 3 / 3; }
+            .technique-tile:nth-child(5) { grid-area: 3 / 1 / 4 / 2; }
+            .technique-tile:nth-child(6) { grid-area: 3 / 2 / 4 / 3; }
+
+            .tab-title {
+                font-size: 0.9rem;
+            }
+
+            .close-technique {
+                top: 70px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-nav {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .quick-help-hero {
+                padding: 60px 20px;
+                height: 40vh;
+            }
+            
+            .quick-help-title {
+                font-size: 2rem;
+            }
+
+            .technique-content {
+                padding: 40px 20px;
+            }
+
+            .technique-tabs {
+                height: 12vh;
+                min-height: 100px;
+                flex-wrap: wrap;
+            }
+
+            .technique-tab {
+                flex: 1 0 33.333%;
+                min-height: 50px;
+            }
+
+            .close-technique {
+                top: 70px;
+                right: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .quick-help-hero {
+                padding: 40px 15px;
+                height: 35vh;
+            }
+            
+            .quick-help-title {
+                font-size: 1.8rem;
+            }
+
+            .tile-title {
+                font-size: 1.5rem;
+            }
+
+            .technique-tabs {
+                height: 15vh;
+                min-height: 120px;
+            }
+
+            .technique-tab {
+                flex: 1 0 50%;
+            }
+
+            .tab-title {
+                font-size: 0.7rem;
+            }
+
+            .close-technique {
+                top: 65px;
+                right: 10px;
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Хедер -->
+    <header class="tilda-header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">
+                <span class="logo-ng">НЕ ГОРИ</span>
+            </a>
+            
+            <nav class="header-nav">
+                <a href="quick-help.html" class="nav-link active">Быстрая помощь</a>
+                <a href="daily.html" class="nav-link">Ежедневные практики</a>
+                <a href="materials.html" class="nav-link">Материалы</a>
+                <a href="tests.html" class="nav-link">Тесты</a>
+            </nav>
+            
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </header>
+
+    <!-- Мобильное меню -->
+    <div class="mobile-menu">
+        <a href="quick-help.html" class="mobile-nav-link active">Быстрая помощь</a>
+        <a href="daily.html" class="mobile-nav-link">Ежедневные практики</a>
+        <a href="materials.html" class="mobile-nav-link">Материалы</a>
+        <a href="tests.html" class="mobile-nav-link">Тесты</a>
+    </div>
+
+    <!-- Герой секция -->
+    <section class="quick-help-hero">
+        <div class="quick-help-hero-content">
+            <h1 class="quick-help-title">Быстрая помощь</h1>
+            <p class="quick-help-subtitle">Техники "скорой помощи" для мгновенного снятия напряжения и стресса</p>
+        </div>
+    </section>
+
+    <!-- Основной контент -->
+    <main class="main-content">
+        <!-- СОСТОЯНИЕ 1: Мозаика методик (все закрыто) -->
+        <div class="techniques-mosaic" id="techniquesMosaic">
+            <div class="technique-tile breath-style" onclick="openTechnique('breath')">
+                <div class="tile-title">ДЫХАНИЕ</div>
+            </div>
+            <div class="technique-tile grounding-style" onclick="openTechnique('grounding')">
+                <div class="tile-title">ЗАЗЕМЛЕНИЕ</div>
+            </div>
+            <div class="technique-tile body-style" onclick="openTechnique('body')">
+                <div class="tile-title">ТЕЛО</div>
+            </div>
+            <div class="technique-tile cold-style" onclick="openTechnique('cold')">
+                <div class="tile-title">ХОЛОД</div>
+            </div>
+            <div class="technique-tile stop-style" onclick="openTechnique('stop')">
+                <div class="tile-title">СТОП</div>
+            </div>
+            <div class="technique-tile worry-style" onclick="openTechnique('worry')">
+                <div class="tile-title">НАБЛЮДЕНИЕ</div>
+            </div>
+        </div>
+
+        <!-- СОСТОЯНИЕ 2: Контейнер для открытой методики -->
+        <div class="techniques-container" id="techniquesContainer">
+            <!-- Контент методик будет вставляться сюда -->
+        </div>
+    </main>
+
+    <!-- Вкладки внизу (отдельно, будут показываться при открытии методики) -->
+    <div class="technique-tabs" id="techniqueTabs">
+        <div class="technique-tab breath-style" onclick="switchTechnique('breath')">
+            <div class="tab-title">ДЫХАНИЕ</div>
+        </div>
+        <div class="technique-tab grounding-style" onclick="switchTechnique('grounding')">
+            <div class="tab-title">ЗАЗЕМЛЕНИЕ</div>
+        </div>
+        <div class="technique-tab body-style" onclick="switchTechnique('body')">
+            <div class="tab-title">ТЕЛО</div>
+        </div>
+        <div class="technique-tab cold-style" onclick="switchTechnique('cold')">
+            <div class="tab-title">ХОЛОД</div>
+        </div>
+        <div class="technique-tab stop-style" onclick="switchTechnique('stop')">
+            <div class="tab-title">СТОП</div>
+        </div>
+        <div class="technique-tab worry-style" onclick="switchTechnique('worry')">
+            <div class="tab-title">ТРЕВОГА</div>
+        </div>
+    </div>
+
+    <!-- Плавающий крестик -->
+    <button class="close-technique" onclick="closeTechnique()" id="closeButton">×</button>
+
+    <!-- Футер -->
+    <footer class="tilda-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>НЕ ГОРИ</h3>
+                <p>Платформа для профилактики профессионального выгорания</p>
+            </div>
+            <div class="footer-section">
+                <h3>Разделы</h3>
+                <nav class="footer-nav">
+                    <a href="quick-help.html">Быстрая помощь</a>
+                    <a href="daily.html">Ежедневные практики</a>
+                    <a href="materials.html">Материалы</a>
+                    <a href="tests.html">Тесты</a>
+                </nav>
+            </div>
+            <div class="footer-section">
+                <h3>Контакты</h3>
+                <p>support@negotri.ru</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 НЕ ГОРИ. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <!-- Шаблоны контента методик -->
+    <template id="breath-template">
+        <div class="technique-content active" id="breath-content">
+            <div class="technique-content-inner">
+                <div class="subsection">
+                    <h3 class="subsection-title">Дыхание 4-2-6</h3>
+                    <div class="subsection-content">
+                        <p><strong>Техника для мгновенного снятия напряжения и успокоения нервной системы.</strong> Этот метод помогает быстро восстановить контроль над дыханием и снизить уровень стресса.</p>
+                        
+                        <div class="info-card">
+                            <h4>Как выполнять</h4>
+                            <ul class="checklist">
+                                <li><strong>Сосредоточьтесь:</strong> Представьте лёгкое пёрышко на кончике носа и подышите так, чтобы оно не улетело</li>
+                                <li><strong>Вдох:</strong> Медленный вдох через нос в течение <strong>4 секунд</strong></li>
+                                <li><strong>Задержка:</strong> Задержите дыхание на <strong>2 секунды</strong></li>
+                                <li><strong>Выдох:</strong> Плавный выдох через рот в течение <strong>6 секунд</strong></li>
+                                <li><strong>Повторение:</strong> Выполните <strong>5-10 циклов</strong> для достижения эффекта</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="info-card success">
+                            <h4>Совет</h4>
+                            <p>Выполняйте упражнение сидя в удобной позе, закрыв глаза для лучшей концентрации.</p>
+                        </div>
+                        
+                        <div class="timer-display" id="breath-timer">03:00</div>
+                        <div class="timer-controls">
+                            <button class="timer-btn" onclick="startTimer('breath')">Запустить таймер</button>
+                            <button class="timer-btn stop" onclick="stopTimer('breath')">Остановить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="grounding-template">
+        <div class="technique-content active" id="grounding-content">
+            <div class="technique-content-inner">
+                <div class="subsection">
+                    <h3 class="subsection-title">Заземление 5-4-3-2-1</h3>
+                    <div class="subsection-content">
+                        <p><strong>Вернитесь в "здесь и сейчас", когда чувствуете перегрузку.</strong> Эта техника помогает отвлечься от тревожных мыслей и сосредоточиться на текущем моменте.</p>
+                        
+                        <div class="info-card">
+                            <h4>Как выполнять</h4>
+                            <ul class="checklist">
+                                <li><strong>5 вещей, которые вы видите</strong> вокруг себя (стол, окно, ручка, растение, книга)</li>
+                                <li><strong>4 вещи, которые ощущаете</strong> (текстура ткани, температура воздуха, поверхность стола, собственное дыхание)</li>
+                                <li><strong>3 звука, которые слышите</strong> прямо сейчас (разговоры, шум техники, шаги, собственное сердцебиение)</li>
+                                <li><strong>2 запаха, которые чувствуете</strong> (кофе, воздух в помещении, собственные духи)</li>
+                                <li><strong>1 вкус</strong> (можно сделать глоток воды, почувствовать вкус во рту)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="info-card success">
+                            <h4>Совет</h4>
+                            <p>Выполняйте упражнение медленно, полностью концентрируясь на каждом ощущении.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="cold-template">
+        <div class="technique-content active" id="cold-content">
+            <div class="technique-content-inner">
+             <div class="subsection">
+                <h3 class="subsection-title">"Сброс" через холод</h3>
+                <div class="subsection-content">
+                    <p><strong>Резкое переключение нервной системы через температурный раздражитель.</strong> Холод — быстрый переключатель внимания. Мгновенно отвлекает от тревоги и возвращает в настоящее, давая мозгу "перезагрузку".</p>
+                    
+                    <div class="info-card">
+                        <h4>Как выполнять</h4>
+                        <ul class="checklist">
+                            <li><strong>Подготовка:</strong> Выйдите в процедурный кабинет или ванную комнату</li>
+                            <li><strong>Воздействие:</strong> Намочите запястья и шею холодной водой или приложите холодный компресс</li>
+                            <li><strong>Альтернатива:</strong> Если возможно, умойтесь холодной водой или подержите в ней руки</li>
+                            <li><strong>Дыхание:</strong> Сделайте несколько глубоких вдохов-выдохов во время процедура</li>
+                            <li><strong>Осознание:</strong> Сосредоточьтесь на ощущении прохлады и свежести</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card success">
+                        <h4>Эффект</h4>
+                        <p>Холод — быстрый переключатель нервной системы</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="stop-template">
+    <div class="technique-content active" id="stop-content">
+        <div class="technique-content-inner">
+            <div class="subsection">
+                <h3 class="subsection-title">Метод СТОП</h3>
+                <div class="subsection-content">
+                    <p><strong>Акроним для управления эмоциональными реакциями в стрессовых ситуациях.</strong></p>
+                    
+                    <div class="info-card">
+                        <h4>С — Стой</h4>
+                        <p>Настиг эмоциональный шторм? Остановите желание действовать и замрите на несколько секунд. Вы молодец! Вы уже на шаг ближе к наилучшему разрешению ситуации, помните главный тут- вы!, а не эмоции.</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h4>Т — Теперь шаг назад</h4>
+                        <p>Сделайте глубокий вдох и выдох, мысленно отступите назад. Объявите небольшой перерыв. Это можно сделать и в реальности — как шагнуть назад, если вы находитесь наедине с собой, так и попросить собеседника о паузе."мне нужно обдумать/изучить этот вопрос более подробно", Если вы поделитесь своими эмоциями и попросите вернуться к разговору чуть позже, это только поспособствует разрешению ситуации. Уверены, собеседник оценит вашу внимательность!</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h4>О — Осмотрись</h4>
+                        <p>Понаблюдайте за тем, какие мысли и чувства блуждают в вас, а также без оценки, словно вы сторонний наблюдатель, опишите, что происходит вокруг — что делают и говорят другие? Что происходит? Кто участвует в ситуации? Это поможет слегка подняться над ситуацией и посмотреть на происходящее со стороны, «холодным» взглядом.</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h4>П — попытайся действовать осознанно</h4>
+                        <p>Задайте себе следующие вопросы: «Что станет лучшим разрешением ситуации для меня и каждого ее участника?», «Какой результат я хочу получить?», «Какие действия улучшат ситуацию, а какие, наоборот, ухудшат?»</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="worry-template">
+    <div class="technique-content active" id="worry-content">
+        <div class="technique-content-inner">
+            <div class="subsection">
+                <h3 class="subsection-title">Метод "Позвольте себе потревожиться"</h3>
+                <div class="subsection-content">
+                    <p><strong>Целенаправленное выделение времени для тревоги помогает контролировать её.</strong> Вместо того чтобы бороться с тревожными мыслями, мы даем им ограниченное пространство и время.</p>
+                    
+                    <div class="info-card">
+                        <h4>Как выполнять</h4>
+                        <ul class="checklist">
+                            <li><strong>Установите границы:</strong> Поставьте таймер на <strong>5 минут</strong></li>
+                            <li><strong>Позвольте себе тревожиться:</strong> В течение этого времени разрешите себе думать обо всех тревожных мыслях</li>
+                            <li><strong>Записывайте:</strong> Фиксируйте все тревожные мысли на бумаге</li>
+                            <li><strong>Структурируйте:</strong> Разделите мысли на категории: реальные проблемы и гипотетические сценарии</li>
+                            <li><strong>Завершение:</strong> Когда таймер сработает, сознательно прекратите процесс тревоги</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card success">
+                        <h4>Эффект</h4>
+                        <p>Вы учитесь контролировать тревогу, а не позволять ей контролировать вас</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+    <template id="body-template">
+        <div class="technique-content active" id="body-content">
+            <div class="technique-content-inner">
+                <div class="subsection">
+                    <h3 class="subsection-title">Заземление через тело</h3>
+                        <div class="subsection-content">
+                    <p><strong>Быстрое сканирование тела и осознанное напряжение-расслабление мышц.</strong> Этот метод помогает снять мышечное напряжение и мгновенно переключить нервную систему.</p>
+                    
+                    <div class="info-card">
+                        <h4>Как выполнять</h4>
+                        <ul class="checklist">
+                            <li><strong>Поза:</strong> Сядьте прямо, закройте глаза, сделайте глубокий вдох</li>
+                            <li><strong>Напряжение:</strong> Напрягите одновременно стопы, сожмите кулаки и стисните зубы на <strong>5 секунд</strong></li>
+                            <li><strong>Расслабление:</strong> Резко расслабьтесь на выдохе, почувствуйте волну расслабления</li>
+                            <li><strong>Повторение:</strong> Повторите упражнение <strong>2-3 раза</strong></li>
+                            <li><strong>Осознание:</strong> Сосредоточьтесь на ощущениях расслабления в теле</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card success">
+                        <h4>Эффект</h4>
+                        <p>Расслабление через напряжение — парадоксальный ключ к освобождению мышц и расслаблению</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+    <!-- Остальные шаблоны... -->
+
+    <script>
+        let currentTechnique = null;
+        let timers = {};
+
+        function openTechnique(technique) {
+            // Скрываем мозаику
+            document.getElementById('techniquesMosaic').classList.add('hidden');
+            
+            // Показываем контейнер для методик
+            document.getElementById('techniquesContainer').classList.add('active');
+            
+            // Показываем вкладки и крестик
+            document.getElementById('techniqueTabs').classList.add('active');
+            document.getElementById('closeButton').classList.add('active');
+            
+            // Загружаем контент методики
+            loadTechniqueContent(technique);
+            
+            // Прокручиваем к началу контента
+            setTimeout(() => {
+                document.getElementById('techniquesContainer').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }, 100);
+        }
+
+        function loadTechniqueContent(technique) {
+            const container = document.getElementById('techniquesContainer');
+            const template = document.getElementById(`${technique}-template`);
+            
+            if (template) {
+                container.innerHTML = '';
+                const content = template.content.cloneNode(true);
+                container.appendChild(content);
+                currentTechnique = technique;
+                
+                // Активируем соответствующую вкладку
+                activateTab(technique);
+            }
+        }
+
+        function switchTechnique(technique) {
+            if (currentTechnique !== technique) {
+                loadTechniqueContent(technique);
+                
+                // Прокручиваем к верху контента
+                document.getElementById('techniquesContainer').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        function activateTab(technique) {
+            // Убираем активный класс со всех вкладок
+            document.querySelectorAll('.technique-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Активируем выбранную вкладку
+            const activeTab = document.querySelector(`.technique-tab.${technique}-style`);
+            if (activeTab) {
+                activeTab.classList.add('active');
+            }
+        }
+
+        function closeTechnique() {
+            // Показываем мозаику
+            document.getElementById('techniquesMosaic').classList.remove('hidden');
+            
+            // Скрываем контейнер методик
+            document.getElementById('techniquesContainer').classList.remove('active');
+            document.getElementById('techniquesContainer').innerHTML = '';
+            
+            // Скрываем вкладки и крестик
+            document.getElementById('techniqueTabs').classList.remove('active');
+            document.getElementById('closeButton').classList.remove('active');
+            
+            // Останавливаем таймеры
+            Object.values(timers).forEach(timer => {
+                if (timer) clearInterval(timer);
+            });
+            timers = {};
+            
+            currentTechnique = null;
+            
+            // Прокручиваем к мозаике
+            document.getElementById('techniquesMosaic').scrollIntoView({ 
+                behavior: 'smooth'
+            });
+        }
+
+        // Таймер для дыхательного упражнения
+        function startTimer(type) {
+            if (timers[type]) {
+                clearInterval(timers[type]);
+            }
+            
+            let timeLeft = 180;
+            const timerElement = document.getElementById(`${type}-timer`);
+            
+            function updateTimer() {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timers[type]);
+                    timerElement.textContent = "00:00";
+                    alert("Время вышло! Отличная работа!");
+                }
+                
+                timeLeft--;
+            }
+            
+            updateTimer();
+            timers[type] = setInterval(updateTimer, 1000);
+        }
+
+        function stopTimer(type) {
+            if (timers[type]) {
+                clearInterval(timers[type]);
+                timers[type] = null;
+                document.getElementById(`${type}-timer`).textContent = "03:00";
+            }
+        }
+
+        // Мобильное меню
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.mobile-menu').classList.toggle('active');
+        });
+
+        // Закрытие по ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && currentTechnique) {
+                closeTechnique();
+            }
+        });
+    </script>
+</body>
+</html>
