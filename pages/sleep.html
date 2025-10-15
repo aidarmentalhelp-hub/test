@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гигиена сна | Не гори: профилактика профессионального выгорания</title>
+    
+    <!-- Фавиконки -->
+    <link rel="icon" type="image/png" href="../assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="../assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="НЕГОРИ" />
+    <link rel="manifest" href="../assets/favicon/site.webmanifest" />
+    
+    <style>
+        /* Reset и базовые стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #7f8c8d;
+            --success-color: #27ae60;
+            --text-color: #333333;
+            --dark-bg: #1a1a1a;
+            --light-bg: #f8f9fa;
+            --border-color: #e0e0e0;
+            --white: #ffffff;
+            --black: #000000;
+            --shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --gray-bg: #f8f8f8;
+        }
+
+        /* Подключение шрифтов */
+        @font-face {
+            font-family: 'NG';
+            src: url('../assets/fonts/NG.woff2') format('woff2'),
+                 url('../assets/fonts/NG.woff') format('woff'),
+                 url('../assets/fonts/NG.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Zag';
+            src: url('../assets/fonts/Zag.woff2') format('woff2'),
+                 url('../assets/fonts/Zag.woff') format('woff'),
+                 url('../assets/fonts/Zag.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Tekst';
+            src: url('../assets/fonts/Tekst.woff2') format('woff2'),
+                 url('../assets/fonts/Tekst.woff') format('woff'),
+                 url('../assets/fonts/Tekst.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'Tekst', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            font-size: 18px;
+            font-weight: 400;
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+
+        .logo-ng {
+            font-family: 'NG', sans-serif;
+            font-size: 2.2rem;
+            font-weight: normal;
+        }
+
+        /* Хедер */
+        .tilda-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            box-shadow: var(--shadow);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--primary-color);
+            margin-right: auto;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+            margin-right: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.3rem;
+            padding: 8px 0;
+            position: relative;
+            transition: var(--transition);
+            white-space: nowrap;
+            font-family: 'Tekst', sans-serif;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-color);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1002;
+            color: var(--primary-color);
+        }
+
+        /* Герой секция */
+        .sleep-header-section {
+            background: var(--white);
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 40px;
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sleep-header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .sleep-header-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: slideInLeft 1s ease 0.5s forwards;
+        }
+
+        .sleep-header-img {
+            max-width: 100%;
+            max-height: 400px;
+            width: auto;
+            height: auto;
+            border-radius: 0;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .sleep-header-img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .sleep-header-content {
+            flex: 1;
+            color: var(--text-color);
+            text-align: left;
+            opacity: 0;
+            transform: translateX(50px);
+            animation: slideInRight 1s ease 0.5s forwards;
+        }
+
+        .sleep-header-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-family: 'Zag', sans-serif;
+            line-height: 1.2;
+            color: var(--primary-color);
+        }
+
+        .sleep-header-text {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            font-family: 'Tekst', sans-serif;
+            color: var(--text-color);
+        }
+
+        /* Анимации */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-element {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* Основной контент */
+        .sleep-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .sleep-article {
+            background: transparent;
+            padding: 4rem 0;
+            line-height: 1.8;
+        }
+
+        .sleep-article h1 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            text-align: center;
+            font-family: 'Zag', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.3s forwards;
+        }
+
+        .sleep-article p {
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            font-family: 'Tekst', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            font-size: 1.3rem;
+            line-height: 1.7;
+            text-align: justify;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.5s forwards;
+        }
+
+        /* Карточки рекомендаций */
+        .recommendations-grid {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px 4rem;
+        }
+
+        .recommendation-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 0;
+            border-left: 4px solid var(--primary-color);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .recommendation-card:nth-child(1) { animation-delay: 0.1s; }
+        .recommendation-card:nth-child(2) { animation-delay: 0.2s; }
+        .recommendation-card:nth-child(3) { animation-delay: 0.3s; }
+        .recommendation-card:nth-child(4) { animation-delay: 0.4s; }
+        .recommendation-card:nth-child(5) { animation-delay: 0.5s; }
+        .recommendation-card:nth-child(6) { animation-delay: 0.6s; }
+        .recommendation-card:nth-child(7) { animation-delay: 0.7s; }
+
+        .recommendation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .recommendation-card.warning {
+            border-left-color: var(--accent-color);
+        }
+
+        .recommendation-card.important {
+            border-left-color: var(--secondary-color);
+        }
+
+        .recommendation-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .recommendation-title {
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            font-family: 'Zag', sans-serif;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        .recommendation-description {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .key-points {
+            background: var(--gray-bg);
+            padding: 1.5rem;
+            border-radius: 0;
+            margin: 1.5rem 0;
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .key-points strong {
+            display: block;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            font-family: 'Zag', sans-serif;
+        }
+
+        .practical-tips {
+            background: var(--gray-bg);
+            padding: 1.5rem;
+            border-radius: 0;
+            margin: 1.5rem 0;
+            border-left: 3px solid var(--secondary-color);
+        }
+
+        .practical-tips strong {
+            display: block;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            font-family: 'Zag', sans-serif;
+        }
+
+        .example {
+            background: var(--gray-bg);
+            padding: 1.5rem;
+            border-radius: 0;
+            margin: 1.5rem 0;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .example strong {
+            color: var(--accent-color);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Секция ошибок мышления */
+        .mistakes-section {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 0;
+            margin: 3rem auto;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            max-width: 1400px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.9s forwards;
+        }
+
+        .mistakes-section h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            font-family: 'Zag', sans-serif;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        .mistake-card {
+            background: var(--gray-bg);
+            padding: 2rem;
+            border-radius: 0;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .mistake-card h3 {
+            font-size: 1.4rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-family: 'Zag', sans-serif;
+        }
+
+        /* Секция терапии */
+        .therapy-section {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 0;
+            margin: 3rem auto;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            max-width: 1400px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 1s forwards;
+        }
+
+        .therapy-section h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            font-family: 'Zag', sans-serif;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        .therapy-method {
+            background: var(--gray-bg);
+            padding: 2rem;
+            border-radius: 0;
+            margin: 2rem 0;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .therapy-method h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-family: 'Zag', sans-serif;
+        }
+
+        /* Секция призыва к действию */
+        .action-section {
+            background: var(--white);
+            color: var(--text-color);
+            padding: 3rem;
+            border-radius: 0;
+            text-align: center;
+            margin: 3rem auto;
+            max-width: 1400px;
+            border: 1px solid var(--border-color);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 1.1s forwards;
+        }
+
+        .action-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Zag', sans-serif;
+            color: var(--primary-color);
+        }
+
+        .action-section p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .action-section strong {
+            color: var(--primary-color);
+        }
+
+        /* Мобильное меню */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--white);
+            z-index: 1001;
+            padding: 2rem;
+            overflow-y: auto;
+            flex-direction: column;
+            gap: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .mobile-nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.5rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            font-family: 'Tekst', sans-serif;
+            transition: var(--transition);
+        }
+
+        .mobile-nav-link:hover {
+            color: var(--primary-color);
+            padding-left: 1rem;
+        }
+
+        /* Футер */
+        .tilda-footer {
+            background: var(--dark-bg);
+            color: var(--white);
+            padding: 60px 0 30px;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-family: 'Zag', sans-serif;
+        }
+
+        .footer-section p {
+            color: #bdc3c7;
+            line-height: 1.6;
+        }
+
+        .footer-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .footer-nav a {
+            color: #bdc3c7;
+            text-decoration: none;
+            font-family: 'Tekst', sans-serif;
+            transition: var(--transition);
+        }
+
+        .footer-nav a:hover {
+            color: var(--white);
+            padding-left: 0.5rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bdc3c7;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 40px 0;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 1200px) {
+            .sleep-header-title {
+                font-size: 2.5rem;
+            }
+            
+            .sleep-header-container {
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 968px) {
+            .header-nav {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .sleep-header-section {
+                min-height: 40vh;
+                padding: 80px 30px;
+            }
+            
+            .sleep-header-container {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+            }
+            
+            .sleep-header-content {
+                text-align: center;
+            }
+            
+            .sleep-header-title {
+                font-size: 2.2rem;
+            }
+            
+            .sleep-header-text {
+                font-size: 1.1rem;
+            }
+            
+            .sleep-article {
+                padding: 3rem 0;
+            }
+            
+            .sleep-article h1 {
+                font-size: 2rem;
+            }
+            
+            .sleep-article p {
+                font-size: 1.1rem;
+            }
+            
+            .mistakes-section,
+            .therapy-section,
+            .action-section {
+                padding: 2rem;
+                margin: 2rem 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 20px;
+            }
+            
+            .sleep-header-section {
+                padding: 60px 20px;
+                min-height: 35vh;
+            }
+            
+            .sleep-header-title {
+                font-size: 2rem;
+            }
+            
+            .sleep-header-text {
+                font-size: 1rem;
+            }
+            
+            .sleep-header-img {
+                max-height: 300px;
+            }
+            
+            .sleep-content,
+            .recommendations-grid {
+                padding: 0 20px;
+            }
+            
+            .sleep-article {
+                padding: 2rem 0;
+            }
+            
+            .sleep-article h1 {
+                font-size: 1.8rem;
+            }
+            
+            .sleep-article p {
+                font-size: 1rem;
+            }
+            
+            .recommendation-card {
+                padding: 2rem;
+            }
+            
+            .recommendation-title {
+                font-size: 1.4rem;
+            }
+            
+            .mistakes-section,
+            .therapy-section,
+            .action-section {
+                padding: 1.5rem;
+                margin: 1.5rem 15px;
+            }
+            
+            .footer-content {
+                padding: 0 20px;
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .footer-bottom {
+                padding: 2rem 20px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sleep-header-section {
+                padding: 40px 15px;
+                min-height: 30vh;
+            }
+            
+            .sleep-header-title {
+                font-size: 1.8rem;
+            }
+            
+            .sleep-header-text {
+                font-size: 0.9rem;
+            }
+            
+            .sleep-article {
+                padding: 1rem 0;
+            }
+            
+            .sleep-article p {
+                font-size: 0.9rem;
+            }
+            
+            .recommendation-card {
+                padding: 1.5rem;
+            }
+            
+            .mistakes-section,
+            .therapy-section,
+            .action-section {
+                padding: 1rem;
+                margin: 1rem 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Хедер -->
+    <header class="tilda-header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">
+                <span class="logo-ng">НЕ ГОРИ</span>
+            </a>
+            
+            <nav class="header-nav">
+                <a href="quick-help.html" class="nav-link">Быстрая помощь</a>
+                <a href="daily.html" class="nav-link">Ежедневные практики</a>
+                <a href="materials.html" class="nav-link">Материалы</a>
+                <a href="tests.html" class="nav-link">Тесты</a>
+            </nav>
+            
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </header>
+
+    <!-- Мобильное меню -->
+    <div class="mobile-menu">
+        <a href="quick-help.html" class="mobile-nav-link">Быстрая помощь</a>
+        <a href="daily.html" class="mobile-nav-link">Ежедневные практики</a>
+        <a href="materials.html" class="mobile-nav-link">Материалы</a>
+        <a href="tests.html" class="mobile-nav-link">Тесты</a>
+    </div>
+
+    <!-- Герой секция -->
+    <section class="sleep-header-section">
+        <div class="sleep-header-container">
+            <!-- Левая колонка - картинка -->
+            <div class="sleep-header-image">
+                <img src="../assets/images/sleep-bg.png" 
+                     alt="Гигиена сна" 
+                     class="sleep-header-img">
+            </div>
+            
+            <!-- Правая колонка - текст -->
+            <div class="sleep-header-content">
+                <h1 class="sleep-header-title">Гигиена сна</h1>
+                <p class="sleep-header-text">Практические рекомендации для здорового сна и борьбы с бессонницей</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Введение -->
+    <section class="section-wide">
+        <div class="sleep-content">
+            <article class="sleep-article">
+                <h1 class="fade-in-element">Здоровый сон - основа хорошего самочувствия</h1>
+                
+                <p class="fade-in-element">
+                    Качественный сон необходим для восстановления физических и психических сил, 
+                    поддержания когнитивных функций и эмоционального благополучия. Особенно важен 
+                    полноценный отдых для медицинских работников, чья профессиональная деятельность 
+                    связана с высоким уровнем стресса и ответственности.
+                </p>
+                
+                <p class="fade-in-element">
+                    Нарушения сна являются одним из первых признаков профессионального выгорания. 
+                    Своевременное внимание к гигиене сна может предотвратить развитие более серьезных 
+                    проблем и помочь сохранить профессиональное долголетие.
+                </p>
+
+                <p class="fade-in-element">
+                    Эти научно обоснованные рекомендации помогут вам наладить режим сна, улучшить 
+                    его качество и эффективно восстанавливаться после рабочих смен.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Основные рекомендации -->
+    <div class="recommendations-grid">
+        <!-- Режим сна -->
+        <div class="recommendation-card">
+            <div class="recommendation-header">
+                <h3 class="recommendation-title">Соблюдайте режим сна</h3>
+            </div>
+            <p class="recommendation-description">
+                Лучший способ обеспечить хороший ночной сон - точное соблюдение режима. 
+                Регулярность помогает настроить биологические часы и улучшить качество сна.
+            </p>
+            
+            <div class="key-points">
+                <strong>Основные принципы:</strong>
+                <ul>
+                    <li>Вставайте в одно и то же время каждый день, включая выходные</li>
+                    <li>Поддерживайте стабильный график сна и бодрствования</li>
+                    <li>Регулярность помогает настроить биологические часы</li>
+                </ul>
+            </div>
+            
+            <div class="practical-tips">
+                <strong>Практические советы:</strong>
+                <ul>
+                    <li>Установите фиксированное время подъема</li>
+                    <li>Не компенсируйте недосып в выходные слишком долгим сном</li>
+                    <li>Постепенно корректируйте график, если он сбился</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Сокращение времени сна -->
+        <div class="recommendation-card important">
+            <div class="recommendation-header">
+                <h3 class="recommendation-title">Сократите время пребывания в постели</h3>
+            </div>
+            <p class="recommendation-description">
+                Парадоксально, но сокращение времени в постели может улучшить качество сна 
+                за счет консолидации сна и уменьшения количества ночных пробуждений.
+            </p>
+            
+            <div class="example">
+                <strong>Почему это работает:</strong>
+                <p>Слишком долгое пребывание в постели приводит к фрагментарному поверхностному сну. 
+                Оптимальное время в постели - необходимое для сна плюс 15-20 минут.</p>
+            </div>
+        </div>
+
+        <!-- Не заставляйте себя спать -->
+        <div class="recommendation-card warning">
+            <div class="recommendation-header">
+                <h3 class="recommendation-title">Никогда не заставляйте себя спать</h3>
+            </div>
+            <p class="recommendation-description">
+                Попытки "заставить" себя уснуть обычно дают обратный эффект, 
+                вызывая тревогу и напряжение, которые мешают естественному засыпанию.
+            </p>
+            
+            <div class="key-points">
+                <strong>Что делать вместо этого:</strong>
+                <ul>
+                    <li>Если не спится - встаньте и займитесь спокойным делом</li>
+                    <li>Почитайте книгу, послушайте спокойную музыку</li>
+                    <li>Вернитесь в постель, когда почувствуете сонливость</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Физическая активность -->
+        <div class="recommendation-card">
+            <div class="recommendation-header">
+                <h3 class="recommendation-title">Регулярная физическая активность</h3>
+            </div>
+            <p class="recommendation-description">
+                Физические упражнения - эффективное средство против стресса и для улучшения сна. 
+                Они помогают снизить уровень кортизола и повысить выработку эндорфинов.
+            </p>
+            
+            <div class="practical-tips">
+                <strong>Рекомендации:</strong>
+                <ul>
+                    <li>Оптимальное время: 17:00-20:00</li>
+                    <li>Частота: 3-4 раза в неделю</li>
+                    <li>Продолжительность: 30-60 минут</li>
+                    <li>Прекращайте занятия минимум за 90 минут до сна</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Стимуляторы -->
+        <div class="recommendation-card warning">
+            <div class="recommendation-header">
+                <h3 class="recommendation-title">Контроль потребления стимуляторов</h3>
+            </div>
+            <p class="recommendation-description">
+                Кофеин и никотин могут значительно ухудшать качество сна, 
+                нарушая архитектуру сна и уменьшая долю глубокого сна.
+            </p>
+            
+            <div class="key-points">
+                <strong>Рекомендации:</strong>
+                <ul>
+                    <li>Последний прием кофеина - за 6-8 часов до сна</li>
+                    <li>Помните: в зеленом чае кофеина больше, чем в черном</li>
+                    <li>Не курите минимум за 2 часа до сна</li>
+                    <li>Ограничьте алкоголь - он нарушает структуру сна</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Питание -->
+        <div class="recommendation-card">
+            <div class="recommendation-header">
+                <h3 class="recommendation-title">Правильное питание перед сном</h3>
+            </div>
+            <p class="recommendation-description">
+                Последний прием пищи влияет на качество сна. Слишком тяжелая или слишком легкая 
+                пища может нарушить процесс засыпания и качество ночного отдыха.
+            </p>
+            
+            <div class="practical-tips">
+                <strong>Советы:</strong>
+                <ul>
+                    <li>Не ложитесь спать голодным или с переполненным желудком</li>
+                    <li>Избегайте пищи позже чем за 2-3 часа до сна</li>
+                    <li>Легкая закуска перед сном: банан, кефир, молоко</li>
+                    <li>Избегайте продуктов, вызывающих газообразование</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Ритуалы -->
+        <div class="recommendation-card">
+            <div class="recommendation-header">
+                <h3 class="recommendation-title">Создайте ритуал отхода ко сну</h3>
+            </div>
+            <p class="recommendation-description">
+                Вечерние ритуалы помогают настроиться на сон, сигнализируя мозгу о переходе 
+                от активного бодрствования к отдыху.
+            </p>
+            
+            <div class="key-points">
+                <strong>Варианты ритуалов:</strong>
+                <ul>
+                    <li>Теплая ванна (38-40°C) за 1-2 часа до сна</li>
+                    <li>Спокойная музыка или аудиокнига</li>
+                    <li>Легкая растяжка или дыхательные упражнения</li>
+                    <li>Чтение бумажной книги (не с экрана)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ошибки мышления при бессоннице -->
+    <div class="mistakes-section">
+        <h2>Основные ошибки мышления при бессоннице</h2>
+        
+        <div class="mistake-card">
+            <h3>"Нет ничего хуже бессонницы. Это испортит мне завтрашний день"</h3>
+            <p><strong>Реальность:</strong> Одна бессонная ночь обычно не влияет на выполнение большинства задач. 
+            Важно не отсутствие сна само по себе, а наше отношение к нему. Тревога о последствиях бессонницы 
+            часто оказывается более разрушительной, чем сама бессонница.</p>
+        </div>
+
+        <div class="mistake-card">
+            <h3>"Надо просто хорошенько постараться уснуть"</h3>
+            <p><strong>Реальность:</strong> Попытки "заставить" себя уснуть имеют обратный эффект. 
+            Чем больше стараешься, тем труднее заснуть. Сон - это естественный процесс, который 
+            нельзя вызвать усилием воли. Лучшая стратегия - создавать условия для сна, а не пытаться его "достичь".</p>
+        </div>
+
+        <div class="mistake-card">
+            <h3>"Чем дольше я буду в постели, тем больше посплю"</h3>
+            <p><strong>Реальность:</strong> Избыточное время в постели приводит к поверхностному 
+            фрагментарному сну. Качество сна важнее количества. Сокращение времени в постели до 
+            фактически необходимого помогает консолидировать сн и улучшить его качество.</p>
+        </div>
+    </div>
+
+    <!-- Методы терапии -->
+    <div class="therapy-section">
+        <h2>Методы поведенческой терапии бессонницы</h2>
+        
+        <!-- Терапия контроля раздражителя -->
+        <div class="therapy-method">
+            <h3>Терапия контроля раздражителя</h3>
+            
+            <div class="key-points">
+                <strong>Правила метода:</strong>
+                <ol>
+                    <li>Если не заснули за 15 минут - вставайте с постели</li>
+                    <li>Вернитесь в постель только через 45-60 минут</li>
+                    <li>Вставайте утром в одно и то же время всегда</li>
+                    <li>Не спите днем</li>
+                    <li>Ведите дневник сна</li>
+                    <li>Постепенно сокращайте время в постели при необходимости</li>
+                </ol>
+            </div>
+            
+            <div class="practical-tips">
+                <strong>Эффективность:</strong>
+                <p>Метод помогает большинству людей даже при многолетней бессоннице. Требует последовательности и терпения. 
+                Эффект обычно наступает через 2-4 недели регулярного применения.</p>
+            </div>
+        </div>
+
+        <!-- Терапия ограничением сна -->
+        <div class="therapy-method">
+            <h3>Терапия ограничением сна</h3>
+            
+            <div class="key-points">
+                <strong>Как работает:</strong>
+                <ul>
+                    <li>Разрешайте себе в постели только время фактического сна + 15 минут</li>
+                    <li>Постепенно увеличивайте время при улучшении качества сна</li>
+                    <li>Всегда вставайте в одно и то же время</li>
+                    <li>Избегайте дневного сна</li>
+                </ul>
+            </div>
+            
+            <div class="example">
+                <strong>Пример:</strong>
+                <p>Если вы спите 5 часов, проводите в постели 5 часов 15 минут. Ложитесь в 00:45, если встаете в 6:00. 
+                По мере улучшения качества сна постепенно увеличивайте время в постели на 15-30 минут в неделю.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Призыв к действию -->
+    <div class="action-section">
+        <h2>Начните сегодня</h2>
+        <p>Выберите 2-3 рекомендации из списка и начните применять их уже сегодня. Постепенно добавляйте новые привычки.</p>
+        <p><strong>Помните:</strong> Улучшение сна - процесс, требующий времени и последовательности! 
+        Даже небольшие, но регулярные изменения могут значительно улучшить качество вашего сна и общего самочувствия.</p>
+    </div>
+
+    <!-- Футер -->
+    <footer class="tilda-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>НЕ ГОРИ</h3>
+                <p>Платформа для профилактики профессионального выгорания</p>
+            </div>
+            <div class="footer-section">
+                <h3>Разделы</h3>
+                <nav class="footer-nav">
+                    <a href="quick-help.html">Быстрая помощь</a>
+                    <a href="daily.html">Ежедневные практики</a>
+                    <a href="materials.html">Материалы</a>
+                    <a href="tests.html">Тесты</a>
+                </nav>
+            </div>
+            <div class="footer-section">
+                <h3>Контакты</h3>
+                <p>support@negotri.ru</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 НЕ ГОРИ. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Мобильное меню
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            mobileMenuBtn.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
+        });
+        
+        // Закрытие мобильного меню при клике на ссылку
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                mobileMenuBtn.textContent = '☰';
+            });
+        });
+
+        // Анимация появления элементов при скролле
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Анимируем карточки
+        document.querySelectorAll('.recommendation-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease ' + (index * 0.1) + 's';
+            observer.observe(card);
+        });
+
+        // Анимируем секции
+        document.querySelectorAll('.mistakes-section, .therapy-section, .action-section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.8s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
