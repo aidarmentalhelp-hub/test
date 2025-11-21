@@ -1,0 +1,1995 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практика осознанности | Не гори: профилактика профессионального выгорания</title>
+    
+    <!-- Фавиконки -->
+    <link rel="icon" type="image/png" href="../assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="../assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="НЕГОРИ" />
+    <link rel="manifest" href="../assets/favicon/site.webmanifest" />
+    
+    <style>
+        /* Reset и базовые стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2c5530;
+            --secondary-color: #4a7c59;
+            --accent-color: #8a9b6e;
+            --success-color: #27ae60;
+            --text-color: #333333;
+            --dark-bg: #1a1a1a;
+            --light-bg: #f8f9fa;
+            --border-color: #e0e0e0;
+            --white: #ffffff;
+            --black: #000000;
+            --shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --gray-bg: #f8f8f8;
+            --hero-bg: #2c5530;
+        }
+
+        /* Подключение шрифтов */
+        @font-face {
+            font-family: 'NG';
+            src: url('../assets/fonts/NG.woff2') format('woff2'),
+                 url('../assets/fonts/NG.woff') format('woff'),
+                 url('../assets/fonts/NG.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Zag';
+            src: url('../assets/fonts/Zag.woff2') format('woff2'),
+                 url('../assets/fonts/Zag.woff') format('woff'),
+                 url('../assets/fonts/Zag.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Tekst';
+            src: url('../assets/fonts/Tekst.woff2') format('woff2'),
+                 url('../assets/fonts/Tekst.woff') format('woff'),
+                 url('../assets/fonts/Tekst.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'Tekst', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            font-size: 18px;
+            font-weight: 400;
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+
+        .logo-ng {
+            font-family: 'NG', sans-serif;
+            font-size: 2.2rem;
+            font-weight: normal;
+        }
+
+        /* Хедер */
+        .tilda-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            box-shadow: var(--shadow);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--primary-color);
+            margin-right: auto;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+            margin-right: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 8px 0;
+            position: relative;
+            transition: var(--transition);
+            white-space: nowrap;
+            font-family: 'Tekst', sans-serif;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-color);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1002;
+            color: var(--primary-color);
+        }
+
+        /* Герой секция */
+        .mindfulness-header-section {
+            background: var(--hero-bg);
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 40px;
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mindfulness-header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .mindfulness-header-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: slideInLeft 1s ease 0.5s forwards;
+        }
+
+        .mindfulness-header-img {
+            max-width: 100%;
+            max-height: 400px;
+            width: auto;
+            height: auto;
+            border-radius: 0;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .mindfulness-header-img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .mindfulness-header-content {
+            flex: 1;
+            color: var(--white);
+            text-align: left;
+            opacity: 0;
+            transform: translateX(50px);
+            animation: slideInRight 1s ease 0.5s forwards;
+        }
+
+        .mindfulness-header-title {
+            font-size: 2.8rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            font-family: 'Zag', sans-serif;
+            line-height: 1.2;
+            color: var(--white);
+        }
+
+        .mindfulness-header-text {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            font-family: 'Tekst', sans-serif;
+            color: var(--white);
+        }
+
+        /* Анимации */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-element {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+            padding: 0;
+        }
+
+        /* Основной контент */
+        .mindfulness-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .section-wide {
+            width: 100%;
+            padding: 0;
+        }
+
+        .mindfulness-article {
+            background: transparent;
+            padding: 1rem 0;
+            line-height: 1.8;
+        }
+
+        .mindfulness-article h1 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            text-align: center;
+            font-family: 'Zag', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.3s forwards;
+            font-weight: 500;
+        }
+
+        .mindfulness-article h2 {
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            margin: 3rem 0 1.5rem;
+            font-family: 'Zag', sans-serif;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .mindfulness-article h3 {
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+            margin: 2rem 0 1rem;
+            font-family: 'Zag', sans-serif;
+            font-weight: 500;
+        }
+
+        .mindfulness-article p {
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            font-family: 'Tekst', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            text-align: justify;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.5s forwards;
+        }
+
+        .mindfulness-article ul, .mindfulness-article ol {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .mindfulness-article li {
+            margin-bottom: 0.8rem;
+            color: var(--text-color);
+            font-size: 1.1rem;
+        }
+
+        .mindfulness-article strong {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        /* Стили для компонентов */
+        .cbt-component {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 0px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary-color);
+            margin: 1.5rem 0;
+            transition: var(--transition);
+        }
+
+        .cbt-component:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .cbt-component h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-family: 'Zag', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .cbt-component p {
+            color: var(--text-color);
+            line-height: 1.6;
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+
+        /* Стили для списков */
+        .signs-list {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 0px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary-color);
+            margin: 1.5rem 0;
+            transition: var(--transition);
+        }
+
+        .signs-list:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .signs-list ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .signs-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-color);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .signs-list li:last-child {
+            border-bottom: none;
+        }
+
+        .signs-list li::before {
+            content: "•";
+            color: var(--primary-color);
+            font-weight: 500;
+            position: absolute;
+            left: 0;
+        }
+
+        /* СЛАЙДЕР КАК В QUICK-HELP */
+        .techniques-mosaic {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            height: 100vh;
+            gap: 0;
+            margin: 2rem 0;
+        }
+
+        .technique-tile {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .technique-tile::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.1));
+            z-index: 1;
+        }
+
+        .technique-tile::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .technique-tile:hover::after {
+            background: rgba(0, 0, 0, 0);
+        }
+
+        .tile-title {
+            position: relative;
+            z-index: 3;
+            color: var(--white);
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-family: 'Zag', sans-serif;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+            text-align: center;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            height: 100%;
+            transition: all 0.3s ease;
+            padding: 0 20px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .technique-tile:hover .tile-title {
+            transform: scale(1.05);
+        }
+
+        /* Позиционирование плиток в мозаике */
+        .technique-tile:nth-child(1) { grid-area: 1 / 1 / 2 / 3; }
+        .technique-tile:nth-child(2) { grid-area: 1 / 3 / 2 / 4; }
+        .technique-tile:nth-child(3) { grid-area: 1 / 4 / 2 / 5; }
+        .technique-tile:nth-child(4) { grid-area: 2 / 1 / 3 / 2; }
+        .technique-tile:nth-child(5) { grid-area: 2 / 2 / 3 / 3; }
+        .technique-tile:nth-child(6) { grid-area: 2 / 3 / 3 / 5; }
+
+        /* Контейнер для открытой методики */
+        .techniques-container {
+            display: none;
+            min-height: calc(100vh - 60px);
+            position: relative;
+        }
+
+        .techniques-container.active {
+            display: block;
+        }
+
+        .techniques-mosaic.hidden {
+            display: none;
+        }
+
+        /* Контейнер для контента методик */
+        .technique-content {
+            display: none;
+            background: rgba(255, 255, 255, 0.98);
+            padding: 60px 40px;
+            min-height: 80vh;
+        }
+
+        .technique-content.active {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        /* ПЛАВАЮЩИЙ КРЕСТИК */
+        .close-technique {
+            position: fixed;
+            top: 80px;
+            right: 40px;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .close-technique:hover {
+            transform: scale(1.1);
+            background: var(--primary-color);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+        }
+
+        .close-technique.active {
+            display: flex;
+        }
+
+        .technique-content-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* ВКЛАДКИ СЛЕВА С ИКОНКАМИ */
+        .technique-tabs {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: auto;
+            height: auto;
+            min-height: auto;
+            display: none;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 999;
+            flex-direction: column;
+            justify-content: center;
+            border-radius: 0 8px 8px 0;
+            padding: 10px 0;
+        }
+
+        .technique-tabs.active {
+            display: flex;
+        }
+
+        .technique-tab {
+            flex: 0 0 auto;
+            width: 70px;
+            height: 70px;
+            min-width: auto;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .technique-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.1));
+            z-index: 1;
+        }
+
+        .technique-tab::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--section-color);
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .technique-tab:hover::after {
+            background: rgba(0,0,0,0.1);
+        }
+
+        .technique-tab.active::after {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Стили для кастомных SVG иконок */
+        .tab-icon.custom-icon {
+            width: 28px;
+            height: 28px;
+            filter: brightness(0) invert(1); /* Делает черные иконки белыми */
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 3;
+        }
+
+        .technique-tab:hover .tab-icon.custom-icon {
+            transform: scale(1.2);
+            filter: brightness(0) invert(1) drop-shadow(0 0 3px rgba(255,255,255,0.8));
+        }
+
+        .technique-tab.active .tab-icon.custom-icon {
+            transform: scale(1.3);
+            filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(255,255,255,1));
+        }
+
+        /* Подсказки при наведении */
+        .technique-tab {
+            position: relative;
+        }
+
+        .technique-tab::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+            margin-left: 10px;
+        }
+
+        .technique-tab:hover::before {
+            opacity: 1;
+        }
+
+        /* Цветовые схемы для техник */
+        .breath-style {
+            --section-color: #2c5530;
+        }
+
+        .body-style {
+            --section-color: #4a7c59;
+        }
+
+        .walking-style {
+            --section-color: #8a9b6e;
+        }
+
+        .eating-style {
+            --section-color: #a8b5a0;
+        }
+
+        .thoughts-style {
+            --section-color: #6b8e6b;
+        }
+
+        .listening-style {
+            --section-color: #7d997d;
+        }
+
+        /* Стили контента */
+        .subsection {
+            margin: 2rem 0;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow);
+            border-radius: 12px;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .subsection.success {
+            border-left-color: var(--success-color);
+            background: rgba(28, 107, 61, 0.05);
+        }
+
+        .subsection.warning {
+            border-left-color: var(--accent-color);
+            background: rgba(196, 81, 28, 0.05);
+        }
+
+        .subsection-title {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            font-family: 'Zag', sans-serif;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .subsection-content {
+            font-size: 1.3rem;
+            line-height: 1.7;
+        }
+
+        .subsection h4 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin: 2rem 0 1.5rem 0;
+            font-family: 'Zag', sans-serif;
+        }
+
+        .subsection p {
+            margin-bottom: 1.5rem;
+        }
+
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+            margin: 2rem 0;
+        }
+
+        .checklist li {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            line-height: 1.7;
+        }
+
+        .checklist li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success-color);
+            font-weight: bold;
+            font-size: 1.8rem;
+            top: -0.2rem;
+        }
+
+        /* Стили для пути новичка */
+        .beginner-path {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 0px;
+            box-shadow: var(--shadow);
+            margin: 3rem 0;
+            border-left: 6px solid var(--primary-color);
+        }
+
+        .path-step {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .path-step:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .path-step-number {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 1rem;
+            font-weight: bold;
+        }
+
+        /* Опросник */
+        .questionnaire {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 0px;
+            box-shadow: var(--shadow);
+            margin: 3rem 0;
+        }
+
+        .question {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .question:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .option {
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .option:hover {
+            border-color: var(--secondary-color);
+            background: rgba(74, 124, 89, 0.05);
+        }
+
+        .option.selected {
+            border-color: var(--primary-color);
+            background: rgba(44, 85, 48, 0.1);
+        }
+
+        .option.correct {
+            border-color: var(--success-color);
+            background: rgba(39, 174, 96, 0.1);
+        }
+
+        .option.incorrect {
+            border-color: #e74c3c;
+            background: rgba(231, 76, 60, 0.1);
+        }
+
+        .test-result {
+            display: none;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 0px;
+            box-shadow: var(--shadow);
+            margin: 2rem 0;
+            text-align: center;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .test-result.show {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .result-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-family: 'Zag', sans-serif;
+        }
+
+        .result-score {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--success-color);
+            margin: 1rem 0;
+        }
+
+        .result-message {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        .submit-test {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            margin: 2rem auto;
+            display: block;
+            font-family: 'Tekst', sans-serif;
+        }
+
+        .submit-test:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .submit-test:disabled {
+            background: var(--border-color);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Мобильное меню */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--white);
+            z-index: 1001;
+            padding: 2rem;
+            overflow-y: auto;
+            flex-direction: column;
+            gap: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .mobile-nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.2rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            font-family: 'Tekst', sans-serif;
+            transition: var(--transition);
+        }
+
+        .mobile-nav-link:hover {
+            color: var(--primary-color);
+            padding-left: 1rem;
+        }
+
+        /* Футер */
+        .tilda-footer {
+            background: var(--dark-bg);
+            color: var(--white);
+            padding: 60px 0 30px;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            font-family: 'Zag', sans-serif;
+            font-weight: 500;
+        }
+
+        .footer-section p {
+            color: #bdc3c7;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .footer-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .footer-nav a {
+            color: #bdc3c7;
+            text-decoration: none;
+            font-family: 'Tekst', sans-serif;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .footer-nav a:hover {
+            color: var(--white);
+            padding-left: 0.5rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bdc3c7;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 40px 0;
+            font-size: 1rem;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 968px) {
+            .techniques-mosaic {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+            }
+
+            .technique-tile:nth-child(1) { grid-area: 1 / 1 / 2 / 2; }
+            .technique-tile:nth-child(2) { grid-area: 1 / 2 / 2 / 3; }
+            .technique-tile:nth-child(3) { grid-area: 2 / 1 / 3 / 2; }
+            .technique-tile:nth-child(4) { grid-area: 2 / 2 / 3 / 3; }
+            .technique-tile:nth-child(5) { grid-area: 3 / 1 / 4 / 2; }
+            .technique-tile:nth-child(6) { grid-area: 3 / 2 / 4 / 3; }
+
+            .technique-tabs {
+                width: 60px;
+            }
+            
+            .technique-tab {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .tab-icon.custom-icon {
+                width: 24px;
+                height: 24px;
+            }
+
+            .close-technique {
+                top: 70px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+
+            .subsection {
+                padding: 2.5rem;
+                margin: 1.5rem 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-nav {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .mindfulness-header-section {
+                min-height: 40vh;
+                padding: 80px 30px;
+            }
+            
+            .mindfulness-header-container {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+            }
+            
+            .mindfulness-header-content {
+                text-align: center;
+            }
+            
+            .mindfulness-header-title {
+                font-size: 2rem;
+            }
+            
+            .mindfulness-header-text {
+                font-size: 1rem;
+            }
+            
+            .mindfulness-article {
+                padding: 3rem 0;
+            }
+            
+            .mindfulness-article h1 {
+                font-size: 1.8rem;
+            }
+            
+            .mindfulness-article p {
+                font-size: 1rem;
+            }
+            
+            .technique-content {
+                padding: 40px 20px;
+            }
+
+            .technique-tabs {
+                width: 55px;
+            }
+            
+            .technique-tab {
+                width: 55px;
+                height: 55px;
+            }
+            
+            .tab-icon.custom-icon {
+                width: 22px;
+                height: 22px;
+            }
+
+            .close-technique {
+                top: 70px;
+                right: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .subsection {
+                padding: 2rem;
+                margin: 1rem 0;
+            }
+
+            .subsection-title {
+                font-size: 1.6rem;
+            }
+
+            .subsection-content {
+                font-size: 1.2rem;
+            }
+
+            .checklist li {
+                font-size: 1.2rem;
+                padding-left: 2.5rem;
+                margin-bottom: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .mindfulness-header-section {
+                padding: 40px 15px;
+                min-height: 30vh;
+            }
+            
+            .mindfulness-header-title {
+                font-size: 1.6rem;
+            }
+            
+            .mindfulness-header-text {
+                font-size: 0.9rem;
+            }
+            
+            .mindfulness-article {
+                padding: 1rem 0;
+            }
+            
+            .mindfulness-article p {
+                font-size: 0.9rem;
+            }
+
+            .tile-title {
+                font-size: 1.5rem;
+            }
+
+            .technique-tabs {
+                width: 50px;
+            }
+            
+            .technique-tab {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .tab-icon.custom-icon {
+                width: 20px;
+                height: 20px;
+            }
+
+            .close-technique {
+                top: 65px;
+                right: 10px;
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+
+            .subsection {
+                padding: 1.5rem;
+                margin: 0.8rem 0;
+            }
+
+            .subsection-title {
+                font-size: 1.4rem;
+            }
+
+            .subsection-content {
+                font-size: 1.1rem;
+            }
+
+            .checklist li {
+                font-size: 1.1rem;
+                padding-left: 2rem;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Хедер -->
+    <!-- Хедер -->
+    <header class="tilda-header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">
+                <span class="logo-ng">НЕ ГОРИ</span>
+            </a>
+            
+            <nav class="header-nav">
+                <a href="quick-help.html" class="nav-link active">Быстрая помощь</a>
+                <a href="daily.html" class="nav-link">Ежедневные практики</a>
+                <a href="materials.html" class="nav-link">Материалы</a>
+                <a href="tests.html" class="nav-link">Тесты</a>
+                <a href="contacts.html" class="nav-link"> Контакты</a>
+            </nav>
+            
+            
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </header>
+
+    <!-- Мобильное меню -->
+    <div class="mobile-menu">
+        <a href="quick-help.html" class="mobile-nav-link active">Быстрая помощь</a>
+        <a href="daily.html" class="mobile-nav-link">Ежедневные практики</a>
+        <a href="materials.html" class="mobile-nav-link">Материалы</a>
+        <a href="tests.html" class="mobile-nav-link">Тесты</a>
+        <a href="contacts.html" class="mobile-nav-link"> Контакты</a>
+    </div>
+
+    <!-- Герой секция -->
+    <section class="mindfulness-header-section">
+        <div class="mindfulness-header-container">
+            <!-- Левая колонка - картинка -->
+            <div class="mindfulness-header-image">
+                <img src="../assets/images/mindfulness-bg.png" 
+                     alt="Практика осознанности" 
+                     class="mindfulness-header-img">
+            </div>
+            
+            <!-- Правая колонка - текст -->
+            <div class="mindfulness-header-content">
+                <h1 class="mindfulness-header-title">Практика осознанности</h1>
+                <p class="mindfulness-header-text">Навык присутствия "здесь и сейчас" для снижения стресса и повышения качества жизни</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Основной контент -->
+    <section class="section-wide">
+        <div class="mindfulness-content">
+            <article class="mindfulness-article">
+                <h1 class="fade-in-element">Осознанность: искусство жить настоящим</h1>
+                
+                <!-- ЧТО ЭТО (вынесено из слайдера) -->
+                <h2 class="fade-in-element">Что такое осознанность?</h2>
+                <p class="fade-in-element">
+                    <strong>Осознанность</strong> — это фундаментальная человеческая способность полностью присутствовать в текущем моменте, 
+                    осознавая, где мы находимся и что мы делаем, без чрезмерной реакции или перегруженности происходящим вокруг.
+                </p>
+                
+                <div class="cbt-component fade-in-element">
+                    <h3>Ключевые характеристики осознанности:</h3>
+                    <ul>
+                        <li><strong>Направленность на настоящее</strong> — внимание к тому, что происходит здесь и сейчас</li>
+                        <li><strong>Открытость и любопытство</strong> — интерес к собственному опыту без предвзятости</li>
+                        <li><strong>Принятие без осуждения</strong> — наблюдение без оценки "хорошо/плохо"</li>
+                        <li><strong>Дистанцирование</strong> — мы не есть наши мысли и чувства</li>
+                        <li><strong>Доброе отношение</strong> — мягкость и сострадание к себе</li>
+                    </ul>
+                </div>
+
+                <!-- ЗАЧЕМ НУЖНО (вынесено из слайдера) -->
+                <h2 class="fade-in-element">Зачем нужна осознанность?</h2>
+                <p class="fade-in-element">
+                    Практика осознанности приносит множество преимуществ для ментального и физического здоровья, 
+                    особенно в контексте профилактики профессионального выгорания.
+                </p>
+                
+                <div class="signs-list fade-in-element">
+                    <h3>Основные преимущества:</h3>
+                    <ul>
+                        <li><strong>Снижение стресса</strong> — уменьшение уровня кортизола и тревожности</li>
+                        <li><strong>Улучшение концентрации</strong> — усиление способности фокусироваться</li>
+                        <li><strong>Эмоциональная устойчивость</strong> — лучшая регуляция эмоций</li>
+                        <li><strong>Повышение удовлетворенности</strong> — больше радости от простых моментов</li>
+                        <li><strong>Улучшение отношений</strong> — более глубокое Понимание и эмпатия</li>
+                        <li><strong>Лучшее принятие решений</strong> — ясность мышления в сложных ситуациях</li>
+                    </ul>
+                </div>
+
+                <!-- ПРАВИЛА (вынесено из слайдера) -->
+                <h2 class="fade-in-element">Правила практики осознанности</h2>
+                <p class="fade-in-element">
+                    Эти принципы создают основу для эффективной практика, помогая избежать распространенных ошибок.
+                </p>
+                
+                <div class="cbt-component fade-in-element">
+                    <h3>Основные правила:</h3>
+                    <ul>
+                        <li><strong>Безоценочность</strong> — наблюдайте без оценки "хорошо/плохо"</li>
+                        <li><strong>Терпение</strong> — позвольте всему происходить в своем темпе</li>
+                        <li><strong>Ум новичка</strong> — подходите к каждому моменту как к новому опыту</li>
+                        <li><strong>Доверие</strong> — развивайте доверие к собственной мудрости</li>
+                        <li><strong>Без насилия</strong> — относитесь к себе с добротой и состраданием</li>
+                        <li><strong>Принятие</strong> — признавайте вещи такими, какие они есть</li>
+                        <li><strong>Отпускание</strong> — не цепляйтесь за переживания</li>
+                    </ul>
+                </div>
+
+                <!-- СЛАЙДЕР С ТЕХНИКАМИ -->
+                <h2 class="fade-in-element">Техники осознанности</h2>
+                <p class="fade-in-element">Нажмите на любую технику, чтобы узнать о ней подробнее</p>
+
+                <div class="techniques-mosaic" id="techniquesMosaic">
+                    <div class="technique-tile body-style" style="background-image: url('../assets/images/body.jpg')" onclick="openTechnique('body')" >
+                        <div class="tile-title">ОТДЫХАТЬ</div>
+                    </div>
+                    <div class="technique-tile breath-style" onclick="openTechnique('breath')" style="background-image: url('../assets/images/breath.jpg')">
+                        <div class="tile-title">ДЫШАТЬ</div>
+                    </div>
+                    
+                    <div class="technique-tile walking-style" onclick="openTechnique('walking')" style="background-image: url('../assets/images/walking.jpg')">
+                        <div class="tile-title">ХОДИТЬ</div>
+                    </div>
+                    <div class="technique-tile eating-style" onclick="openTechnique('eating')" style="background-image: url('../assets/images/eating.jpg')">
+                        <div class="tile-title">ПИТАТЬСЯ</div>
+                    </div>
+                    <div class="technique-tile thoughts-style" onclick="openTechnique('thoughts')" style="background-image: url('../assets/images/thoughts.jpg')">
+                        <div class="tile-title">МЫСЛИТЬ</div>
+                    </div>
+                    <div class="technique-tile listening-style" onclick="openTechnique('listening')" style="background-image: url('../assets/images/listening.jpg')">
+                        <div class="tile-title">СЛУШАТЬ</div>
+                    </div>
+                </div>
+
+                <!-- Контейнер для открытой методики -->
+                <div class="techniques-container" id="techniquesContainer"></div>
+
+                <!-- ПУТЬ НОВИЧКА -->
+                <h2 class="fade-in-element">Путь новичка: 7 дней практики</h2>
+                
+                <div class="beginner-path fade-in-element">
+                    <div class="path-step">
+                        <span class="path-step-number">1</span>
+                        <strong>День 1: Осознанное дыхание</strong>
+                        <p>3 минуты утром: просто наблюдайте за дыханием, не меняя его</p>
+                    </div>
+                    <div class="path-step">
+                        <span class="path-step-number">2</span>
+                        <strong>День 2: Осознанное питание</strong>
+                        <p>Один прием пищи без телефона и телевизора, внимание к вкусу и текстуре</p>
+                    </div>
+                    <div class="path-step">
+                        <span class="path-step-number">3</span>
+                        <strong>День 3: Телесное сканирование</strong>
+                        <p>5 минут перед сном: мысленно пройдитесь вниманием по всему телу</p>
+                    </div>
+                    <div class="path-step">
+                        <span class="path-step-number">4</span>
+                        <strong>День 4: Осознанная ходьба</strong>
+                        <p>10-минутная прогулка с вниманием к ощущениям в стопах</p>
+                    </div>
+                    <div class="path-step">
+                        <span class="path-step-number">5</span>
+                        <strong>День 5: Наблюдение мыслей</strong>
+                        <p>Представьте мысли как облака, которые проплывают мимо</p>
+                    </div>
+                    <div class="path-step">
+                        <span class="path-step-number">6</span>
+                        <strong>День 6: Осознанное внимание</strong>
+                        <p>Полное внимание к собеседнику без подготовки ответа</p>
+                    </div>
+                    <div class="path-step">
+                        <span class="path-step-number">7</span>
+                        <strong>День 7: Интеграция</strong>
+                        <p>Выберите 2-3 понравившиеся практики для регулярного использования</p>
+                    </div>
+                </div>
+
+                <!-- ТЕСТ -->
+                <h2 class="fade-in-element">Проверьте свои знания об осознанности</h2>
+                
+                <div class="questionnaire fade-in-element" id="testContainer">
+                    <div class="question">
+                        <div class="question-text">1. Что такое осознанность?</div>
+                        <div class="options">
+                            <div class="option" data-correct="true">Способность полностью присутствовать в текущем моменте</div>
+                            <div class="option">Умение быстро принимать решения</div>
+                            <div class="option">Техника запоминания информации</div>
+                            <div class="option">Метод планирования времени</div>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <div class="question-text">2. Какая из этих характеристик НЕ относится к осознанности?</div>
+                        <div class="options">
+                            <div class="option">Направленность на настоящее</div>
+                            <div class="option">Принятие без осуждения</div>
+                            <div class="option" data-correct="true">Оценивать момент через хорошо/плохо</div>
+                            <div class="option">Открытость и любопытство</div>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <div class="question-text">3. Какой основной принцип осознанного слушания?</div>
+                        <div class="options">
+                            <div class="option">Быстро отвечать собеседнику</div>
+                            <div class="option" data-correct="true">Полное внимание без подготовки ответа</div>
+                            <div class="option">Записывать ключевые моменты</div>
+                            <div class="option">Анализировать речь собеседника</div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">4. Что означает "ум новичка" в практике осознанности?</div>
+                        <div class="options">
+                            <div class="option">Начинать с простых упражнений</div>
+                            <div class="option" data-correct="true">Подходите к каждому моменту как к новому опыту</div>
+                            <div class="option">Практиковать только утром</div>
+                            <div class="option">Использовать базовые техники</div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">5. Какое преимущество осознанности помогает в профессиональной сфере?</div>
+                        <div class="options">
+                            <div class="option">Увеличение скорости работы</div>
+                            <div class="option">Умение работать в многозадачном режиме</div>
+                            <div class="option" data-correct="true">Улучшение концентрации и ясности мышления</div>
+                            <div class="option">Снижение потребности в отдыхе</div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">6. Что такое "Дистанцирование" в контексте осознанности?</div>
+                        <div class="options">
+                            <div class="option">Отказ от личных целей</div>
+                            <div class="option">Скрытие своих эмоций</div>
+                            <div class="option" data-correct="true">Понимание, что мы не есть наши мысли и чувства</div>
+                            <div class="option">Избегание социальных контактов</div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">7. Какой из этих методов НЕ является практикой осознанности?</div>
+                        <div class="options">
+                            <div class="option">Осознанное дыхание</div>
+                            <div class="option">Телесное сканирование</div>
+                            <div class="option">Осознанное питание</div>
+                            <div class="option" data-correct="true">Многозадачность</div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">8. Что означает принцип "безоценочности" в осознанности?</div>
+                        <div class="options">
+                            <div class="option">Отказ от принятия решений</div>
+                            <div class="option" data-correct="true">Наблюдение без оценки "хорошо/плохо"</div>
+                            <div class="option">Игнорирование проблем</div>
+                            <div class="option">Отсутствие целей</div>
+                        </div>
+                    </div>
+
+                    <button class="submit-test" id="submitTest" onclick="checkTest()">Проверить ответы</button>
+                    
+                    <div class="test-result" id="testResult">
+                        <div class="result-title">Результаты теста</div>
+                        <div class="result-score" id="score">0/8</div>
+                        <div class="result-message" id="resultMessage"></div>
+                    </div>
+                </div>
+
+                <div class="cbt-component fade-in-element">
+                    <h3>Помните</h3>
+                    <p>Осознанность — это не цель, а путь. Каждый момент осознанного присутствия — это уже успех. 
+                       Начинайте с малого, будьте добры к себе, и практика постепенно станет естественной частью вашей жизни.</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Вкладки слева с иконками -->
+    <div class="technique-tabs" id="techniqueTabs">
+        <div class="technique-tab body-style" onclick="switchTechnique('body')" data-tooltip="РАСЛАБЛЯТЬСЯ">
+            <img src="../assets/icons/relax1.svg" class="tab-icon custom-icon" alt="Расслабление">
+        </div>
+        <div class="technique-tab breath-style" onclick="switchTechnique('breath')" data-tooltip="ДЫШАТЬ">
+            <img src="../assets/icons/breath1.svg" class="tab-icon custom-icon" alt="Дыхание">
+        </div>
+        <div class="technique-tab walking-style" onclick="switchTechnique('walking')" data-tooltip="ХОДИТЬ">
+            <img src="../assets/icons/steps1.svg" class="tab-icon custom-icon" alt="Ходьба">
+        </div>
+        <div class="technique-tab eating-style" onclick="switchTechnique('eating')" data-tooltip="ПИТАТЬСЯ">
+            <img src="../assets/icons/food1.svg" class="tab-icon custom-icon" alt="Питание">
+        </div>
+        <div class="technique-tab thoughts-style" onclick="switchTechnique('thoughts')" data-tooltip="МЫСЛИТЬ">
+            <img src="../assets/icons/mind1.svg" class="tab-icon custom-icon" alt="Мышление">
+        </div>
+        <div class="technique-tab listening-style" onclick="switchTechnique('listening')" data-tooltip="СЛУШАТЬ">
+            <img src="../assets/icons/hear1.svg" class="tab-icon custom-icon" alt="Слушание">
+        </div>
+    </div>
+
+    <!-- Плавающий крестик -->
+    <button class="close-technique" onclick="closeTechnique()" id="closeButton">×</button>
+
+       <!-- Футер -->
+    <footer class="tilda-footer">
+        <div class="footer-content">
+            <div class="footer-section fade-in-element">
+                <h3>НЕ ГОРИ</h3>
+                <p>Платформа для профилактики профессионального выгорания и поддержания ментального здоровья</p>
+            </div>
+            
+            <div class="footer-section fade-in-element">
+                <h3>Разделы</h3>
+                <nav class="footer-nav">
+                    <a href="pages/quick-help.html">Быстрая помощь</a>
+                    <a href="pages/daily.html">Методики</a>
+                    <a href="pages/materials.html">Материалы</a>
+                    <a href="pages/tests.html">Тесты</a>
+                    <a href="contacts.html" class="nav-link"> Контакты</a>
+                </nav>
+            </div>
+            
+            <div class="footer-section fade-in-element">
+                <h3>Прочее</h3>
+                <nav class="footer-nav">
+                    <a href="#privacy">Политика конфиденциальности</a>
+                    <a href="#terms">Условия использования</a>
+                </nav>
+            </div>
+        </div>
+            
+        
+        <div class="footer-bottom fade-in-element">
+            <p>&copy; 2025 НЕ ГОРИ. Все права защищены.</p>
+        </div>
+    </footer>
+
+
+    <!-- Шаблоны контента для 6 методик -->
+    <template id="breath-template">
+        <div class="technique-content active" id="breath-content">
+            <div class="technique-content-inner">
+                <div class="subsection">
+                    <h3 class="subsection-title">Дыхательная медитация</h3>
+                    <div class="subsection-content">
+                        <p><strong>Фундаментальная практика осознанности, использующая дыхание как якорь для внимания.</strong></p>
+                        
+                        <h4>Пошаговая инструкция:</h4>
+                        <ul class="checklist">
+                            <li>Сядьте удобно с прямой спиной или лягте</li>
+                            <li>Закройте глаза, чтобы уменьшить отвлечения</li>
+                            <li>Направьте внимание на дыхание, не меняя его</li>
+                            <li>Выберите точку фокуса: ноздри, грудь или живот</li>
+                            <li>Отмечайте качества дыхания: температуру, глубину, ритм</li>
+                            <li>Когда ум отвлекается — мягко возвращайте внимание к дыханию</li>
+                            <li>Практикуйте 5-10 минут, просто присутствуя с дыханием</li>
+                        </ul>
+                        
+                        <div class="subsection success">
+                            <h4>Пример из жизни</h4>
+                            <p>"Когда чувствую нарастающую тревогу перед встречей, делаю 3-минутную паузу: закрываю глаза, сосредотачиваюсь на дыхании. После этого возвращаюсь к работе с ясной головой."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="body-template">
+        <div class="technique-content active" id="body-content">
+            <div class="technique-content-inner">
+                <div class="subsection">
+                    <h3 class="subsection-title">Сканирование тела</h3>
+                    <div class="subsection-content">
+                        <p><strong>Практика для развития телесной осознанности и снятия напряжения.</strong></p>
+                        
+                        <h4>Методика выполнения:</h4>
+                        <ul class="checklist">
+                            <li>Лягте на спину в удобном положении</li>
+                            <li>Начните с пальцев ног — направьте внимание на ощущения</li>
+                            <li>Медленно двигайтесь вверх: стопы, лодыжки, голени, колени</li>
+                            <li>Исследуйте каждую область без оценки</li>
+                            <li>Включайте все тело: бедра, таз, живот, грудь, спина, руки, шея, голова</li>
+                            <li>Завершите всеобщим осознание тела как единого целого</li>
+                            <li>Оставайтесь несколько минут в состоянии открытого присутствия</li>
+                        </ul>
+                        
+                        <div class="subsection success">
+                            <h4>Пример из жизни</h4>
+                            <p>"Вечером после тяжелого дня делаю 10-минутное сканирование тела. Замечаю, где скопилось напряжение, и просто наблюдаю за этими ощущениями. Часто напряжение уходит само собой."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="walking-template">
+        <div class="technique-content active" id="walking-content">
+            <div class="technique-content-inner">
+                <div class="subsection">
+                    <h3 class="subsection-title">Осознанная ходьба</h3>
+                    <div class="subsection-content">
+                        <p><strong>Медитация в движении для интеграции осознанности в повседневность.</strong></p>
+                        
+                        <h4>Формальная практика:</h4>
+                        <ul class="checklist">
+                            <li>Выберите спокойное место, путь длиной 10-20 шагов</li>
+                            <li>Встаньте прямо, почувствуйте контакт стоп с землей</li>
+                            <li>Начните медленно идти с осознание каждого движения</li>
+                            <li>Фокусируйтесь на ощущениях: подъем, перенос, опускание стопы</li>
+                            <li>Соедините с дыханием, если это происходит естественно</li>
+                            <li>В конце пути остановитесь, развернитесь осознанно, продолжайте</li>
+                            <li>Практикуйте 10-20 минут</li>
+                        </ul>
+                        
+                        <div class="subsection success">
+                            <h4>Пример из жизни</h4>
+                            <p>"Иду на работу пешком 15 минут. Вместо того чтобы планировать день в голове, обращаю внимание на ощущение шагов, дыхания, окружающих звуков. Прихожу на работу более собранным."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="eating-template">
+        <div class="technique-content active" id="eating-content">
+            <div class="technique-content-inner">
+                <div class="subsection">
+                    <h3 class="subsection-title">Осознанное питание</h3>
+                    <div class="subsection-content">
+                        <p><strong>Практика полного присутствия во время приема пищи.</strong></p>
+                        
+                        <h4>Как практиковать:</h4>
+                        <ul class="checklist">
+                            <li>Ешьте без отвлечений: телефона, телевизора, компьютера</li>
+                            <li>Используйте все чувства: рассмотрите пищу, почувствуйте аромат</li>
+                            <li>Ешьте медленно, тщательно пережевывая каждый кусочек</li>
+                            <li>Осознавайте голод и насыщение до, во время и после еды</li>
+                            <li>Различайте физический и эмоциональный голод</li>
+                            <li>Относитесь к еде без осуждения</li>
+                            <li>Практикуйте благодарность за пищу</li>
+                        </ul>
+                        
+                        <div class="subsection success">
+                            <h4>Пример из жизни</h4>
+                            <p>"Завтракаю 15 минут без телефона. Замечаю вкус каждого продукта, текстуру, как меняется чувство голода. Стал лучше чувствовать, когда действительно наелся."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="thoughts-template">
+        <div class="technique-content active" id="thoughts-content">
+            <div class="technique-content-inner">
+                <div class="subsection">
+                    <h3 class="subsection-title">Наблюдение мыслей</h3>
+                    <div class="subsection-content">
+                        <p><strong>Практика дистанцирования от мыслей через мета-осознание.</strong></p>
+                        
+                        <h4>Техники наблюдения:</h4>
+                        <ul class="checklist">
+                            <li><strong>Мысли как облака</strong> — представьте мысли проплывающими облаками</li>
+                            <li><strong>Мысли как листья на реке</strong> — наблюдайте, как мысли уплывают</li>
+                            <li><strong>Наблюдение со стороны</strong> — смотрите на мысли как сторонний наблюдатель</li>
+                            <li><strong>Метка мыслей</strong> — "это мысль о работе", "это тревожная мысль"</li>
+                            <li><strong>Любопытство</strong> — исследуйте мысли с интересом, но без вовлечения</li>
+                            <li><strong>Возвращение к якорю</strong> — когда замечаете вовлечение, возвращайтесь к дыханию</li>
+                        </ul>
+                        
+                        <div class="subsection success">
+                            <h4>Пример из жизни</h4>
+                            <p>"Когда начинаю тревожиться о дедлайне, говорю себе: 'Это просто мысль о работе'. Наблюдаю ее со стороны, не вовлекаясь. Тревога уменьшается, и я могу действовать более эффективно."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="listening-template">
+        <div class="technique-content active" id="listening-content">
+            <div class="technique-content-inner">
+                <div class="subsection">
+                    <h3 class="subsection-title">Осознанное слушание</h3>
+                    <div class="subsection-content">
+                        <p><strong>Практика полного присутствия и внимания во время общения.</strong></p>
+                        
+                        <h4>Как практиковать:</h4>
+                        <ul class="checklist">
+                            <li>Отложите отвлечения: телефон, другие дела</li>
+                            <li>Установите зрительный контакт с собеседником</li>
+                            <li>Сосредоточьтесь на словах, интонации, эмоциях говорящего</li>
+                            <li>Отслеживайте внутренние реакции без осуждения</li>
+                            <li>Не готовьте ответ, пока собеседник говорит</li>
+                            <li>Возвращайте внимание к слушанию, когда замечаете отвлечение</li>
+                            <li>Отвечайте осознанно, подтверждая услышанное</li>
+                        </ul>
+                        
+                        <div class="subsection success">
+                            <h4>Пример из жизни</h4>
+                            <p>"На совещаниях вместо того чтобы готовить свой ответ, полностью сосредотачиваюсь на говорящем. Заметил, что лучше понимаю задачи и меньше возникает недопониманий с коллегами."</p>
+                        </div>
+
+                        <h4>Преимущества осознанного слушания:</h4>
+                        <ul class="checklist">
+                            <li><strong>Улучшение коммуникации</strong> в профессиональной и личной жизни</li>
+                            <li><strong>Снижение конфликтов</strong> за счет лучшего взаимопонимания</li>
+                            <li><strong>Более глубокие отношения</strong> с близкими и коллегами</li>
+                            <li><strong>Эффективные решения</strong> благодаря полному пониманию ситуации</li>
+                            <li><strong>Укрепление доверия</strong> в отношениях</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        // Глобальные переменные
+        let currentTechnique = null;
+
+        // Основные функции слайдера
+        function openTechnique(technique) {
+            console.log('Opening technique:', technique);
+            
+            // Скрываем мозаику
+            document.getElementById('techniquesMosaic').classList.add('hidden');
+            
+            // Показываем контейнер для методик
+            document.getElementById('techniquesContainer').classList.add('active');
+            
+            // Показываем вкладки и крестик
+            document.getElementById('techniqueTabs').classList.add('active');
+            document.getElementById('closeButton').classList.add('active');
+            
+            // Загружаем контент методики
+            loadTechniqueContent(technique);
+            
+            // Прокручиваем к началу контента
+            setTimeout(() => {
+                document.getElementById('techniquesContainer').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }, 100);
+        }
+
+        function loadTechniqueContent(technique) {
+            const container = document.getElementById('techniquesContainer');
+            const template = document.getElementById(`${technique}-template`);
+            
+            console.log('Template found:', !!template);
+            
+            if (template) {
+                container.innerHTML = '';
+                const content = template.content.cloneNode(true);
+                container.appendChild(content);
+                currentTechnique = technique;
+                
+                // Активируем соответствующую вкладку
+                activateTab(technique);
+            }
+        }
+
+        function switchTechnique(technique) {
+            console.log('Switching to:', technique);
+            if (currentTechnique !== technique) {
+                loadTechniqueContent(technique);
+                
+                // Прокручиваем к верху контента
+                document.getElementById('techniquesContainer').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        function activateTab(technique) {
+            // Убираем активный класс со всех вкладок
+            document.querySelectorAll('.technique-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Активируем выбранную вкладку
+            const activeTab = document.querySelector(`.technique-tab.${technique}-style`);
+            if (activeTab) {
+                activeTab.classList.add('active');
+            }
+        }
+
+        function closeTechnique() {
+            console.log('Closing technique');
+            
+            // Показываем мозаику
+            document.getElementById('techniquesMosaic').classList.remove('hidden');
+            
+            // Скрываем контейнер методик
+            document.getElementById('techniquesContainer').classList.remove('active');
+            document.getElementById('techniquesContainer').innerHTML = '';
+            
+            // Скрываем вкладки и крестик
+            document.getElementById('techniqueTabs').classList.remove('active');
+            document.getElementById('closeButton').classList.remove('active');
+            
+            currentTechnique = null;
+            
+            // Прокручиваем к мозаике
+            document.getElementById('techniquesMosaic').scrollIntoView({ 
+                behavior: 'smooth'
+            });
+        }
+
+        // Функции для теста
+        function checkTest() {
+            const questions = document.querySelectorAll('.question');
+            let correctAnswers = 0;
+            let totalQuestions = questions.length;
+
+            questions.forEach(question => {
+                const options = question.querySelectorAll('.option');
+                let answered = false;
+
+                options.forEach(option => {
+                    if (option.classList.contains('selected')) {
+                        answered = true;
+                        if (option.dataset.correct === 'true') {
+                            correctAnswers++;
+                            option.classList.add('correct');
+                        } else {
+                            option.classList.add('incorrect');
+                            // Показываем правильный ответ
+                            options.forEach(opt => {
+                                if (opt.dataset.correct === 'true') {
+                                    opt.classList.add('correct');
+                                }
+                            });
+                        }
+                    }
+                });
+
+                if (!answered) {
+                    // Показываем правильный ответ для неотвеченных вопросов
+                    options.forEach(opt => {
+                        if (opt.dataset.correct === 'true') {
+                            opt.classList.add('correct');
+                        }
+                    });
+                }
+            });
+
+            // Показываем результаты
+            const resultDiv = document.getElementById('testResult');
+            const scoreDiv = document.getElementById('score');
+            const messageDiv = document.getElementById('resultMessage');
+
+            scoreDiv.textContent = `${correctAnswers}/${totalQuestions}`;
+            
+            let message = '';
+            if (correctAnswers === totalQuestions) {
+                message = 'Отлично! Вы прекрасно разбираетесь в теме осознанности!';
+            } else if (correctAnswers >= totalQuestions * 0.7) {
+                message = 'Хорошо! Вы хорошо понимаете основы осознанности.';
+            } else if (correctAnswers >= totalQuestions * 0.5) {
+                message = 'Неплохо! Есть некоторые пробелы в знаниях, которые можно заполнить.';
+            } else {
+                message = 'Рекомендуем внимательнее изучить материалы по осознанности.';
+            }
+
+            messageDiv.textContent = message;
+            resultDiv.classList.add('show');
+
+            // Отключаем кнопку после проверки
+            document.getElementById('submitTest').disabled = true;
+        }
+
+        // Инициализация при загрузке DOM
+        document.addEventListener('DOMContentLoaded', function() {
+            // Мобильное меню
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.toggle('active');
+                this.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
+            });
+            
+            // Закрытие меню при клике на ссылку
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.remove('active');
+                    mobileMenuBtn.textContent = '☰';
+                });
+            });
+
+            // Обработчики для теста
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const question = this.closest('.question');
+                    question.querySelectorAll('.option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                });
+            });
+
+            // Плавное появление элементов при скролле
+            const fadeElements = document.querySelectorAll('.fade-in-element');
+            
+            const appearOnScroll = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        appearOnScroll.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(element => {
+                appearOnScroll.observe(element);
+            });
+
+            // Закрытие по ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && currentTechnique) {
+                    closeTechnique();
+                }
+            });
+
+            // Дебаг информация
+            console.log('Slider initialized successfully');
+            console.log('Templates available:', {
+                breath: !!document.getElementById('breath-template'),
+                body: !!document.getElementById('body-template'),
+                walking: !!document.getElementById('walking-template'),
+                eating: !!document.getElementById('eating-template'),
+                thoughts: !!document.getElementById('thoughts-template'),
+                listening: !!document.getElementById('listening-template')
+            });
+        });
+    </script>
+</body>
+</html>

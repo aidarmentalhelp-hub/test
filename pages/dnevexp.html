@@ -1,0 +1,2516 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дневник экспозиций | Профилактика профессионального выгорания</title>
+    
+    <!-- Фавиконки -->
+    <link rel="icon" type="image/png" href="../assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="../assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="НЕГОРИ" />
+    <link rel="manifest" href="../assets/favicon/site.webmanifest" />
+
+    <!-- Библиотека для работы с Excel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    
+    <style>
+        /* Reset и базовые стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #7f8c8d;
+            --success-color: #27ae60;
+            --warning-color: #e74c3c;
+            --text-color: #333333;
+            --dark-bg: #1a1a1a;
+            --light-bg: #f8f9fa;
+            --border-color: #e0e0e0;
+            --white: #ffffff;
+            --black: #000000;
+            --shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --gray-bg: #f8f8f8;
+            --hero-bg: #2c3e50;
+        }
+
+        /* Подключение шрифтов */
+        @font-face {
+            font-family: 'NG';
+            src: url('../assets/fonts/NG.woff2') format('woff2'),
+                 url('../assets/fonts/NG.woff') format('woff'),
+                 url('../assets/fonts/NG.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Zag';
+            src: url('../assets/fonts/Zag.woff2') format('woff2'),
+                 url('../assets/fonts/Zag.woff') format('woff'),
+                 url('../assets/fonts/Zag.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Tekst';
+            src: url('../assets/fonts/Tekst.woff2') format('woff2'),
+                 url('../assets/fonts/Tekst.woff') format('woff'),
+                 url('../assets/fonts/Tekst.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'Tekst', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            font-size: 18px;
+            font-weight: 400;
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+
+        .logo-ng {
+            font-family: 'NG', sans-serif;
+            font-size: 2.2rem;
+            font-weight: normal;
+        }
+
+        /* Хедер */
+        .tilda-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            box-shadow: var(--shadow);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--primary-color);
+            margin-right: auto;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+            margin-right: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 8px 0;
+            position: relative;
+            transition: var(--transition);
+            white-space: nowrap;
+            font-family: 'Tekst', sans-serif;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-color);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1002;
+            color: var(--primary-color);
+        }
+
+        /* Герой секция */
+        .diary-header-section {
+            background: var(--hero-bg);
+            min-height: 40vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 40px;
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .diary-header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .diary-header-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: slideInLeft 1s ease 0.5s forwards;
+        }
+
+        .diary-header-img {
+            max-width: 100%;
+            max-height: 300px;
+            width: auto;
+            height: auto;
+            border-radius: 0;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .diary-header-img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .diary-header-content {
+            flex: 1;
+            color: var(--white);
+            text-align: left;
+            opacity: 0;
+            transform: translateX(50px);
+            animation: slideInRight 1s ease 0.5s forwards;
+        }
+
+        .diary-header-title {
+            font-size: 2.8rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            font-family: 'Zag', sans-serif;
+            line-height: 1.2;
+            color: var(--white);
+        }
+
+        .diary-header-text {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            font-family: 'Tekst', sans-serif;
+            color: var(--white);
+        }
+
+        /* Анимации */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-element {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+            padding: 0;
+        }
+
+        /* Основной контент */
+        .diary-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .diary-article {
+            background: transparent;
+            padding: 1rem 0;
+            line-height: 1.8;
+        }
+
+        .diary-article h1 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            text-align: center;
+            font-family: 'Zag', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.3s forwards;
+            font-weight: 500;
+        }
+
+        .diary-article h2 {
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            margin: 3rem 0 1.5rem;
+            font-family: 'Zag', sans-serif;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .diary-article h3 {
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+            margin: 2rem 0 1rem;
+            font-family: 'Zag', sans-serif;
+            font-weight: 500;
+        }
+
+        .diary-article p {
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            font-family: 'Tekst', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            text-align: justify;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.5s forwards;
+        }
+
+        .diary-article ul, .diary-article ol {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .diary-article li {
+            margin-bottom: 0.8rem;
+            color: var(--text-color);
+            font-size: 1.1rem;
+        }
+
+        .diary-article strong {
+            color: var(--text-color);
+            font-weight: 700;
+        }
+
+        /* Стили для методологии */
+        .methodology-section {
+            background: var(--gray-bg);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 0;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .methodology-tip {
+            background: rgba(46, 204, 113, 0.1);
+            border-left: 4px solid var(--success-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0;
+        }
+
+        .methodology-warning {
+            background: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid var(--warning-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0;
+        }
+
+        /* Стили для структуры дневника */
+        .diary-structure {
+            background: var(--white);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 0;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .structure-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-family: 'Tekst', sans-serif;
+        }
+
+        .structure-table th {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+            font-family: 'Zag', sans-serif;
+        }
+
+        .structure-table td {
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+
+        .structure-table tr:nth-child(even) {
+            background: var(--gray-bg);
+        }
+
+        .column-explanation {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            font-style: italic;
+        }
+
+        /* Стили для тренажера */
+        .trainer-section {
+            background: var(--white);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 0;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .trainer-title {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-family: 'Zag', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+        }
+
+        .trainer-step {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--gray-bg);
+            border-radius: 0;
+            border-left: 4px solid var(--primary-color);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .trainer-step h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-family: 'Zag', sans-serif;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+        }
+
+        .step-number {
+            background: var(--primary-color);
+            color: var(--white);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            font-family: 'Tekst', sans-serif;
+        }
+
+        .trainer-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 0;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+            box-sizing: border-box;
+            transition: var(--transition);
+            font-family: 'Tekst', sans-serif;
+            color: var(--text-color);
+        }
+
+        .trainer-input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(44, 62, 80, 0.2);
+        }
+
+        .trainer-textarea {
+            min-height: 100px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .input-example {
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            font-style: italic;
+            margin-top: 0.25rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Стили для эмоций */
+        .emotion-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding: 15px;
+            background: var(--white);
+            border-radius: 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .emotion-name {
+            flex: 1;
+            min-width: 150px;
+            color: var(--text-color);
+        }
+
+        .emotion-intensity {
+            width: 120px;
+        }
+
+        .add-emotion-btn {
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 0;
+            cursor: pointer;
+            margin-top: 10px;
+            font-family: 'Tekst', sans-serif;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .add-emotion-btn:hover {
+            background: var(--secondary-color);
+        }
+
+        .remove-btn {
+            background: var(--warning-color);
+            color: var(--white);
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Tekst', sans-serif;
+            transition: var(--transition);
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .remove-btn:hover {
+            background: #c0392b;
+        }
+
+        /* Стили для автодополнения */
+        .autocomplete-container {
+            position: relative;
+            flex: 1;
+        }
+
+        .emotion-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 0;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: var(--transition);
+            font-family: 'Tekst', sans-serif;
+            color: var(--text-color);
+            background-color: var(--white);
+        }
+
+        .emotion-input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(44, 62, 80, 0.2);
+        }
+
+        .autocomplete-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-top: none;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            box-shadow: var(--shadow);
+        }
+
+        .autocomplete-item {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border-color);
+            font-family: 'Tekst', sans-serif;
+            color: var(--text-color);
+        }
+
+        .autocomplete-item:hover {
+            background: var(--gray-bg);
+        }
+
+        .autocomplete-item.active {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .autocomplete-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Стили для шкал оценки */
+        .rating-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .rating-slider {
+            flex: 1;
+            height: 8px;
+            border-radius: 4px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .rating-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .rating-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+            border: none;
+        }
+
+        .rating-value {
+            font-weight: bold;
+            min-width: 40px;
+            text-align: center;
+            font-family: 'Tekst', sans-serif;
+        }
+
+        .rating-scale {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            font-family: 'Tekst', sans-serif;
+        }
+
+        /* Стили для негативных последствий */
+        .consequence-item {
+            background: rgba(231, 76, 60, 0.05);
+            border-left: 4px solid var(--warning-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+
+        .consequence-check {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(231, 76, 60, 0.2);
+        }
+
+        .check-options {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .check-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .check-option input {
+            margin: 0;
+        }
+
+        /* Стили для кнопок */
+        .trainer-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            gap: 1rem;
+        }
+
+        .trainer-btn {
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 0;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 1rem;
+            box-shadow: var(--shadow);
+            font-family: 'Tekst', sans-serif;
+        }
+
+        .trainer-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .trainer-btn:disabled {
+            background: var(--accent-color);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .trainer-btn.prev {
+            background: var(--accent-color);
+        }
+
+        .trainer-btn.prev:hover {
+            background: #6c7a7b;
+        }
+
+        .trainer-btn.next {
+            background: var(--success-color);
+        }
+
+        .trainer-btn.next:hover {
+            background: #219653;
+        }
+
+        .trainer-btn.complete {
+            background: var(--success-color);
+            width: 100%;
+        }
+
+        .trainer-btn.complete:hover {
+            background: #219653;
+        }
+
+        /* Стили для результата */
+        .result-section {
+            background: var(--primary-color);
+            color: #ffffff !important;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 0;
+            text-align: center;
+            display: none;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+            border: 2px solid #ffffff;
+        }
+
+        .result-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-family: 'Zag', sans-serif;
+            font-weight: 500;
+            color: #ffffff !important;
+        }
+
+        .result-content {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 0;
+            margin: 1.5rem 0;
+            text-align: left;
+            color: #ffffff !important;
+            border: 1px solid #ffffff;
+        }
+
+        .result-item {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff !important;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+            color: #ffffff !important;    
+        }
+
+        .result-label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: 'Zag', sans-serif;
+            color: #ffffff !important;
+            font-size: 1.1rem;
+        }
+
+        .result-value {
+            font-size: 1.1rem;
+            color: #ffffff !important;
+            font-family: 'Tekst', sans-serif;
+            line-height: 1.6;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-family: 'Tekst', sans-serif;
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+        }
+
+        .comparison-table th {
+            background: rgba(255, 255, 255, 0.1);
+            font-weight: bold;
+            font-family: 'Zag', sans-serif;
+        }
+
+        .insight-positive {
+            background: rgba(46, 204, 113, 0.2);
+            border-left: 4px solid var(--success-color);
+            padding: 1rem;
+            border-radius: 0;
+            margin: 1rem 0;
+            color: #ffffff;
+        }
+
+        /* Стили для скачивания */
+        .download-section {
+            background: var(--white);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 0;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .download-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .download-btn {
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 0;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 1rem;
+            box-shadow: var(--shadow);
+            font-family: 'Tekst', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .download-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .download-btn.template {
+            background: var(--accent-color);
+        }
+
+        .download-btn.template:hover {
+            background: #6c7a7b;
+        }
+
+        .download-btn.excel {
+            background: var(--success-color);
+        }
+
+        .download-btn.excel:hover {
+            background: #219653;
+        }
+
+        .download-btn.pdf {
+            background: #e74c3c;
+        }
+
+        .download-btn.pdf:hover {
+            background: #c0392b;
+        }
+
+        /* Мобильное меню */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--white);
+            z-index: 1001;
+            padding: 2rem;
+            overflow-y: auto;
+            flex-direction: column;
+            gap: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .mobile-nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.2rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            font-family: 'Tekst', sans-serif;
+            transition: var(--transition);
+        }
+
+        .mobile-nav-link:hover {
+            color: var(--primary-color);
+            padding-left: 1rem;
+        }
+
+        /* Футер */
+        .tilda-footer {
+            background: var(--dark-bg);
+            color: var(--white);
+            padding: 60px 0 30px;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            font-family: 'Zag', sans-serif;
+            font-weight: 500;
+        }
+
+        .footer-section p {
+            color: #bdc3c7;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .footer-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .footer-nav a {
+            color: #bdc3c7;
+            text-decoration: none;
+            font-family: 'Tekst', sans-serif;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .footer-nav a:hover {
+            color: var(--white);
+            padding-left: 0.5rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bdc3c7;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 40px 0;
+            font-size: 1rem;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 1200px) {
+            .diary-header-title {
+                font-size: 2.3rem;
+            }
+            
+            .diary-header-container {
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 968px) {
+            .header-nav {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .diary-header-section {
+                min-height: 30vh;
+                padding: 80px 30px;
+            }
+            
+            .diary-header-container {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+            }
+            
+            .diary-header-content {
+                text-align: center;
+            }
+            
+            .diary-header-title {
+                font-size: 2rem;
+            }
+            
+            .diary-header-text {
+                font-size: 1rem;
+            }
+            
+            .diary-article {
+                padding: 3rem 0;
+            }
+            
+            .diary-article h1 {
+                font-size: 1.8rem;
+            }
+            
+            .diary-article p {
+                font-size: 1rem;
+            }
+            
+            .trainer-buttons {
+                flex-direction: column;
+            }
+            
+            .trainer-btn {
+                width: 100%;
+            }
+            
+            .rating-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .emotion-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .emotion-intensity {
+                width: 100%;
+            }
+            
+            .download-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .download-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 20px;
+            }
+            
+            .diary-header-section {
+                padding: 60px 20px;
+                min-height: 25vh;
+            }
+            
+            .diary-header-title {
+                font-size: 1.8rem;
+            }
+            
+            .diary-header-text {
+                font-size: 0.95rem;
+            }
+            
+            .diary-header-img {
+                max-height: 200px;
+            }
+            
+            .diary-content {
+                padding: 0 20px;
+            }
+            
+            .diary-article {
+                padding: 2rem 0;
+            }
+            
+            .diary-article h1 {
+                font-size: 1.6rem;
+            }
+            
+            .diary-article p {
+                font-size: 0.95rem;
+            }
+            
+            .footer-content {
+                padding: 0 20px;
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .footer-bottom {
+                padding: 2rem 20px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .diary-header-section {
+                padding: 40px 15px;
+                min-height: 20vh;
+            }
+            
+            .diary-header-title {
+                font-size: 1.6rem;
+            }
+            
+            .diary-header-text {
+                font-size: 0.9rem;
+            }
+            
+            .diary-article {
+                padding: 1rem 0;
+            }
+            
+            .diary-article p {
+                font-size: 0.9rem;
+            }
+            
+            .trainer-section {
+                padding: 1rem;
+            }
+            
+            .methodology-section {
+                padding: 1rem;
+            }
+            
+            .diary-structure {
+                padding: 1rem;
+            }
+            
+            .download-section {
+                padding: 1rem;
+            }
+            
+            .check-options {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Хедер -->
+    <header class="tilda-header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">
+                <span class="logo-ng">НЕ ГОРИ</span>
+            </a>
+            
+            <nav class="header-nav">
+                <a href="quick-help.html" class="nav-link active">Быстрая помощь</a>
+                <a href="daily.html" class="nav-link">Ежедневные практики</a>
+                <a href="materials.html" class="nav-link">Материалы</a>
+                <a href="tests.html" class="nav-link">Тесты</a>
+                <a href="contacts.html" class="nav-link"> Контакты</a>
+            </nav>
+            
+            
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </header>
+
+    <!-- Мобильное меню -->
+    <div class="mobile-menu">
+        <a href="quick-help.html" class="mobile-nav-link active">Быстрая помощь</a>
+        <a href="daily.html" class="mobile-nav-link">Ежедневные практики</a>
+        <a href="materials.html" class="mobile-nav-link">Материалы</a>
+        <a href="tests.html" class="mobile-nav-link">Тесты</a>
+        <a href="contacts.html" class="mobile-nav-link"> Контакты</a>
+    </div>
+
+    <!-- Герой секция -->
+    <section class="diary-header-section">
+        <div class="diary-header-container">
+            <!-- Левая колонка - картинка -->
+            <div class="diary-header-image">
+                <img src="../assets/images/dnev-bg.png" 
+                     alt="Дневник экспозиций" 
+                     class="diary-header-img">
+            </div>
+            
+            <!-- Правая колонка - текст -->
+            <div class="diary-header-content">
+                <h1 class="diary-header-title">Дневник экспозиций</h1>
+                <p class="diary-header-text">Метод работы с ожиданиями для снижения стресса и повышения реалистичности прогнозов</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Основной контент -->
+    <section class="section-wide">
+        <div class="diary-content">
+            <article class="diary-article">
+                
+                <p class="fade-in-element">
+                    Дневник экспозиций — это мощный инструмент для работы с ожиданиями, который помогает 
+                    сравнивать наши прогнозы с реальностью и учиться делать более точные предсказания.
+                </p>
+
+                <p class="fade-in-element">
+                    Часто мы переоцениваем негативные последствия событий и недооцениваем свою способность 
+                    справляться с трудностями. Этот дневник поможет вам развить более реалистичный взгляд на ситуации.
+                </p>
+
+                <!-- Блок методологии -->
+                <div class="methodology-section fade-in-element">
+                    <h2>Что такое дневник экспозиций?</h2>
+                    
+                    <p><strong>Дневник экспозиций</strong> — это метод когнитивно-поведенческой терапии, направленный на работу с ожиданиями и прогнозами. Он помогает сравнивать наши предсказания с реальными результатами и развивать более реалистичное мышление.</p>
+                    
+                    <h3>Как работает метод?</h3>
+                    <p>Метод основан на принципе проверки гипотез: мы формулируем ожидания относительно ситуации, а затем сравниваем их с тем, что произошло на самом деле. Это помогает:</p>
+                    
+                    <ul>
+                        <li>Выявить случаи переоценки негативных последствий</li>
+                        <li>Развить более точное прогнозирование</li>
+                        <li>Снизить тревожность, связанную с ожиданием худшего</li>
+                        <li>Повысить уверенность в своей способности справляться с трудностями</li>
+                    </ul>
+                    
+                    <div class="methodology-tip">
+                        <p>💡 <strong>Важно:</strong> Регулярное ведение дневника помогает перестроить паттерны мышления и снизить уровень стресса уже через 2-3 недели практики.</p>
+                    </div>
+                </div>
+
+                <!-- Структура дневника -->
+                <h2 class="fade-in-element">Структура дневника экспозиций</h2>
+                
+                <p class="fade-in-element">
+                    Для эффективной работы с ожиданиями используйте следующую структуру. Заполняйте ее для ситуаций, 
+                    которые вызывают у вас сильные эмоции или беспокойство.
+                </p>
+
+                <div class="diary-structure fade-in-element">
+                    <h3>Структура дневника экспозиций</h3>
+                    
+                    <table class="structure-table">
+                        <thead>
+                            <tr>
+                                <th>Колонка</th>
+                                <th>Что записывать</th>
+                                <th>Пример</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Дата/Ситуация</strong></td>
+                                <td>
+                                    Опишите ситуацию, которая вызывает беспокойство
+                                    <div class="column-explanation">Что предстоит? Где? Когда? С кем?</div>
+                                </td>
+                                <td>Разговор с руководителем о допущенной ошибке в отчете</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ожидания</strong></td>
+                                <td>
+                                    Что, по вашему мнению, произойдет в этой ситуации?
+                                    <div class="column-explanation">Какие мысли, чувства, реакции предполагаете?</div>
+                                </td>
+                                <td>Ожидаю критики, почувствую себя беспомощным, не смогу ответить, меня уволят</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Реальность</strong></td>
+                                <td>
+                                    Как ситуация произошла на самом деле
+                                    <div class="column-explanation">Что случилось в действительности?</div>
+                                </td>
+                                <td>Руководитель указал на ошибку конструктивно, я смог объяснить причины</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Вывод</strong></td>
+                                <td>
+                                    Сравнение ожиданий и реальности
+                                    <div class="column-explanation">Что совпало, а что оказалось иначе? Какие уроки?</div>
+                                </td>
+                                <td>Ситуация была менее стрессовой, чем ожидал. Я справляюсь лучше, чем думал</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="methodology-tip" style="margin-top: 1.5rem;">
+                        <p>💡 <strong>Совет:</strong> Регулярное заполнение дневника поможет вам быстрее распознавать искажения в ожиданиях и реагировать на ситуации более реалистично.</p>
+                    </div>
+                </div>
+
+                <!-- Секция скачивания шаблона -->
+                <div class="download-section fade-in-element">
+                    <h2>Скачать шаблон дневника экспозиций</h2>
+                    <p>Для удобства работы с дневником экспозиций вы можете скачать готовый шаблон в формате Word.</p>
+                    <div class="download-buttons">
+                        <button class="download-btn template" onclick="downloadTemplate()">
+                            📄 Скачать шаблон (.docx)
+                        </button>
+                    </div>
+                </div>
+
+                <h2 class="fade-in-element">Практический тренажер дневника экспозиций</h2>
+                
+                <p class="fade-in-element">
+                    Попробуйте прямо сейчас проанализировать свою ситуацию с ожиданиями с помощью нашего тренажера. 
+                    Это поможет вам лучше понять механизмы формирования ожиданий и научиться делать более точные прогнозы.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Тренажер дневника экспозиций -->
+    <section class="section-wide">
+        <div class="diary-content">
+            <article class="diary-article">
+                <div class="trainer-section fade-in-element">
+                    <h2 class="trainer-title">Тренажер дневника экспозиций</h2>
+                    
+                    <!-- Шаг 1: Ситуация -->
+                    <div id="step1" class="trainer-step">
+                        <h3><span class="step-number">1</span> Ситуация</h3>
+                        <p>Опишите ситуацию, которая вызывает у вас беспокойство или сильные ожидания. Будьте максимально конкретны.</p>
+                        <textarea class="trainer-input trainer-textarea" id="situation" placeholder="Например: Предстоящий разговор с главным врачом о допущенной ошибке в документации, необходимость провести сложную процедуру впервые самостоятельно, общение с агрессивным родственником пациента..."></textarea>
+                        <div class="input-example">Пример: "Завтра предстоит сложный разговор с главным врачом о ошибке в отчете за последний квартал"</div>
+                    </div>
+                    
+                    <!-- Шаг 2: Ожидания -->
+                    <div id="step2" class="trainer-step" style="display: none;">
+                        <h3><span class="step-number">2</span> Ожидания</h3>
+                        
+                        <p><strong>Что по вашему произойдет?</strong> Опишите ваши основные ожидания от ситуации.</p>
+                        <textarea class="trainer-input trainer-textarea" id="expectations" placeholder="Например: Ожидаю, что главный врач будет критиковать меня, почувствую себя беспомощным, не смогу грамотно ответить на вопросы, ситуация выйдет из-под контроля..."></textarea>
+                        <div class="input-example">Пример: "Думаю, что руководитель будет очень зол, начнет повышать голос, и я не смогу ничего ответить"</div>
+                        
+                        <p><strong>Какие негативные последствия вы ожидаете?</strong> Оцените вероятность каждого по шкале от 0 до 100%.</p>
+                        
+                        <div id="expected-consequences-container">
+                            <div class="consequence-item">
+                                <textarea class="trainer-input trainer-textarea consequence-text" placeholder="Опишите предполагаемое негативное последствие..."></textarea>
+                                <div class="input-example">Пример: "Меня уволят с работы"</div>
+                                <div class="rating-container">
+                                    <span>Вероятность:</span>
+                                    <input type="range" class="rating-slider consequence-probability" min="0" max="100" value="50" step="5">
+                                    <span class="rating-value consequence-probability-value">50%</span>
+                                </div>
+                                <div class="rating-scale">
+                                    <span>0% - Не случится</span>
+                                    <span>50% - Возможно</span>
+                                    <span>100% - Точно случится</span>
+                                </div>
+                                <button class="remove-btn" onclick="removeConsequence(this)">× Удалить</button>
+                            </div>
+                        </div>
+                        
+                        <button class="add-emotion-btn" onclick="addConsequence()">+ Добавить негативное последствие</button>
+                        
+                        <p><strong>Какие эмоции вы ожидаете?</strong> Оцените их интенсивность по шкале от 0 до 100%.</p>
+                        
+                        <div id="expected-emotions-container">
+                            <div class="emotion-item">
+                                <div class="autocomplete-container">
+                                    <input type="text" class="emotion-input emotion-name" placeholder="Начните вводить название эмоции..." autocomplete="off">
+                                    <div class="autocomplete-list"></div>
+                                </div>
+                                <input type="number" class="trainer-input emotion-intensity" placeholder="0-100%" min="0" max="100" step="10">
+                                <button class="remove-btn" onclick="removeEmotion(this)">×</button>
+                            </div>
+                        </div>
+                        
+                        <button class="add-emotion-btn" onclick="addEmotion()">+ Добавить эмоцию</button>
+                    </div>
+                    
+                    <!-- Шаг 3: Реальность -->
+                    <div id="step3" class="trainer-step" style="display: none;">
+                        <h3><span class="step-number">3</span> Реальность</h3>
+                        
+                        <p><strong>3.1 Что произошло на самом деле?</strong> Опишите реальный ход событий.</p>
+                        <textarea class="trainer-input trainer-textarea" id="reality" placeholder="Опишите реальный ход событий, ваши реакции и эмоции..."></textarea>
+                        <div class="input-example">Пример: "Руководитель был серьезен, но конструктивен. Выслушал мои объяснения и предложил план исправления ошибки"</div>
+                        
+                        <p><strong>3.2 Ожидаемые последствия:</strong> Проверьте, случились ли предполагаемые негативные последствия.</p>
+                        
+                        <div id="actual-consequences-container">
+                            <!-- Контейнер для реальных последствий будет заполнен JavaScript -->
+                        </div>
+                        
+                        <p><strong>3.3 Ожидаемые эмоции:</strong> Укажите выраженность этих эмоций на самом деле.</p>
+                        
+                        <div id="actual-emotions-container">
+                            <!-- Контейнер для реальных эмоций будет заполнен JavaScript -->
+                        </div>
+                        
+                        <p><strong>3.4 Какие реальные последствия были?</strong> Опишите, что произошло на самом деле:</p>
+                        <textarea class="trainer-input trainer-textarea" id="actual-consequences-text" placeholder="Опишите реальные последствия ситуации..."></textarea>
+                        <div class="input-example">Пример: "Получил замечание в личной беседе, необходимо переделать отчет в течение недели"</div>
+                        
+                        <p><strong>3.5 Какие стратегии совладания помогли вам?</strong> Что оказалось полезным?</p>
+                        <textarea class="trainer-input trainer-textarea" id="coping-strategies" placeholder="Например: Глубокое дыхание помогло успокоиться, подготовленные ответы на возможные вопросы, поддержка коллеги..."></textarea>
+                        <div class="input-example">Пример: "Заранее подготовил аргументы, делал паузы перед ответом, сохранял спокойный тон"</div>
+                    </div>
+                    
+                    <!-- Шаг 4: Анализ и выводы -->
+                    <div id="step4" class="trainer-step" style="display: none;">
+                        <h3><span class="step-number">4</span> Анализ и выводы</h3>
+                        <p><strong>Сравните ваши ожидания с реальностью.</strong> Что совпало, а что оказалось иначе?</p>
+                        <textarea class="trainer-input trainer-textarea" id="comparison" placeholder="Например: Ожидал жесткой критики, но получил конструктивные замечания; боялся не найти слов, но смог аргументированно ответить; тревога была меньше, чем ожидал..."></textarea>
+                        <div class="input-example">Пример: "Ситуация оказалась гораздо менее конфликтной, чем я ожидал. Руководитель был заинтересован в решении проблемы, а не в поиске виноватых"</div>
+                        
+                        <p><strong>Что вы узнали из этой ситуации?</strong> Какие выводы можно сделать?</p>
+                        <textarea class="trainer-input trainer-textarea" id="insights" placeholder="Например: Ситуация была не такой страшной, как казалось; я справляюсь лучше, чем ожидал; подготовка помогла чувствовать себя увереннее..."></textarea>
+                        <div class="input-example">Пример: "Я склонен преувеличивать негативные последствия. В будущем буду больше доверять своей подготовке и способности справляться с трудностями"</div>
+                        
+                        <p><strong>Как это повлияет на ваше отношение к подобным ситуациям в будущем?</strong></p>
+                        <textarea class="trainer-input trainer-textarea" id="future-impact" placeholder="Например: Буду меньше тревожиться в подобных ситуациях; понимаю, что могу справляться лучше, чем ожидаю; буду больше доверять своей подготовке..."></textarea>
+                        <div class="input-example">Пример: "В следующий раз буду меньше нервничать перед сложными разговорами и больше сосредоточусь на подготовке содержательной части"</div>
+                    </div>
+                    
+                    <div class="trainer-buttons">
+                        <button class="trainer-btn prev" id="prevBtn" onclick="prevStep()" style="display: none;">← Назад</button>
+                        <button class="trainer-btn next" id="nextBtn" onclick="nextStep()">Далее →</button>
+                    </div>
+                    
+                    <div id="completeSection" style="display: none; text-align: center; margin-top: 2rem;">
+                        <button class="trainer-btn complete" onclick="showResult()">Завершить анализ</button>
+                    </div>
+                </div>
+
+                <!-- Результат анализа -->
+                <div class="result-section" id="resultSection">
+                    <h2 class="result-title">✅ Анализ завершен!</h2>
+                    <p style="color: #ffffff !important;">Вот результаты вашей работы с ожиданиями:</p>
+                    
+                    <div class="result-content">
+                        <div class="result-item">
+                            <span class="result-label">📝 Ситуация:</span>
+                            <span class="result-value" id="resultSituation"></span>
+                        </div>
+                        
+                        <div class="result-item">
+                            <span class="result-label">📊 Сравнение ожиданий и реальности:</span>
+                            <table class="comparison-table">
+                                <thead>
+                                    <tr>
+                                        <th>Параметр</th>
+                                        <th>Ожидание</th>
+                                        <th>Реальность</th>
+                                        <th>Разница</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="comparisonTableBody">
+                                    <!-- Данные будут добавлены через JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="result-item">
+                            <span class="result-label">🔄 Ключевые различия:</span>
+                            <span class="result-value" id="resultComparison"></span>
+                        </div>
+                        
+                        <div class="result-item">
+                            <span class="result-label">🛡️ Полезные стратегии:</span>
+                            <span class="result-value" id="resultStrategies"></span>
+                        </div>
+                        
+                        <div class="result-item">
+                            <span class="result-label">💡 Основные инсайты:</span>
+                            <span class="result-value" id="resultInsights"></span>
+                        </div>
+                        
+                        <div class="result-item">
+                            <span class="result-label">🚀 Влияние на будущее:</span>
+                            <span class="result-value" id="resultFutureImpact"></span>
+                        </div>
+                        
+                        <div class="result-item">
+                            <span class="result-label">📈 Рекомендации:</span>
+                            <div id="recommendations" class="insight-positive"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="download-buttons" style="margin-top: 2rem;">
+                        <button class="download-btn excel" onclick="downloadExcel()">
+                            📊 Скачать в Excel
+                        </button>
+                        <button class="download-btn pdf" onclick="downloadPDF()">
+                            📄 Скачать в PDF
+                        </button>
+                    </div>
+                    
+                    <button class="trainer-btn" onclick="resetTrainer()" style="margin-top: 1rem; background: #ffffff; color: var(--primary-color);">Проанализировать другую ситуацию</button>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Заключительная секция -->
+    <section class="section-wide">
+        <div class="diary-content">
+            <article class="diary-article">
+                <h2 class="fade-in-element">Почему дневник экспозиций эффективен?</h2>
+                
+                <p class="fade-in-element">
+                    Дневник экспозиций основан на принципах когнитивно-поведенческой терапии, которая имеет прочную доказательную базу 
+                    в работе с тревожностью, депрессией и профессиональным выгоранием.
+                </p>
+
+                <div class="methodology-tip fade-in-element">
+                    <p> <strong>Практический совет:</strong> Старайтесь заполнять дневник экспозиций для ситуаций, которые вызывают у вас сильные эмоции. 
+                    Регулярная практика поможет вам постепенно развить более реалистичный взгляд на события и повысить уверенность в себе.</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="tilda-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>О проекте</h3>
+                <p>"НЕ ГОРИ" — это ресурс для профилактики эмоционального выгорания для специалистов разных профессий.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Быстрые ссылки</h3>
+                <nav class="footer-nav">
+                    <a href="../index.html">Главная</a>
+                    <a href="quick-help.html">Быстрая помощь</a>
+                    <a href="daily.html">Ежедневные практики</a>
+                    <a href="materials.html">Материалы</a>
+                    <a href="tests.html">Тесты</a>
+                </nav>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Контакты</h3>
+                <p>По вопросам и предложениям обращайтесь:</p>
+                <p>email@example.com</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 "НЕ ГОРИ". Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ===== СИСТЕМА БЕЗОПАСНОСТИ =====
+        
+        function sanitizeInput(input) {
+            if (typeof input !== 'string') return '';
+            return input
+                .replace(/[<>"'&`]/g, '')
+                .replace(/[;|&$(){}\[\]\\]/g, '')
+                .replace(/\.\.\//g, '')
+                .replace(/\b(union|select|drop|insert|update|delete|script|javascript|on\w+)\b/gi, '')
+                .substring(0, 1000);
+        }
+
+        function safeTextInput(text) {
+            if (typeof text !== 'string') return '';
+            return text.replace(/[^a-zA-Zа-яА-Я0-9\s\-_\.@,?!:()]/g, '')
+                      .substring(0, 1000);
+        }
+
+        function safeNumberInput(value, min = 0, max = 100) {
+            const num = parseInt(value);
+            if (isNaN(num)) return min;
+            return Math.min(Math.max(num, min), max);
+        }
+
+        // ===== ДАННЫЕ И ПЕРЕМЕННЫЕ =====
+        
+        const emotionsList = [
+            "Тревога", "Страх", "Паника", "Беспокойство", "Нервозность",
+            "Гнев", "Раздражение", "Злость", "Ярость", "Возмущение",
+            "Грусть", "Печаль", "Отчаяние", "Безысходность", "Тоска",
+            "Стыд", "Вина", "Смущение", "Унижение", "Скорбь",
+            "Радость", "Удовлетворение", "Облегчение", "Гордость", "Надежда",
+            "Спокойствие", "Уверенность", "Расслабленность", "Умиротворение"
+        ];
+
+        let currentStep = 1;
+        const totalSteps = 4;
+        
+        let expectedEmotions = [];
+        let actualEmotions = [];
+        let expectedConsequences = [];
+        let actualConsequences = [];
+
+        // ===== ФУНКЦИИ АВТОДОПОЛНЕНИЯ =====
+        
+        function setupAutocomplete(inputElement) {
+            const list = inputElement.parentElement.querySelector('.autocomplete-list');
+            
+            inputElement.addEventListener('input', function() {
+                const value = safeTextInput(this.value).toLowerCase();
+                list.innerHTML = '';
+                
+                if (value.length > 0) {
+                    const filteredEmotions = emotionsList.filter(emotion => 
+                        emotion.toLowerCase().includes(value)
+                    );
+                    
+                    if (filteredEmotions.length > 0) {
+                        filteredEmotions.forEach(emotion => {
+                            const item = document.createElement('div');
+                            item.className = 'autocomplete-item';
+                            item.textContent = emotion;
+                            item.addEventListener('click', function() {
+                                inputElement.value = emotion;
+                                list.style.display = 'none';
+                            });
+                            list.appendChild(item);
+                        });
+                        list.style.display = 'block';
+                    } else {
+                        list.style.display = 'none';
+                    }
+                } else {
+                    list.style.display = 'none';
+                }
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!inputElement.parentElement.contains(e.target)) {
+                    list.style.display = 'none';
+                }
+            });
+            
+            inputElement.addEventListener('keydown', function(e) {
+                const items = list.querySelectorAll('.autocomplete-item');
+                let activeItem = list.querySelector('.autocomplete-item.active');
+                
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    if (!activeItem) {
+                        items[0]?.classList.add('active');
+                    } else {
+                        activeItem.classList.remove('active');
+                        const next = activeItem.nextElementSibling;
+                        if (next) next.classList.add('active');
+                    }
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    if (activeItem) {
+                        activeItem.classList.remove('active');
+                        const prev = activeItem.previousElementSibling;
+                        if (prev) prev.classList.add('active');
+                    }
+                } else if (e.key === 'Enter' && activeItem) {
+                    e.preventDefault();
+                    inputElement.value = activeItem.textContent;
+                    list.style.display = 'none';
+                }
+            });
+        }
+
+        // ===== ФУНКЦИИ РАБОТЫ С ЭМОЦИЯМИ =====
+        
+        function addEmotion() {
+            const container = document.getElementById('expected-emotions-container');
+            const emotionItem = document.createElement('div');
+            emotionItem.className = 'emotion-item';
+            emotionItem.innerHTML = `
+                <div class="autocomplete-container">
+                    <input type="text" class="emotion-input emotion-name" placeholder="Начните вводить название эмоции..." autocomplete="off">
+                    <div class="autocomplete-list"></div>
+                </div>
+                <input type="number" class="trainer-input emotion-intensity" placeholder="0-100%" min="0" max="100" step="10">
+                <button class="remove-btn" onclick="removeEmotion(this)">×</button>
+            `;
+            container.appendChild(emotionItem);
+            
+            const newInput = emotionItem.querySelector('.emotion-input');
+            setupAutocomplete(newInput);
+            
+            newInput.addEventListener('input', function() {
+                this.value = safeTextInput(this.value);
+            });
+        }
+        
+        function removeEmotion(button) {
+            const emotionItem = button.parentElement;
+            if (document.querySelectorAll('#expected-emotions-container .emotion-item').length > 1) {
+                emotionItem.remove();
+            }
+        }
+        
+        function collectExpectedEmotions() {
+            const emotions = [];
+            const emotionItems = document.querySelectorAll('#expected-emotions-container .emotion-item');
+            
+            emotionItems.forEach(item => {
+                const nameInput = item.querySelector('.emotion-input');
+                const intensityInput = item.querySelector('.emotion-intensity');
+                
+                if (nameInput.value.trim() && intensityInput.value) {
+                    emotions.push({
+                        name: safeTextInput(nameInput.value.trim()),
+                        intensity: safeNumberInput(intensityInput.value)
+                    });
+                }
+            });
+            
+            return emotions;
+        }
+
+        // ===== ФУНКЦИИ РАБОТЫ С ПОСЛЕДСТВИЯМИ =====
+        
+        function addConsequence() {
+            const container = document.getElementById('expected-consequences-container');
+            const consequenceItem = document.createElement('div');
+            consequenceItem.className = 'consequence-item';
+            consequenceItem.innerHTML = `
+                <textarea class="trainer-input trainer-textarea consequence-text" placeholder="Опишите предполагаемое негативное последствие..."></textarea>
+                <div class="input-example">Пример: "Меня уволят с работы"</div>
+                <div class="rating-container">
+                    <span>Вероятность:</span>
+                    <input type="range" class="rating-slider consequence-probability" min="0" max="100" value="50" step="5">
+                    <span class="rating-value consequence-probability-value">50%</span>
+                </div>
+                <div class="rating-scale">
+                    <span>0% - Не случится</span>
+                    <span>50% - Возможно</span>
+                    <span>100% - Точно случится</span>
+                </div>
+                <button class="remove-btn" onclick="removeConsequence(this)">× Удалить</button>
+            `;
+            container.appendChild(consequenceItem);
+            
+            const slider = consequenceItem.querySelector('.consequence-probability');
+            const valueSpan = consequenceItem.querySelector('.consequence-probability-value');
+            
+            slider.addEventListener('input', function() {
+                valueSpan.textContent = safeNumberInput(this.value) + '%';
+            });
+        }
+        
+        function removeConsequence(button) {
+            const consequenceItem = button.parentElement;
+            if (document.querySelectorAll('#expected-consequences-container .consequence-item').length > 1) {
+                consequenceItem.remove();
+            }
+        }
+        
+        function collectExpectedConsequences() {
+            const consequences = [];
+            const consequenceItems = document.querySelectorAll('#expected-consequences-container .consequence-item');
+            
+            consequenceItems.forEach(item => {
+                const textInput = item.querySelector('.consequence-text');
+                const probabilityInput = item.querySelector('.consequence-probability');
+                
+                if (textInput.value.trim()) {
+                    consequences.push({
+                        text: safeTextInput(textInput.value.trim()),
+                        probability: safeNumberInput(probabilityInput.value)
+                    });
+                }
+            });
+            
+            return consequences;
+        }
+
+        // ===== ФУНКЦИИ ДЛЯ ШАГА 3 =====
+        
+        function createActualConsequencesCheck() {
+            const container = document.getElementById('actual-consequences-container');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            if (expectedConsequences.length === 0) {
+                container.innerHTML = '<p style="color: var(--accent-color); font-style: italic;">Вы не указали ожидаемых негативных последствий на предыдущем шаге</p>';
+                return;
+            }
+            
+            expectedConsequences.forEach((consequence, index) => {
+                const consequenceItem = document.createElement('div');
+                consequenceItem.className = 'consequence-item';
+                consequenceItem.innerHTML = `
+                    <p><strong>${sanitizeInput(consequence.text)}</strong></p>
+                    <p>Ожидаемая вероятность: ${consequence.probability}%</p>
+                    <div class="consequence-check">
+                        <span>Случилось ли это последствие?</span>
+                        <div class="check-options">
+                            <label class="check-option">
+                                <input type="radio" name="consequence-${index}" value="yes" onchange="updateConsequenceResult(${index}, 'yes')">
+                                Да
+                            </label>
+                            <label class="check-option">
+                                <input type="radio" name="consequence-${index}" value="no" onchange="updateConsequenceResult(${index}, 'no')" checked>
+                                Нет
+                            </label>
+                            <label class="check-option">
+                                <input type="radio" name="consequence-${index}" value="partially" onchange="updateConsequenceResult(${index}, 'partially')">
+                                Частично
+                            </label>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(consequenceItem);
+                
+                // Инициализируем результат
+                if (!actualConsequences[index]) {
+                    actualConsequences[index] = {
+                        text: consequence.text,
+                        expectedProbability: consequence.probability,
+                        happened: 'no'
+                    };
+                }
+            });
+        }
+        
+        function createActualEmotionsCheck() {
+            const container = document.getElementById('actual-emotions-container');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            if (expectedEmotions.length === 0) {
+                container.innerHTML = '<p style="color: var(--accent-color); font-style: italic;">Вы не указали ожидаемых эмоций на предыдущем шаге</p>';
+                return;
+            }
+            
+            expectedEmotions.forEach((emotion, index) => {
+                const emotionItem = document.createElement('div');
+                emotionItem.className = 'emotion-item';
+                
+                // Используем сохраненное значение или значение по умолчанию
+                const currentActualIntensity = actualEmotions[index] ? actualEmotions[index].actualIntensity : emotion.intensity;
+                
+                emotionItem.innerHTML = `
+                    <span style="color: var(--text-color); min-width: 150px;">${sanitizeInput(emotion.name)}:</span>
+                    <span style="color: var(--text-color);">Ожидалось: ${emotion.intensity}%</span>
+                    <input type="number" class="trainer-input emotion-intensity" 
+                           value="${currentActualIntensity}"
+                           placeholder="0-100%" min="0" max="100" step="10"
+                           onchange="updateEmotionIntensity(${index}, this.value)">
+                    <span style="color: var(--text-color);">% (реальная выраженность)</span>
+                `;
+                container.appendChild(emotionItem);
+                
+                // Инициализируем или обновляем результат
+                actualEmotions[index] = {
+                    name: emotion.name,
+                    expectedIntensity: emotion.intensity,
+                    actualIntensity: currentActualIntensity
+                };
+            });
+        }
+        
+        function updateConsequenceResult(index, value) {
+            if (actualConsequences[index]) {
+                actualConsequences[index].happened = value;
+            } else {
+                actualConsequences[index] = {
+                    text: expectedConsequences[index].text,
+                    expectedProbability: expectedConsequences[index].probability,
+                    happened: value
+                };
+            }
+        }
+        
+        function updateEmotionIntensity(index, value) {
+            const intensity = safeNumberInput(value);
+            if (actualEmotions[index]) {
+                actualEmotions[index].actualIntensity = intensity;
+            } else {
+                actualEmotions[index] = {
+                    name: expectedEmotions[index].name,
+                    expectedIntensity: expectedEmotions[index].intensity,
+                    actualIntensity: intensity
+                };
+            }
+        }
+
+        // ===== ОСНОВНАЯ ЛОГИКА ТРЕНАЖЕРА =====
+        
+        function nextStep() {
+            if (currentStep === 1) {
+                const situation = document.getElementById('situation').value.trim();
+                if (!situation) {
+                    alert('Пожалуйста, опишите ситуацию');
+                    document.getElementById('situation').style.borderColor = 'var(--warning-color)';
+                    return;
+                }
+                document.getElementById('situation').style.borderColor = '';
+            }
+            
+            if (currentStep === 2) {
+                const expectations = document.getElementById('expectations').value.trim();
+                if (!expectations) {
+                    alert('Пожалуйста, опишите ваши ожидания');
+                    document.getElementById('expectations').style.borderColor = 'var(--warning-color)';
+                    return;
+                }
+                
+                expectedEmotions = collectExpectedEmotions();
+                expectedConsequences = collectExpectedConsequences();
+                
+                document.getElementById('expectations').style.borderColor = '';
+            }
+            
+            // Скрываем текущий шаг
+            document.getElementById(`step${currentStep}`).style.display = 'none';
+            
+            // Увеличиваем номер шага
+            currentStep++;
+            
+            // ОСОБЕННОСТЬ: Для шага 3 нужно заранее подготовить контейнеры
+            if (currentStep === 3) {
+                createActualConsequencesCheck();
+                createActualEmotionsCheck();
+            }
+            
+            // Показываем следующий шаг
+            document.getElementById(`step${currentStep}`).style.display = 'block';
+            
+            // Обновляем кнопки навигации
+            updateNavigationButtons();
+        }
+        
+        function prevStep() {
+            // Скрываем текущий шаг
+            document.getElementById(`step${currentStep}`).style.display = 'none';
+            
+            // Уменьшаем номер шага
+            currentStep--;
+            
+            // ОСОБЕННОСТЬ: При возврате на шаг 3 также нужно обновить контейнеры
+            if (currentStep === 3) {
+                createActualConsequencesCheck();
+                createActualEmotionsCheck();
+            }
+            
+            // Показываем предыдущий шаг
+            document.getElementById(`step${currentStep}`).style.display = 'block';
+            
+            // Обновляем кнопки навигации
+            updateNavigationButtons();
+        }
+        
+        function updateNavigationButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const completeSection = document.getElementById('completeSection');
+            
+            if (currentStep > 1) {
+                prevBtn.style.display = 'inline-block';
+            } else {
+                prevBtn.style.display = 'none';
+            }
+            
+            if (currentStep < totalSteps) {
+                nextBtn.style.display = 'inline-block';
+                completeSection.style.display = 'none';
+            } else {
+                nextBtn.style.display = 'none';
+                completeSection.style.display = 'block';
+            }
+        }
+        
+        function showResult() {
+            const allConsequencesChecked = actualConsequences.every(consequence => 
+                consequence && consequence.happened
+            );
+            
+            if (!allConsequencesChecked) {
+                alert('Пожалуйста, оцените все предполагаемые последствия');
+                return;
+            }
+            
+            const situation = safeTextInput(document.getElementById('situation').value);
+            const expectations = safeTextInput(document.getElementById('expectations').value);
+            const reality = safeTextInput(document.getElementById('reality').value);
+            const strategies = safeTextInput(document.getElementById('coping-strategies').value);
+            const comparison = safeTextInput(document.getElementById('comparison').value);
+            const insights = safeTextInput(document.getElementById('insights').value);
+            const futureImpact = safeTextInput(document.getElementById('future-impact').value);
+            const actualConsequencesText = safeTextInput(document.getElementById('actual-consequences-text').value);
+            
+            document.getElementById('resultSituation').textContent = situation || 'Не указано';
+            document.getElementById('resultComparison').textContent = comparison || 'Не указано';
+            document.getElementById('resultStrategies').textContent = strategies || 'Не указаны';
+            document.getElementById('resultInsights').textContent = insights || 'Не указаны';
+            document.getElementById('resultFutureImpact').textContent = futureImpact || 'Не указано';
+            
+            fillComparisonTable();
+            generateRecommendations();
+            
+            document.getElementById('resultSection').style.display = 'block';
+            document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function fillComparisonTable() {
+            const tableBody = document.getElementById('comparisonTableBody');
+            tableBody.innerHTML = '';
+            
+            const expectationsRow = document.createElement('tr');
+            expectationsRow.innerHTML = `
+                <td>Ожидания vs Реальность</td>
+                <td>${sanitizeInput(document.getElementById('expectations').value) || 'Не указано'}</td>
+                <td>${sanitizeInput(document.getElementById('reality').value) || 'Не указано'}</td>
+                <td>-</td>
+            `;
+            tableBody.appendChild(expectationsRow);
+            
+            expectedEmotions.forEach((expected, i) => {
+                const actual = actualEmotions[i] || { actualIntensity: 0 };
+                
+                const emotionRow = document.createElement('tr');
+                emotionRow.innerHTML = `
+                    <td>Эмоция: ${sanitizeInput(expected.name) || 'Не указана'}</td>
+                    <td>${expected.intensity}%</td>
+                    <td>${actual.actualIntensity}%</td>
+                    <td>${expected.intensity - actual.actualIntensity > 0 ? '-' : '+'}${Math.abs(expected.intensity - actual.actualIntensity)}%</td>
+                `;
+                tableBody.appendChild(emotionRow);
+            });
+            
+            actualConsequences.forEach((consequence, index) => {
+                const expected = expectedConsequences[index] || { text: '-', probability: 0 };
+                
+                const consequenceRow = document.createElement('tr');
+                let happenedText = '';
+                switch(consequence.happened) {
+                    case 'yes': happenedText = 'Да'; break;
+                    case 'no': happenedText = 'Нет'; break;
+                    case 'partially': happenedText = 'Частично'; break;
+                    default: happenedText = 'Не оценено';
+                }
+                
+                consequenceRow.innerHTML = `
+                    <td>${sanitizeInput(expected.text)}</td>
+                    <td>${expected.probability}% вероятность</td>
+                    <td>${happenedText}</td>
+                    <td>${consequence.happened === 'no' ? 'Переоценка' : consequence.happened === 'yes' ? 'Подтверждение' : 'Частичное подтверждение'}</td>
+                `;
+                tableBody.appendChild(consequenceRow);
+            });
+        }
+        
+        function generateRecommendations() {
+            const recommendationsElement = document.getElementById('recommendations');
+            let recommendations = '';
+            
+            const emotionDifferences = expectedEmotions.map((expected, i) => {
+                const actual = actualEmotions[i] || { actualIntensity: 0 };
+                return expected.intensity - actual.actualIntensity;
+            });
+            
+            const avgEmotionDiff = emotionDifferences.length > 0 ? 
+                emotionDifferences.reduce((a, b) => a + b, 0) / emotionDifferences.length : 0;
+            
+            const notHappenedConsequences = actualConsequences.filter(c => c.happened === 'no').length;
+            const totalConsequences = actualConsequences.length;
+            const overestimationRate = totalConsequences > 0 ? (notHappenedConsequences / totalConsequences) * 100 : 0;
+            
+            if (avgEmotionDiff > 30 && overestimationRate > 50) {
+                recommendations = `
+                    <p>✅ <strong>Значительное расхождение между ожиданиями и реальностью!</strong></p>
+                    <p>Вы склонны сильно переоценивать интенсивность эмоций и вероятность негативных последствий. В будущем старайтесь напоминать себе, что ситуация, скорее всего, будет менее стрессовой, чем кажется.</p>
+                `;
+            } else if (avgEmotionDiff > 15 || overestimationRate > 30) {
+                recommendations = `
+                    <p>👍 <strong>Умеренное расхождение между ожиданиями и реальностью.</strong></p>
+                    <p>Вы иногда переоцениваете сложность ситуаций. Продолжайте практиковать анализ ожиданий - это поможет развить более точное прогнозирование.</p>
+                `;
+            } else {
+                recommendations = `
+                    <p>🔍 <strong>Ожидания в целом соответствуют реальности.</strong></p>
+                    <p>Вы хорошо прогнозируете развитие ситуаций. Это ценное качество, которое помогает снизить стресс и принимать более взвешенные решения.</p>
+                `;
+            }
+            
+            recommendationsElement.innerHTML = recommendations;
+        }
+        
+        function resetTrainer() {
+            currentStep = 1;
+            
+            for (let i = 2; i <= totalSteps; i++) {
+                const stepElement = document.getElementById(`step${i}`);
+                if (stepElement) {
+                    stepElement.style.display = 'none';
+                }
+            }
+            
+            const firstStep = document.getElementById('step1');
+            if (firstStep) {
+                firstStep.style.display = 'block';
+            }
+            
+            const resultSection = document.getElementById('resultSection');
+            if (resultSection) {
+                resultSection.style.display = 'none';
+            }
+            
+            const inputs = [
+                'situation', 'expectations', 'reality', 'coping-strategies', 
+                'comparison', 'insights', 'future-impact', 'actual-consequences-text'
+            ];
+            
+            inputs.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) element.value = '';
+            });
+            
+            expectedEmotions = [];
+            actualEmotions = [];
+            expectedConsequences = [];
+            actualConsequences = [];
+            
+            const containers = [
+                'expected-emotions-container', 'actual-emotions-container',
+                'expected-consequences-container', 'actual-consequences-container'
+            ];
+            
+            containers.forEach(id => {
+                const container = document.getElementById(id);
+                if (container) {
+                    const items = container.querySelectorAll('.emotion-item, .consequence-item');
+                    if (items.length > 1) {
+                        for (let i = 1; i < items.length; i++) {
+                            items[i].remove();
+                        }
+                    }
+                    
+                    const inputs = container.querySelectorAll('input, textarea');
+                    inputs.forEach(input => {
+                        if (input.type !== 'button') {
+                            input.value = '';
+                            if (input.type === 'range') {
+                                input.value = '50';
+                                const valueSpan = input.parentElement.querySelector('.rating-value');
+                                if (valueSpan) valueSpan.textContent = '50%';
+                            }
+                        }
+                    });
+                }
+            });
+            
+            updateNavigationButtons();
+            
+            const trainerSection = document.querySelector('.trainer-section');
+            if (trainerSection) {
+                trainerSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // ===== ФУНКЦИИ СКАЧИВАНИЯ =====
+        
+        function downloadTemplate() {
+            const allowedPaths = [
+                '../assets/files/shablonexpozicii.docx',
+                '/assets/files/shablonexpozicii.docx',
+                './assets/files/shablonexpozicii.docx'
+            ];
+            
+            const filePath = '../assets/files/shablonexpozicii.docx';
+            
+            if (!allowedPaths.includes(filePath)) {
+                console.error('Недопустимый путь к файлу');
+                alert('Ошибка безопасности: недопустимый путь к файлу');
+                return;
+            }
+            
+            try {
+                const link = document.createElement('a');
+                link.href = filePath;
+                link.download = 'Шаблон_дневника_экспозиций.docx';
+                link.rel = 'noopener noreferrer';
+                link.target = '_blank';
+                
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+            } catch (error) {
+                console.error('Ошибка при скачивании шаблона:', error);
+                alert('Не удалось скачать шаблон. Пожалуйста, попробуйте позже.');
+            }
+        }
+        
+        function downloadExcel() {
+            const situation = safeTextInput(document.getElementById('situation').value);
+            const expectations = safeTextInput(document.getElementById('expectations').value);
+            const reality = safeTextInput(document.getElementById('reality').value);
+            const strategies = safeTextInput(document.getElementById('coping-strategies').value);
+            const comparison = safeTextInput(document.getElementById('comparison').value);
+            const insights = safeTextInput(document.getElementById('insights').value);
+            const futureImpact = safeTextInput(document.getElementById('future-impact').value);
+            const actualConsequencesText = safeTextInput(document.getElementById('actual-consequences-text').value);
+            
+            let expectedEmotionsStr = expectedEmotions.map(e => `${e.name}: ${e.intensity}%`).join('\n');
+            let actualEmotionsStr = actualEmotions.map(e => `${e.name}: ${e.actualIntensity}%`).join('\n');
+            
+            let expectedConsequencesStr = expectedConsequences.map(c => `${c.text} (${c.probability}%)`).join('\n');
+            let actualConsequencesStr = actualConsequences.map(c => {
+                let happened = '';
+                switch(c.happened) {
+                    case 'yes': happened = 'Да'; break;
+                    case 'no': happened = 'Нет'; break;
+                    case 'partially': happened = 'Частично'; break;
+                    default: happened = 'Не оценено';
+                }
+                return `${c.text} - ${happened}`;
+            }).join('\n');
+
+            const wb = XLSX.utils.book_new();
+            const ws = XLSX.utils.aoa_to_sheet([
+                ["Ситуация", "Ожидания", "Реальность", "Ожидаемые эмоции", "Реальные эмоции", "Ожидаемые последствия", "Реальные последствия", "Стратегии совладания", "Сравнение", "Инсайты", "Влияние на будущее", "Реальные последствия (текст)"],
+                [situation, expectations, reality, expectedEmotionsStr, actualEmotionsStr, expectedConsequencesStr, actualConsequencesStr, strategies, comparison, insights, futureImpact, actualConsequencesText]
+            ]);
+
+            const colWidths = [
+                { wch: 30 }, { wch: 30 }, { wch: 30 }, { wch: 25 }, { wch: 25 },
+                { wch: 30 }, { wch: 30 }, { wch: 30 }, { wch: 30 }, { wch: 30 },
+                { wch: 30 }, { wch: 30 }
+            ];
+            ws['!cols'] = colWidths;
+
+            const range = XLSX.utils.decode_range(ws['!ref']);
+            for(let R = range.s.r; R <= range.e.r; ++R) {
+                for(let C = range.s.c; C <= range.e.c; ++C) {
+                    const cell_address = {c:C, r:R};
+                    const cell_ref = XLSX.utils.encode_cell(cell_address);
+                    if(!ws[cell_ref]) continue;
+                    
+                    if(!ws[cell_ref].s) ws[cell_ref].s = {};
+                    ws[cell_ref].s.border = {
+                        top: {style: "thin", color: {rgb: "000000"}},
+                        left: {style: "thin", color: {rgb: "000000"}},
+                        bottom: {style: "thin", color: {rgb: "000000"}},
+                        right: {style: "thin", color: {rgb: "000000"}}
+                    };
+                    
+                    if(R === 0) {
+                        ws[cell_ref].s.font = { bold: true };
+                        ws[cell_ref].s.fill = { fgColor: {rgb: "E0E0E0"} };
+                    }
+                    
+                    ws[cell_ref].s.alignment = { 
+                        wrapText: true,
+                        vertical: "top"
+                    };
+                }
+            }
+
+            XLSX.utils.book_append_sheet(wb, ws, "Дневник экспозиций");
+            XLSX.writeFile(wb, "дневник_экспозиций.xlsx");
+        }
+        
+        function downloadPDF() {
+            if (window.self !== window.top) {
+                alert('Функция недоступна в этом режиме');
+                return;
+            }
+            
+            const printWindow = window.open('', '_blank', 'noopener,noreferrer');
+            if (!printWindow) {
+                alert('Разрешите всплывающие окна для генерации PDF');
+                return;
+            }
+            
+            const situation = safeTextInput(document.getElementById('situation').value);
+            const expectations = safeTextInput(document.getElementById('expectations').value);
+            const reality = safeTextInput(document.getElementById('reality').value);
+            const strategies = safeTextInput(document.getElementById('coping-strategies').value);
+            const comparison = safeTextInput(document.getElementById('comparison').value);
+            const insights = safeTextInput(document.getElementById('insights').value);
+            const futureImpact = safeTextInput(document.getElementById('future-impact').value);
+            
+            let expectedEmotionsStr = expectedEmotions.map(e => `${e.name}: ${e.intensity}%`).join('; ');
+            let actualEmotionsStr = actualEmotions.map(e => `${e.name}: ${e.actualIntensity}%`).join('; ');
+            let expectedConsequencesStr = expectedConsequences.map(c => `${c.text} (${c.probability}%)`).join('; ');
+            let actualConsequencesStr = actualConsequences.map(c => {
+                let happened = '';
+                switch(c.happened) {
+                    case 'yes': happened = 'Да'; break;
+                    case 'no': happened = 'Нет'; break;
+                    case 'partially': happened = 'Частично'; break;
+                }
+                return `${c.text} - ${happened}`;
+            }).join('; ');
+
+            const htmlContent = `
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <style>
+                        body { font-family: Arial, sans-serif; margin: 20px; }
+                        h1 { color: #2c3e50; text-align: center; }
+                        .section { margin-bottom: 30px; }
+                        .section-title { font-weight: bold; color: #2c3e50; margin-bottom: 10px; font-size: 1.1em; }
+                        .content { margin-left: 20px; }
+                        table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+                        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                        th { background-color: #2c3e50; color: white; }
+                    </style>
+                </head>
+                <body>
+                    <h1>Дневник экспозиций</h1>
+                    
+                    <div class="section">
+                        <div class="section-title">Ситуация:</div>
+                        <div class="content">${situation}</div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Ожидания:</div>
+                        <div class="content">${expectations}</div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Реальность:</div>
+                        <div class="content">${reality}</div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Эмоции:</div>
+                        <table>
+                            <tr>
+                                <th>Ожидаемые эмоции</th>
+                                <th>Реальные эмоции</th>
+                            </tr>
+                            <tr>
+                                <td>${expectedEmotionsStr}</td>
+                                <td>${actualEmotionsStr}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Последствия:</div>
+                        <table>
+                            <tr>
+                                <th>Ожидаемые последствия</th>
+                                <th>Реальные последствия</th>
+                            </tr>
+                            <tr>
+                                <td>${expectedConsequencesStr}</td>
+                                <td>${actualConsequencesStr}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Стратегии совладания:</div>
+                        <div class="content">${strategies}</div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Сравнение и выводы:</div>
+                        <div class="content">${comparison}</div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Инсайты:</div>
+                        <div class="content">${insights}</div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Влияние на будущее:</div>
+                        <div class="content">${futureImpact}</div>
+                    </div>
+                    
+                    <p style="margin-top: 20px; font-size: 12px; color: #666;">
+                        Создано с помощью сервиса "НЕ ГОРИ" - ${new Date().toLocaleDateString('ru-RU')}
+                    </p>
+                </body>
+                </html>
+            `;
+            
+            printWindow.document.write(htmlContent);
+            printWindow.document.close();
+            printWindow.print();
+        }
+
+        // ===== ИНИЦИАЛИЗАЦИЯ =====
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('active');
+                    this.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
+                });
+                
+                const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+                mobileNavLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenu.classList.remove('active');
+                        mobileMenuBtn.textContent = '☰';
+                    });
+                });
+            }
+            
+            const fadeElements = document.querySelectorAll('.fade-in-element');
+            const appearOnScroll = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        appearOnScroll.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(element => {
+                appearOnScroll.observe(element);
+            });
+
+            updateNavigationButtons();
+            
+            const initialInputs = document.querySelectorAll('.emotion-input');
+            initialInputs.forEach(input => {
+                setupAutocomplete(input);
+            });
+            
+            const initialSliders = document.querySelectorAll('.consequence-probability');
+            initialSliders.forEach(slider => {
+                const valueSpan = slider.parentElement.querySelector('.consequence-probability-value');
+                slider.addEventListener('input', function() {
+                    valueSpan.textContent = safeNumberInput(this.value) + '%';
+                });
+            });
+            
+            const inputs = document.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                if (input.type !== 'number' && input.type !== 'range' && input.type !== 'radio') {
+                    input.addEventListener('input', function() {
+                        this.value = safeTextInput(this.value);
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
